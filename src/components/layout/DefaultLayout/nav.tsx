@@ -39,7 +39,7 @@ export default function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-black/90 shadow-md' : 'bg-black'
+        scrolled ? 'bg-black/60  backdrop-blur-md' : 'bg-black'
       )}
     >
       <div className="container mx-auto px-4">
@@ -48,7 +48,9 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
               <Image src="/logo.svg" alt="Logo" width={40} height={40} />
-              <span className="ml-2 text-white font-bold text-xl">UNIEN</span>
+              <span className="ml-2 text-white font-bold text-xl md:text-2xl lg:text-3xl">
+                UNIEN
+              </span>
             </div>
           </Link>
 

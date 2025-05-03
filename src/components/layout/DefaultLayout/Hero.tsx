@@ -23,9 +23,8 @@ export default function HeroBanner() {
       if (!heroRef.current) return;
 
       const scrollY = window.scrollY;
-      const opacity = Math.max(1 - scrollY / 500, 0.2);
-
-      heroRef.current.style.opacity = opacity.toString();
+      const blurAmount = Math.min(scrollY / 100, 5); // max 10px blur
+      heroRef.current.style.filter = `blur(${blurAmount}px)`;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,7 +32,10 @@ export default function HeroBanner() {
   }, []);
 
   return (
-    <div ref={heroRef} className="relative w-full h-screen overflow-hidden">
+    <div
+      ref={heroRef}
+      className="relative w-full h-screen overflow-hidden transition-all duration-300"
+    >
       {/* Background Image */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
@@ -42,7 +44,7 @@ export default function HeroBanner() {
         }}
       >
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 dark:from-black/90 dark:via-black/60 dark:to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40 dark:from-black/90 dark:via-black/60 dark:to-black/40"></div>
       </div>
 
       {/* Particle Overlay */}
