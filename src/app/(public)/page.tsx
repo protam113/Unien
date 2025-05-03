@@ -4,9 +4,9 @@ import { StatsSection } from '@/components/container/StartSection';
 import HeroBanner from '@/components/layout/DefaultLayout/Hero';
 import BlogSection from '@/components/pages/home/blog-section';
 import IndustrialIntro from '@/components/pages/home/introduce';
+import ProductShowcase from '@/components/pages/home/product-showcase';
 import ProjectCarousel from '@/components/pages/home/project-carousel';
 import ServicesData from '@/components/pages/home/service';
-import Image from 'next/image';
 
 export default function Home() {
   const projects = [
@@ -44,6 +44,7 @@ export default function Home() {
       <Container>
         <ProjectCarousel projects={projects} />
         <ServicesData />
+        <ProductShowcase />
         <BlogSection />
         <ContactComponent />
       </Container>

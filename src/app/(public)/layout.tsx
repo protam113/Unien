@@ -1,5 +1,6 @@
 'use client';
 
+import ScrollToTopButton from '@/components/button/ScrollToTopButton';
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout';
 import RadiatingLoader from '@/components/loading/radiating-loader';
 import React, { useEffect, useState } from 'react';
@@ -26,6 +27,7 @@ export default function CustomerLayoutDefault({
     <div>
       <DefaultLayout>
         <div>{children}</div>
+        <ScrollToTopButton />
       </DefaultLayout>
     </div>
   );

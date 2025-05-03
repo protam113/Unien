@@ -1,6 +1,8 @@
 'use client';
 import SectionHeader from '@/components/container/SectionHeader';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface Service {
   title: string;
@@ -58,8 +60,16 @@ export default function ServicesTabs() {
       <Tabs defaultValue="services" className="space-y-8">
         <TabsContent value="services" className="space-y-8">
           <div>
-            <SectionHeader title="Dịch Vụ & Công Nghiệp" />
-
+            <div className="flex items-center justify-between mb-6">
+              <SectionHeader title="Dịch Vụ & Công Nghiệp" />
+              <Link
+                href="/products"
+                className="text-sm text-gray-500 hover:text-gray-700 flex items-center"
+              >
+                Xem Thêm
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Link>
+            </div>
             <p className="mt-4 text-lg text-muted-foreground">
               Chúng tôi cung cấp giải pháp toàn diện trong lĩnh vực điều khiển –
               tự động hóa cho hệ thống lò hơi và thiết bị công nghiệp. Từ lắp

@@ -1,10 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import DefaultBreadcrumb from '../design/DefaultBreadCrumb';
 
-export default function HeroHeader() {
+export default function HeroHeader({
+  title,
+  description,
+}: {
+  title: string;
+  description?: string;
+}) {
   return (
-    <section className="relative h-[300px] md:h-[400px]overflow-hidden bg-gradient-to-r from-background to-card mt-12">
+    <section className="relative h-[400px] md:h-[400px]overflow-hidden bg-gradient-to-r from-background to-card mt-12">
       {/* Grid background */}
       <div className="absolute inset-0  bg-[#F69429]/40  bg-[size:40px_40px]" />
 
@@ -32,16 +39,18 @@ export default function HeroHeader() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Contact Us
+          {title}
         </motion.h1>
+        <div className="mt-4 mb-4">
+          <DefaultBreadcrumb />
+        </div>
         <motion.p
           className="mt-4 text-lg text-muted-foreground max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Chúng tôi ở đây để giúp đỡ. Hãy liên hệ với nhóm của chúng tôi nếu bạn
-          có bất kỳ câu hỏi hoặc thắc mắc nào.
+          {description}
         </motion.p>
       </div>
     </section>

@@ -6,7 +6,12 @@ import React from 'react';
 const Page = () => {
   return (
     <main>
-      <HeroHeader />
+      <HeroHeader
+        title="Contact Us"
+        description=" Chúng tôi ở đây để giúp đỡ. Hãy liên hệ với nhóm của chúng tôi nếu bạn
+      có bất kỳ câu hỏi hoặc thắc mắc nào."
+      />
+
       <Container>
         <ContactComponent />
       </Container>

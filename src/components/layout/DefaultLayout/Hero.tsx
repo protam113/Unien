@@ -49,14 +49,14 @@ export default function HeroBanner() {
       <ParticleOverlay />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-end px-4 sm:px-6 lg:px-8 pb-20 md:pb-32 max-w-7xl mx-auto">
+      <div className="relative z-10 h-full flex flex-col justify-end px-4 sm:px-6 lg:px-8 pb-20 md:pb-32 max-w-8xl mx-auto">
         <div className="animate-fadeIn space-y-6">
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight max-w-3xl leading-tight">
             <span>
               <Image src="/logo.svg" alt="Logo" width={80} height={80} />
               Unien
             </span>
-            <span className="block text-4xl md:text-5xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground to-primary-foreground/80 dark:from-primary-foreground dark:to-primary-foreground/80 animate-gradient">
+            <span className="block text-2xl md:text-4xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground to-primary-foreground/80 dark:from-primary-foreground dark:to-primary-foreground/80 animate-gradient">
               CHẤT LƯỢNG TẠO NIỀM TIN
             </span>
           </h1>
