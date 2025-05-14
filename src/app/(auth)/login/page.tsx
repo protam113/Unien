@@ -48,21 +48,16 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left side with illustration */}
-      <div className="relative hidden lg:flex flex-col items-center justify-center p-8 bg-lime-500 text-white">
+      <div className="relative hidden lg:flex flex-col items-center justify-center p-8 bg-orange-300 text-white">
         <div className="max-w-md mx-auto text-center space-y-6">
           <Image
-            src="/Logo.png"
+            src="/Logo.svg"
             alt="Decorative bird illustration"
             width={300}
             height={300}
             className="mx-auto"
           />
-          <h2 className="text-2xl font-medium">Hust4L</h2>
-          <p className="text-sm text-white/80">
-            Eidum et malesuada fames ac ante ipsum primis in faucibus
-            suspendisse porta
-          </p>
-          {/* Dots navigation */}
+          <h2 className="text-2xl  lg:text-6xl font-bold ">Unien</h2>
         </div>
       </div>
 
@@ -70,14 +65,16 @@ export default function LoginPage() {
       <div className="flex flex-col items-center justify-center p-8">
         <div className="w-full max-w-sm space-y-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-lime-700 mb-6">Hust4L</h1>
-            <h2 className="text-xl text-gray-600">Welcome to Hust4l</h2>
+            <h1 className="text-2xl font-bold text-orange-700 mb-6">Unien</h1>
+            <h2 className="text-xl text-gray-600">
+              Welcome to Unein Dashboard
+            </h2>
           </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <label className="text-sm text-gray-500" htmlFor="email">
-                Username
+                Tên đăng nhập
               </label>
               <Input
                 id="username"
@@ -90,7 +87,7 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <label className="text-sm text-gray-500" htmlFor="password">
-                Password
+                Mật khẩu
               </label>
               <Input
                 id="password"
@@ -103,10 +100,10 @@ export default function LoginPage() {
             </div>
 
             <Button
-              className="w-full font-bold text-xl bg-lime-500 hover:bg-lime-700 text-white"
+              className="w-full font-bold text-xl bg-orange-500 hover:bg-orange-700 text-white"
               disabled={isSubmitting}
             >
-              Sign in
+              Đăng nhập
             </Button>
           </form>
         </div>

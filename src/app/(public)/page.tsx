@@ -9,30 +9,6 @@ import ProjectCarousel from '@/components/pages/home/project-carousel';
 import ServicesData from '@/components/pages/home/service';
 
 export default function Home() {
-  const projects = [
-    {
-      id: 1,
-      image: '/img/process1.png?height=600&width=800',
-      title: 'A UX/UI redesign reactivated a marketplace with 58,000+ users',
-    },
-    {
-      id: 2,
-      image: '/img/process1.png?height=600&width=800',
-      title:
-        'Creating one platform to manage 6 sites led to a 400% revenue growth',
-    },
-    {
-      id: 3,
-      image: '/img/process1.png?height=600&width=800',
-      title:
-        "A bank's first cloud-native payment system reaches 36+ new countries",
-    },
-    {
-      id: 4,
-      image: '/img/process1.png?height=600&width=800',
-      title: "Travelia's user acquisition cost fell by 40%",
-    },
-  ];
   return (
     <main>
       <HeroBanner />
@@ -42,9 +18,10 @@ export default function Home() {
 
       <StatsSection />
       <Container>
-        <ProjectCarousel projects={projects} />
         <ServicesData />
         <ProductShowcase />
+        <ProjectCarousel />
+
         <BlogSection />
         <ContactComponent />
       </Container>

@@ -7,7 +7,7 @@ function ProductCard({ product }: { product: any }) {
       {/* Product Image */}
       <div className="relative">
         <Image
-          src={product.image || '/placeholder.svg'}
+          src={product.file?.[0] || '/placeholder.svg'}
           alt={product.title}
           className="w-full aspect-square object-cover"
           width={200}

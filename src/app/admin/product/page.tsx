@@ -11,10 +11,10 @@ const Page = () => {
     <Container>
       <div className="flex items-center justify-between mb-4">
         <Heading
-          name="Dịch Vụ"
-          desc="Quản lý tất cả các dịch vụ có sẵn trên nền tảng. Bạn có thể tạo, cập nhật hoặc xóa các dịch vụ và đảm bảo rằng mỗi dịch vụ đều được mô tả rõ ràng và cập nhật cho người dùng."
+          name="Sản phẩm"
+          desc="Quản lý tất cả các sản phẩm có sẵn trên nền tảng. Bạn có thể tạo, cập nhật hoặc xóa sản phẩm và đảm bảo rằng mỗi sản phẩm đều được mô tả rõ ràng và cập nhật cho người dùng."
         />
-        <PushButton href="/admin/service/create_service" label="Tạo Dịch Vụ" />
+        <PushButton href="/admin/product/create_product" label="Tạo Sản Phẩm" />
       </div>
 
       <ServiceListDataAdmin />

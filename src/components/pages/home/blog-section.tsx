@@ -1,48 +1,21 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import SectionHeader from '@/components/container/SectionHeader';
-import { ChevronRight } from 'lucide-react';
-
-// Blog post type definition
-type BlogPost = {
-  id: string;
-  title: string;
-  image: string;
-  date: string;
-
-  slug: string;
-};
-
-// Sample blog data (replace with your actual data)
-const blogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Exploring the beautiful landscapes of nature',
-    image: '/img/process1.png?height=200&width=400',
-    date: 'May 2, 2023',
-
-    slug: 'exploring-landscapes',
-  },
-  {
-    id: '2',
-    title: 'Urban architecture and city planning insights',
-    image: '/img/process1.png?height=200&width=400',
-    date: 'April 15, 2023',
-
-    slug: 'urban-architecture',
-  },
-  {
-    id: '3',
-    title: 'Travel photography tips for beginners',
-    image: '/img/process1.png?height=200&width=400',
-    date: 'March 28, 2023',
-
-    slug: 'travel-photography-tips',
-  },
-];
+import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
+import { BlogList } from '@/lib/responses/blogLib';
 
 export default function BlogSection() {
+  const { blogs, isLoading, isError } = BlogList(
+    1,
+    {
+      limit: 3,
+    },
+    0
+  );
+
   return (
     <section className="py-12 px-4 md:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -58,14 +31,26 @@ export default function BlogSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
+          {isLoading ? (
+            <div className="col-span-full flex justify-center items-center py-10">
+              <Loader2 className="animate-spin h-6 w-6 text-gray-500" />
+              <span className="ml-2 text-sm text-gray-500">
+                Đang tải bài viết...
+              </span>
+            </div>
+          ) : isError ? (
+            <div className="col-span-full flex justify-center items-center py-10 text-red-500">
+              <AlertTriangle className="h-5 w-5 mr-2" />
+              <span>Không thể tải bài viết. Vui lòng thử lại sau.</span>
+            </div>
+          ) : (
+            blogs.map((post) => <BlogCard key={post._id} post={post} />)
+          )}
         </div>
 
         <div className="mt-8 text-center md:hidden">
           <Link
-            href="/blog"
+            href="/blogs"
             className="text-sm font-medium text-gray-600 hover:text-gray-900"
           >
             Xem Thêm →
@@ -76,7 +61,7 @@ export default function BlogSection() {
   );
 }
 
-function BlogCard({ post }: { post: BlogPost }) {
+function BlogCard({ post }: { post: any }) {
   return (
     <Card className="group rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <Link
@@ -85,7 +70,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       >
         <div className="relative h-48 w-full">
           <Image
-            src={post.image || '/placeholder.svg'}
+            src={post.file || '/placeholder.svg'}
             alt={post.title}
             fill
             className="object-cover"

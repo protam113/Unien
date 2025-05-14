@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center gap-4">
             <span>+84 265 847 483</span>
             <span className="hidden md:inline">|</span>
-            <span>ugc_creator@hanhsocial.com</span>
+            <span>unien@unien.com</span>
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-4">

@@ -1,36 +1,42 @@
+import { CategoryList } from '@/lib/responses/categoriesLib';
 import { cn } from '@/lib/utils';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 
 function SidebarFilters({
   activeCategory,
   setActiveCategory,
-  expandedSections,
-  toggleSection,
 }: {
   activeCategory: string;
   setActiveCategory: (category: string) => void;
   expandedSections: Record<string, boolean>;
   toggleSection: (section: string) => void;
 }) {
-  const categories = [
-    'Điện Thoại & Phụ Kiện',
-    'Điện thoại',
-    'Máy tính bảng',
-    'Pin Dự Phòng',
-    'Pin Gắn Trong, Cáp và Bộ Sạc',
-    'Ốp lưng, bao da, Miếng dán điện thoại',
-  ];
+  const { categories, isLoading, isError } = CategoryList(
+    1,
+    { limit: 20, type: 'blogs' },
+    0
+  );
+  if (isLoading) {
+    return (
+      <div className="w-full md:w-1/4 lg:w-1/5 bg-white p-4 border-r border-gray-200 md:min-h-screen">
+        <div className="animate-pulse">
+          <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+          <div className="space-y-3">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-3 bg-gray-200 rounded w-5/6"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-  const brands = [
-    'Apple',
-    'Samsung',
-    'Xiaomi',
-    'Baseus',
-    'Anker',
-    'GOOJOODOQ',
-    'Basefast',
-    'Hoco',
-  ];
+  if (isError) {
+    return (
+      <div className="w-full md:w-1/4 lg:w-1/5 bg-white p-4 border-r border-gray-200 md:min-h-screen">
+        <div className="text-red-500">Failed to load categories</div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full md:w-1/4 lg:w-1/5 bg-white p-4 border-r border-gray-200 md:min-h-screen overflow-y-auto">
@@ -41,42 +47,40 @@ function SidebarFilters({
       {/* Categories */}
       <div className="mb-6">
         <ul className="space-y-2">
-          {categories.map((category, index) => (
-            <li key={index}>
-              <button
-                className={cn(
-                  'w-full text-left py-1.5 px-2 rounded text-sm hover:bg-gray-100 transition-colors flex items-center',
-                  activeCategory === category
-                    ? 'text-red-500 font-medium'
-                    : 'text-gray-700'
-                )}
-                onClick={() => setActiveCategory(category)}
-              >
-                {index === 0 && <span className="mr-2 text-red-500">•</span>}
-                {category}
-              </button>
-            </li>
-          ))}
+          <>
+            <button
+              className={cn(
+                'w-full text-left py-1.5 px-2 rounded text-sm hover:bg-gray-100 transition-colors flex items-center  text-gray-700'
+              )}
+              onClick={() => setActiveCategory('')}
+            >
+              View all
+            </button>
+            {categories.map((category, index) => (
+              <li key={index}>
+                <button
+                  className={cn(
+                    'w-full text-left py-1.5 px-2 rounded text-sm hover:bg-gray-100 transition-colors flex items-center',
+                    activeCategory === category._id
+                      ? 'text-red-500 font-medium'
+                      : 'text-gray-700'
+                  )}
+                  onClick={() => setActiveCategory(category._id)}
+                >
+                  {category.name}
+                </button>
+              </li>
+            ))}
+          </>
         </ul>
-        <button
-          className="text-sm text-gray-500 mt-2 flex items-center"
-          onClick={() => toggleSection('categories')}
-        >
-          Thêm{' '}
-          {expandedSections.categories ? (
-            <ChevronUp className="h-3 w-3 ml-1" />
-          ) : (
-            <ChevronDown className="h-3 w-3 ml-1" />
-          )}
-        </button>
       </div>
 
-      {/* Filter Section */}
+      {/* Filter Section
       <div className="border-t border-gray-200 pt-4 mb-6">
         <h3 className="font-bold text-gray-800 mb-3 flex items-center">
           <span className="mr-2">BỘ LỌC TÌM KIẾM</span>
         </h3>
-        {/* Brands */}
+     
         <div className="mb-4">
           <h4 className="font-medium text-gray-700 mb-2">Thương Hiệu</h4>
           <ul className="space-y-2">
@@ -147,8 +151,8 @@ function SidebarFilters({
               )}
             </button>
           )}
-        </div> */}
-      </div>
+        </div> 
+      </div>*/}
     </div>
   );
 }

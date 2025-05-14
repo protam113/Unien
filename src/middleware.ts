@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
 
   if (!isAuthenticated && isProtectedPage) {
     return NextResponse.redirect(
-      new URL(`/auth?from=${encodeURIComponent(path)}`, request.url)
+      new URL(`/login?from=${encodeURIComponent(path)}`, request.url)
     );
   }
 

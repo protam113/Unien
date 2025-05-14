@@ -74,7 +74,11 @@ export default function NewBlogPost() {
   const router = useRouter();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const { mutate: createBlog } = useCreateBlog();
-  const { categories, isLoading, isError } = CategoryList(1, { limit: 20 }, 0);
+  const { categories, isLoading, isError } = CategoryList(
+    1,
+    { limit: 20, type: 'blogs' },
+    0
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({

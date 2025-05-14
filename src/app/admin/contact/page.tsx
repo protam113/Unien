@@ -79,7 +79,10 @@ export default function ProductManager() {
   return (
     <>
       <Container>
-        <Heading name="Contacts Page" desc="Manage your contacts here" />
+        <Heading
+          name="Quản lý liên hệ"
+          desc="Quản lý danh sách những người liên hệ của bạn ở đây"
+        />
 
         <div className="md:flex col flex-col-2 md:flex-row justify-between items-center mb-6">
           <div className="flex items-center gap-4">

@@ -83,7 +83,10 @@ export default function Footer() {
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Contact</h3>
             <div className="flex flex-col space-y-2">
-              <p className="text-gray-400 ">Người Đại Diện:</p>
+              <p className="text-gray-400 ">
+                Người Đại Diện :
+                <span className="text-white"> Nguyễn Đức Hiệp</span>{' '}
+              </p>
               <p className="text-gray-400">Địa Chỉ:</p>
               <p className="text-gray-400 ">Email:</p>
               <p className="text-gray-400 ">Tel:</p>
@@ -98,9 +101,13 @@ export default function Footer() {
             Copyright {new Date().getFullYear()} © Unien
           </p>
           <div className="mt-4 md:mt-0">
-            <span className="text-sm text-gray-200 bg-gray-700 px-3 py-1 rounded-full">
+            <Link
+              href="https://vietstrix.com"
+              target="_blank"
+              className="text-sm text-gray-200 bg-gray-700 px-3 py-1 rounded-full"
+            >
               by Vietstrix
-            </span>
+            </Link>
           </div>
         </div>
       </div>

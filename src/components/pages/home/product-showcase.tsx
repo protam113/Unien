@@ -3,50 +3,21 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
 import SectionHeader from '@/components/container/SectionHeader';
+import ProductCategoryCard from './ProductCategory';
+import { ProductList } from '@/lib/responses/productLib';
 
-// Exchange rate: 1 USD ≈ 25,500 VND
 const EXCHANGE_RATE = 25500;
 
-interface Product {
-  id: string;
-  title: string;
-  image: string;
-  oldPrice?: number;
-  newPrice: number;
-}
-
 export default function ProductShowcase() {
-  const [products] = useState<Product[]>([
-    {
-      id: '1',
-      title: 'A Young Woman in Colorful Jacket',
-      image: '/images/colorful-jacket.jpg',
-      newPrice: 108,
-    },
-    {
-      id: '2',
-      title: 'Young Man in Vibrant Jacket',
-      image: '/images/vibrant-jacket.jpg',
-      oldPrice: 147,
-      newPrice: 108,
-    },
-    {
-      id: '3',
-      title: 'Fashionable Woman with Orange Sunglasses',
-      image: '/images/orange-sunglasses.jpg',
-      oldPrice: 147,
-      newPrice: 108,
-    },
-    {
-      id: '4',
-      title: 'Stretch Tee in Milk',
-      image: '/images/stretch-tee.jpg',
-      oldPrice: 137,
-      newPrice: 98,
-    },
-  ]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const params = {
+    category: selectedCategory ?? undefined,
+    limit: 5,
+  };
+
+  const { products, isLoading, isError } = ProductList(1, params, 0);
 
   // Convert USD to VND and format with commas
   const formatVND = (usd: number) => {
@@ -66,28 +37,42 @@ export default function ProductShowcase() {
           <ChevronRight className="ml-1 h-4 w-4" />
         </Link>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <div key={product.id} className="group">
-            <div className="relative aspect-square overflow-hidden rounded-md mb-3 bg-gray-100">
-              <Image
-                src={product.image || '/placeholder.svg'}
-                alt={product.title}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <h3 className="font-medium text-sm mb-2">{product.title}</h3>
-            <div className="flex items-start flex-col">
-              <div className="flex flex-col">
-                <span className="font-bold text-red-600">
-                  {formatVND(product.newPrice)}
-                </span>
+      <ProductCategoryCard onCategorySelect={setSelectedCategory} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        {isLoading ? (
+          <div className="col-span-full flex justify-center items-center py-10">
+            <Loader2 className="animate-spin h-6 w-6 text-gray-500" />
+            <span className="ml-2 text-sm text-gray-500">
+              Đang tải sản phẩm...
+            </span>
+          </div>
+        ) : isError ? (
+          <div className="col-span-full flex justify-center items-center py-10 text-red-500">
+            <AlertTriangle className="h-5 w-5 mr-2" />
+            <span>Không thể tải sản phẩm. Vui lòng thử lại sau.</span>
+          </div>
+        ) : (
+          products.map((product) => (
+            <div key={product._id} className="group">
+              <div className="relative aspect-square overflow-hidden rounded-md mb-3 bg-gray-100">
+                <Image
+                  src={product.file?.[0] || '/placeholder.svg'}
+                  alt={product.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <h3 className="font-medium text-sm mb-2">{product.title}</h3>
+              <div className="flex items-start flex-col">
+                <div className="flex flex-col">
+                  <span className="font-bold text-red-600">
+                    {formatVND(product.price)}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </section>
   );

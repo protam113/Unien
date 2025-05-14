@@ -69,12 +69,8 @@ const endpoints = {
   product: process.env.NEXT_PUBLIC_PRODUCT,
   productStatus: process.env.NEXT_PUBLIC_PRODUCT_STATUS,
 
-  // Logs
+  // Logsd
   logs: process.env.NEXT_PUBLIC_LOGS,
-
-  // Tracking
-  tracking: process.env.NEXT_PUBLIC_TRACKING,
-  trackingApi: process.env.NEXT_PUBLIC_TRACK,
 
   // Media
   media: process.env.NEXT_PUBLIC_MEDIA,

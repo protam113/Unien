@@ -6,21 +6,19 @@ import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import SectionHeader from '@/components/container/SectionHeader';
+import { ProjectList } from '@/lib/responses/projectLib';
 
-interface Project {
-  id: number;
-  image: string;
-  title: string;
-}
-
-interface ProjectCarouselProps {
-  projects: Project[];
-}
-
-export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
+export default function ProjectCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [transition, setTransition] = useState(true);
+  const { projects, isLoading, isError } = ProjectList(
+    1,
+    {
+      status: 'popular',
+    },
+    0
+  );
 
   // Adjust slides per view based on screen size
   useEffect(() => {
@@ -69,7 +67,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
   };
 
   return (
-    <div className="container mx-auto px-4 md:px-8 lg:px-12">
+    <div className=" mx-auto ">
       <div className="mb-8 md:mb-12">
         <SectionHeader title="Các Dự Án" design="Tiêu Biểu" />
       </div>
@@ -77,31 +75,48 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
       <div className="mb-8 md:mb-12">
         {/* Projects display area with transition */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visibleProjects.map((project) => (
-            <div
-              key={project.id}
-              className={cn(
-                'flex flex-col h-full transform transition-all duration-500',
-                transition
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-4'
-              )}
-              onTransitionEnd={() => transition && setTransition(true)}
-            >
-              <div className="relative aspect-[4/3] w-full mb-4 overflow-hidden group">
-                <Image
-                  src={project.image || '/placeholder.svg'}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300" />
-              </div>
-              <h3 className="text-lg md:text-xl font-medium text-gray-800 group-hover:text-gray-600 transition">
-                {project.title}
-              </h3>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-full py-10 text-gray-500">
+              <ArrowRight className="animate-spin h-5 w-5 mr-2" />
+              <span>Đang tải dự án...</span>
             </div>
-          ))}
+          ) : isError ? (
+            <div className="flex flex-col items-center justify-center text-red-500 py-10">
+              <span>Không thể tải dữ liệu dự án. Vui lòng thử lại sau.</span>
+            </div>
+          ) : projects.length === 0 ? (
+            <div className="flex flex-col items-center justify-center text-gray-500 py-10">
+              <span>Hiện chưa có dự án nào để hiển thị.</span>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {visibleProjects.map((project) => (
+                <div
+                  key={project._id}
+                  className={cn(
+                    'flex flex-col h-full transform transition-all duration-500',
+                    transition
+                      ? 'opacity-100 translate-y-0'
+                      : 'opacity-0 translate-y-4'
+                  )}
+                  onTransitionEnd={() => transition && setTransition(true)}
+                >
+                  <div className="relative aspect-[4/3] w-full mb-4 overflow-hidden group">
+                    <Image
+                      src={project.file || '/placeholder.svg'}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition duration-300" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-medium text-gray-800 group-hover:text-gray-600 transition">
+                    {project.title}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

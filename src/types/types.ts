@@ -133,8 +133,8 @@ interface ManagerData {
   email: string;
   phoneNumber: string;
   role: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchManagerListResponse {
@@ -166,8 +166,8 @@ export interface Category {
   type: string;
   status: string;
   user?: UserDataComponents;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchCategoryListResponse {
@@ -220,8 +220,8 @@ interface ContactList {
   message: string;
   link?: string;
   service?: ContactService;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchContactListResponse {
@@ -255,46 +255,6 @@ export interface CreateContactItem {
 
 /**
  * ==========================
- *  @TRACKING
- * ==========================
- */
-interface DeviceData {
-  mobile: number;
-  desktop: number;
-  tablet: number;
-  other: number;
-}
-
-interface AnalyticsItem {
-  _id: string;
-  postId: string;
-  title: string;
-  slug: string;
-  type: string;
-  views: number;
-  byDevice: DeviceData;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AnalyticsData {
-  results: AnalyticsItem[];
-  pagination: Pagination;
-}
-
-/**
- * ==========================
- *  @CREATE_TRACKING
- * ==========================
- */
-export interface CreateTracing {
-  slug: string;
-  type: string;
-  byDevice: string;
-}
-
-/**
- * ==========================
  *  @PROJECT
  * ==========================
  */
@@ -319,8 +279,8 @@ interface ProjectList {
   client: string;
   link?: number;
   status: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchProjectListResponse {
@@ -349,8 +309,8 @@ interface ProjectDetail {
   link?: number;
   status: string;
   user: UserDataComponents;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface ProjectDetailResponse {
@@ -395,8 +355,8 @@ interface ServiceList {
   price: number;
   status: string;
   category: ChildCategory;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchServiceListResponse {
@@ -421,8 +381,8 @@ export interface ServiceDetail {
   status: string;
   description: string;
   category: ChildCategory;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface ServiceDetailResponse {
@@ -447,8 +407,8 @@ export interface ServiceDetailResponse {
   views: number;
   status: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 /**
@@ -485,8 +445,8 @@ interface ProductList {
   price: number;
   status: string;
   category: ChildCategory;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface FetchProductListResponse {
@@ -511,8 +471,8 @@ export interface ProductDetail {
   status: string;
   description: string;
   category: ChildCategory;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface ProductDetailResponse {
@@ -590,8 +550,8 @@ export interface BlogDetail {
   status: string;
   description: string;
   link?: string | null;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface BlogDetailResponse {

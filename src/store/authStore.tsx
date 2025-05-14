@@ -316,7 +316,7 @@ export const useAuthStore = create<AuthState>()(
           });
 
           toast.success('Log out successfully!');
-          window.location.href = '/auth';
+          window.location.href = '/login';
         } catch (error) {
           // This catch block should rarely be hit due to the try/catch in the server logout
           logError('Catastrophic error during logout:', error);

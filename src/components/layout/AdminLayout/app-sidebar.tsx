@@ -26,11 +26,6 @@ const data = {
       url: '/admin',
       icon: ComponentsIcons.LayoutDashboard,
     },
-    {
-      title: 'Tracking',
-      url: '/admin/tracking',
-      icon: ComponentsIcons.TrainTrack,
-    },
   ],
   navAdmin: [
     {
@@ -46,34 +41,29 @@ const data = {
   ],
   navService: [
     {
-      title: 'Category',
+      title: 'Thể Loại',
       url: '/admin/category',
       icon: ComponentsIcons.ChartBarStacked,
     },
     {
-      title: 'Blog',
+      title: 'Bài Viết',
       url: '/admin/blog',
       icon: ComponentsIcons.List,
     },
     {
-      title: 'Services',
+      title: 'Dịch Vụ',
       url: '/admin/service',
       icon: ComponentsIcons.Package,
     },
     {
-      title: 'Projects',
+      title: 'Dự Án',
       url: '/admin/project',
       icon: ComponentsIcons.SquareChartGantt,
-    },
-    {
-      title: 'FaQ',
-      url: '/admin/faq',
-      icon: ComponentsIcons.MessageCircleQuestion,
     },
   ],
   navSupport: [
     {
-      title: 'Contacts',
+      title: 'Liên Hệ',
       url: '/admin/contact',
       icon: ComponentsIcons.Contact,
     },

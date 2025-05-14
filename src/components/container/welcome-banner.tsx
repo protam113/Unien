@@ -6,7 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { WelcomeBannerProps } from '@/types/types';
 
 export default function WelcomeBanner({
-  message = "Here's your latest financial status. You're expected to hit the benchmark. Keep up the good work!",
+  message = 'Chào mừng bạn đến với bảng điều khiển – nơi tập trung mọi dữ liệu và công cụ quản lý website của bạn',
 }: WelcomeBannerProps) {
   const [isVisible, setIsVisible] = useState(false);
   const userInfo = useAuthStore((state) => state.userInfo);
@@ -17,7 +17,7 @@ export default function WelcomeBanner({
   }, []);
 
   return (
-    <div className="bg-lime-600 bg-opacity-90 rounded-lg overflow-hidden shadow-md transition-all duration-500 ease-in-out">
+    <div className="bg-orange-700 bg-opacity-90 rounded-lg overflow-hidden shadow-md transition-all duration-500 ease-in-out">
       <div className="flex flex-col md:flex-row items-center justify-between p-6">
         <div className="space-y-3 md:w-1/2 mb-6 md:mb-0">
           <h2
@@ -46,7 +46,7 @@ export default function WelcomeBanner({
         >
           <div className="relative overflow-hidden hover:scale-105 transition-transform duration-500 ease-in-out">
             <Image
-              src="/Logo.png"
+              src="/Logo.svg"
               alt="People working together"
               width={300}
               height={200}
