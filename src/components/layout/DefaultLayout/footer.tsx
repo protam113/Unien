@@ -85,12 +85,21 @@ export default function Footer() {
             <div className="flex flex-col space-y-2">
               <p className="text-gray-400 ">
                 Người Đại Diện :
-                <span className="text-white"> Nguyễn Đức Hiệp</span>{' '}
+                <span className="text-white"> Nguyễn Đức Hiệp</span>
               </p>
-              <p className="text-gray-400">Địa Chỉ:</p>
+              <p className="text-gray-400">
+                Địa Chỉ :
+                <span className="text-white">
+                  {' '}
+                  69/14/3B Tây B, Phường Đông Hòa, Thành phố Dĩ An, Tỉnh Bình
+                  Dương
+                </span>
+              </p>
               <p className="text-gray-400 ">Email:</p>
               <p className="text-gray-400 ">Tel:</p>
-              <p className="text-gray-400 ">MST:</p>
+              <p className="text-gray-400 ">
+                MST : <span className="text-white"> 3703266418</span>
+              </p>
             </div>
           </div>
         </div>
