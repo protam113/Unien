@@ -43,11 +43,6 @@ const data = {
       url: '/admin/seo',
       icon: ComponentsIcons.Search,
     },
-    {
-      title: 'Logs',
-      url: '/admin/logs',
-      icon: ComponentsIcons.Logs,
-    },
   ],
   navService: [
     {

@@ -19,6 +19,17 @@ export interface WelcomeBannerProps {
 
 /**
  * ==========================
+ *  @UPLOAD_MEDIA
+ * ==========================
+ */
+
+export interface UploadMedia {
+  path: string;
+  file: File;
+}
+
+/**
+ * ==========================
  *  @PAGINATION
  * ==========================
  */
@@ -280,4 +291,257 @@ export interface CreateTracing {
   slug: string;
   type: string;
   byDevice: string;
+}
+
+/**
+ * ==========================
+ *  @PROJECT
+ * ==========================
+ */
+
+interface ProjectService {
+  _id: string;
+  title: string;
+}
+
+interface ProjectList {
+  _id: string;
+  title: string;
+  slug: string;
+  file: string;
+  content: string;
+  description: string;
+  views: number;
+  service: ProjectService[];
+  testimonial: string;
+  brand_name: string;
+  user: UserDataComponents;
+  client: string;
+  link?: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FetchProjectListResponse {
+  pagination: Pagination;
+  results: ProjectList[];
+}
+
+/**
+ * ==========================
+ *  @PROJECT_DETAIL
+ * ==========================
+ */
+
+interface ProjectDetail {
+  _id: string;
+  title: string;
+  slug: string;
+  file: string;
+  content: string;
+  description: string;
+  service: ProjectService[];
+  testimonial: string;
+  brand_name: string;
+  views: number;
+  client: string;
+  link?: number;
+  status: string;
+  user: UserDataComponents;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProjectDetailResponse {
+  status: string;
+  result: ProjectDetail;
+}
+
+/**
+ * ==========================
+ *  @PROJECT_CREATED
+ * ==========================
+ */
+
+export interface CreateProjectItem {
+  title: string;
+  content: string;
+  file: File;
+  service: string[];
+  description: string;
+  brand_name: string;
+  status: string;
+  testimonial: string;
+  client: string;
+  link?: string | null;
+}
+
+/**
+ * ==========================
+ *  @SERVICE
+ * ==========================
+ */
+
+interface ServiceList {
+  _id: string;
+  title: string;
+  content: string;
+  description: string;
+  file: string;
+  slug: string;
+  user?: UserDataComponents;
+  views: number;
+  price: number;
+  status: string;
+  category: ChildCategory;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FetchServiceListResponse {
+  pagination: Pagination;
+  results: ServiceList[];
+}
+
+/**
+ * ==========================
+ *  @SERVICE_DETAIL
+ * ==========================
+ */
+
+export interface ServiceDetail {
+  _id: string;
+  title: string;
+  slug: string;
+  file: string;
+  content: string;
+  price: number;
+  views: number;
+  status: string;
+  description: string;
+  category: ChildCategory;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ServiceDetailResponse {
+  status: string;
+  result: ServiceDetail;
+}
+
+/**
+ * ==========================
+ *  @SERVICE_DETAIL
+ * ==========================
+ */
+
+export interface ServiceDetailResponse {
+  _id: string;
+  title: string;
+  slug: string;
+  file: string;
+  content: string;
+  price: number;
+  category: ChildCategory;
+  views: number;
+  status: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * ==========================
+ *  @SERVICE_Create
+ * ==========================
+ */
+
+export interface CreateServiceItem {
+  title: string;
+  file: File;
+  content: string;
+  price: string;
+  category: string;
+  status?: string;
+  description: string;
+}
+
+/**
+ * ==========================
+ *  @BLOG_CATEGORY
+ * ==========================
+ */
+interface ChildCategory {
+  _id: string;
+  name: string;
+}
+/**
+ * ==========================
+ *  @BLOG
+ * ==========================
+ */
+
+interface BlogList {
+  _id: string;
+  title: string;
+  content: string;
+  description: string;
+  file: string;
+  link: string;
+  slug: string;
+  views: number;
+  user?: UserDataComponents;
+  category: ChildCategory;
+  status: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
+
+export interface FetchBlogListResponse {
+  pagination: Pagination;
+  results: BlogList[];
+}
+
+/**
+ * ==========================
+ *  @BLOG_DETAIL
+ * ==========================
+ */
+
+export interface BlogDetail {
+  _id: string;
+  title: string;
+  slug: string;
+  content: string;
+  file: string;
+  category: ChildCategory;
+  user?: UserDataComponents;
+  views: number;
+  status: string;
+  description: string;
+  link?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BlogDetailResponse {
+  status: string;
+  result: BlogDetail;
+}
+
+/**
+ * ==========================
+ *  @BLOG_CREATED
+ * ==========================
+ */
+
+export interface CreateBlogItem {
+  title: string;
+  content: string;
+  file: File;
+  category: string;
+  description: string;
+  status: string;
+  link?: string | null;
 }
