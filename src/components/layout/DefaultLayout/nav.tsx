@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, Phone, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -20,6 +20,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Handle scroll effect
   useEffect(() => {
@@ -34,6 +35,10 @@ export default function Navbar() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
+
+  const handleMenuClick = () => {
+    router.push('/contact');
+  };
 
   return (
     <header
@@ -94,7 +99,10 @@ export default function Navbar() {
               <Phone size={16} className="mr-2" />
               <span>+84 123456789</span>
             </a>
-            <Button className="bg-white text-black hover:bg-orange-400 hover:text-white">
+            <Button
+              onClick={handleMenuClick}
+              className="bg-white text-black hover:bg-orange-400 hover:text-white"
+            >
               Liên hệ
             </Button>
           </div>
@@ -141,7 +149,10 @@ export default function Navbar() {
               <Phone size={16} className="mr-2" />
               <span>+84 123456789</span>
             </a>
-            <Button className="w-full bg-white text-black hover:bg-orange-400 hover:text-white">
+            <Button
+              onClick={handleMenuClick}
+              className="w-full bg-white text-black hover:bg-orange-400 hover:text-white"
+            >
               Liên Hệ
             </Button>
           </div>

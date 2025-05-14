@@ -31,7 +31,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import Container from '@/components/container/Container';
-import Heading from '@/components/pages/heading/Heading';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import {
   useCreateCategory,
@@ -50,6 +49,7 @@ import {
 import { Form } from '@/components/ui/form';
 import { useAuthStore } from '@/store/authStore';
 import SelectCategoryFilter from '@/components/pages/admin/categoryFilter';
+import Heading from '@/components/design/Heading';
 
 const formSchema = z.object({
   name: z.string().min(1, 'name is required'),

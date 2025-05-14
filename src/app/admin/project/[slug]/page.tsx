@@ -156,7 +156,7 @@ export default function Page() {
           <Separator />
           <div>
             <h3 className="text-sm font-medium">Testimonial</h3>
-            <p className="text-sm mt-1 italic">"{project.testimonial}"</p>
+            <p className="text-sm mt-1 italic">{project.testimonial}</p>
           </div>
         </div>
 

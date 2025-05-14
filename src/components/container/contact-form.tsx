@@ -1,9 +1,70 @@
+'use client';
+
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+import { CreateContactItem } from '@/types/types';
+import { useCreateContact } from '@/hooks/contact/useContact';
+import { logDebug } from '@/utils/logger';
+import { toast } from 'sonner';
 
 export default function ContactComponent() {
+  const [loading, setLoading] = useState(false);
+
+  const [contactData, setContactData] = useState<CreateContactItem>({
+    name: '',
+    email: '',
+    phone_number: '',
+    message: '',
+  });
+
+  const { mutate: createContact } = useCreateContact();
+
+  const handleSentContact = async () => {
+    logDebug('Final Product Data:', contactData);
+    setLoading(true);
+    try {
+      if (contactData.name.trim() === '') {
+        toast.error('Name is required');
+        setLoading(false);
+        return;
+      }
+
+      if (contactData.email.trim() === '') {
+        toast.error('Email is required');
+        setLoading(false);
+        return;
+      }
+
+      if (contactData.message.trim() === '') {
+        toast.error('Message is required');
+        setLoading(false);
+        return;
+      }
+
+      const productDataToSend: CreateContactItem = {
+        ...contactData,
+      };
+
+      createContact(productDataToSend);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Reset state mà không gây re-render liên tục
+      setContactData({
+        name: '',
+        email: '',
+        phone_number: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error('Error sent contact.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-16 lg:py-20">
       <div className="container px-4 md:px-6">
@@ -64,15 +125,16 @@ export default function ContactComponent() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Input
-                    id="first-name"
-                    placeholder="First Name"
-                    className="border-gray-300"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Input
-                    id="last-name"
-                    placeholder="Last Name"
+                    id="Name"
+                    placeholder="Tên"
+                    value={contactData.name}
+                    onChange={(e) =>
+                      setContactData((prevData) => ({
+                        ...prevData,
+                        name: e.target.value,
+                      }))
+                    }
+                    required
                     className="border-gray-300"
                   />
                 </div>
@@ -82,15 +144,30 @@ export default function ContactComponent() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="Email Address"
+                    placeholder="unien@unien.com"
+                    value={contactData.email}
+                    onChange={(e) =>
+                      setContactData((prevData) => ({
+                        ...prevData,
+                        email: e.target.value,
+                      }))
+                    }
+                    required
                     className="border-gray-300"
                   />
                 </div>
                 <div className="space-y-2">
                   <Input
-                    id="phone"
+                    id="phone_number"
                     type="tel"
-                    placeholder="Phone No."
+                    placeholder="(+00)000000"
+                    value={contactData.phone_number}
+                    onChange={(e) =>
+                      setContactData((prevData) => ({
+                        ...prevData,
+                        phone_number: e.target.value,
+                      }))
+                    }
                     className="border-gray-300"
                   />
                 </div>
@@ -99,14 +176,23 @@ export default function ContactComponent() {
                 <Textarea
                   id="message"
                   placeholder="Message"
+                  value={contactData.message}
+                  onChange={(e) =>
+                    setContactData((prevData) => ({
+                      ...prevData,
+                      message: e.target.value,
+                    }))
+                  }
                   className="min-h-[120px] border-gray-300"
                 />
               </div>
               <Button
                 type="submit"
+                disabled={loading}
+                onClick={handleSentContact}
                 className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-medium"
               >
-                Submit
+                {loading ? 'Sending...' : 'Reach Us'}
               </Button>
             </form>
           </div>

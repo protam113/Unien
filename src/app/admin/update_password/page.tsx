@@ -25,7 +25,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
 import { useChangePassword, useGetVerifyCode } from '@/hooks/auth/useAuth';
 import { ChangePassword, VerifyCode } from '@/types/types';
 import Link from 'next/link';
@@ -118,9 +117,10 @@ export default function UpdatePasswordPage() {
         {step === 'password' && (
           <Card className="w-full">
             <CardHeader>
-              <CardTitle className="text-2xl">Update Password</CardTitle>
+              <CardTitle className="text-2xl">Cập Nhật Mật Khẩu</CardTitle>
               <CardDescription>
-                Change your account password. You'll need to verify this change.
+                Thay đổi mật khẩu tài khoản của bạn. Bạn sẽ cần xác minh thay
+                đổi này.
               </CardDescription>
             </CardHeader>
             <CardContent>

@@ -8,14 +8,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import {
   Form,
@@ -26,23 +23,15 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Bold,
-  Italic,
-  List,
-  Heading1,
-  Heading2,
-  Underline,
-  ImageIcon,
-  Loader2,
-} from 'lucide-react';
+import { ImageIcon, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCreateService } from '@/hooks/service/useService';
 import { CreateServiceItem } from '@/types/types';
 import { useRouter } from 'next/navigation';
-import Heading from '@/components/pages/heading/Heading';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
+import Heading from '@/components/design/Heading';
+import Image from 'next/image';
 
 const formSchema = z.object({
   title: z.string().min(2, { message: 'Title must be at least 2 characters.' }),
@@ -157,68 +146,6 @@ export default function NewServiceForm() {
     setIsDragging(false);
   };
 
-  // Rich text editor functions
-  const [editorContent, setEditorContent] = useState('');
-
-  const formatText = (format: string) => {
-    const textarea = document.getElementById(
-      'description'
-    ) as HTMLTextAreaElement;
-    if (!textarea) return;
-
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = textarea.value.substring(start, end);
-    let formattedText = '';
-    let cursorPosition = 0;
-
-    switch (format) {
-      case 'bold':
-        formattedText = `**${selectedText}**`;
-        cursorPosition = 2;
-        break;
-      case 'italic':
-        formattedText = `*${selectedText}*`;
-        cursorPosition = 1;
-        break;
-      case 'underline':
-        formattedText = `__${selectedText}__`;
-        cursorPosition = 2;
-        break;
-      case 'list':
-        formattedText = `\n- ${selectedText}`;
-        cursorPosition = 3;
-        break;
-      case 'h1':
-        formattedText = `\n# ${selectedText}`;
-        cursorPosition = 3;
-        break;
-      case 'h2':
-        formattedText = `\n## ${selectedText}`;
-        cursorPosition = 4;
-        break;
-      default:
-        return;
-    }
-
-    const newValue =
-      textarea.value.substring(0, start) +
-      formattedText +
-      textarea.value.substring(end);
-
-    form.setValue('description', newValue);
-    setEditorContent(newValue);
-
-    // Set cursor position after formatting
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(
-        start + cursorPosition,
-        start + cursorPosition + selectedText.length
-      );
-    }, 0);
-  };
-
   return (
     <Card className="w-full max-w-7xl mx-auto">
       <CardHeader>
@@ -320,47 +247,6 @@ export default function NewServiceForm() {
                     )}
                   />
                 </div>
-
-                <div className="mt-4 p-4 border rounded-md">
-                  <div className="prose prose-sm max-w-none">
-                    {editorContent.split('\n').map((line, i) => {
-                      // Basic markdown parsing for preview
-                      if (line.startsWith('# ')) {
-                        return (
-                          <h1 key={i} className="text-xl font-bold">
-                            {line.substring(2)}
-                          </h1>
-                        );
-                      } else if (line.startsWith('## ')) {
-                        return (
-                          <h2 key={i} className="text-lg font-bold">
-                            {line.substring(3)}
-                          </h2>
-                        );
-                      } else if (line.startsWith('- ')) {
-                        return <li key={i}>{line.substring(2)}</li>;
-                      } else {
-                        // Handle bold, italic, underline
-                        let content = line;
-                        content = content.replace(
-                          /\*\*(.*?)\*\*/g,
-                          '<strong>$1</strong>'
-                        );
-                        content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
-                        content = content.replace(/__(.*?)__/g, '<u>$1</u>');
-
-                        return line ? (
-                          <p
-                            key={i}
-                            dangerouslySetInnerHTML={{ __html: content }}
-                          />
-                        ) : (
-                          <br key={i} />
-                        );
-                      }
-                    })}
-                  </div>
-                </div>
               </div>
 
               <div>
@@ -384,10 +270,12 @@ export default function NewServiceForm() {
                   >
                     {imagePreview ? (
                       <div className="relative mx-auto max-w-xs">
-                        <img
+                        <Image
+                          className="h-10 w-10 text-muted-foreground"
                           src={imagePreview || '/placeholder.svg'}
                           alt="Preview"
-                          className="max-h-[200px] mx-auto rounded-md object-contain"
+                          width={200}
+                          height={200}
                         />
                         <Button
                           type="button"

@@ -63,6 +63,12 @@ const endpoints = {
   project: process.env.NEXT_PUBLIC_PROJECT,
   projectStatus: process.env.NEXT_PUBLIC_PROJECT_STATUS,
 
+  // Product
+  products: process.env.NEXT_PUBLIC_PRODUCTS,
+  productDetail: process.env.NEXT_PUBLIC_PRODUCT_DETAIL,
+  product: process.env.NEXT_PUBLIC_PRODUCT,
+  productStatus: process.env.NEXT_PUBLIC_PRODUCT_STATUS,
+
   // Logs
   logs: process.env.NEXT_PUBLIC_LOGS,
 

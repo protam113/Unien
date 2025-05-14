@@ -33,15 +33,14 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
-import Heading from '@/components/pages/heading/Heading';
 import { useCreateBlog } from '@/hooks/blog/useBlog';
 import { CreateBlogItem } from '@/types/types';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
+import Heading from '@/components/design/Heading';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
 const ACCEPTED_IMAGE_TYPES = [
@@ -291,7 +290,7 @@ export default function NewBlogPost() {
               <FormField
                 control={form.control}
                 name="file"
-                render={({ field: { value, onChange, ...fieldProps } }) => (
+                render={({ field: { onChange, ...fieldProps } }) => (
                   <FormItem>
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
@@ -314,7 +313,8 @@ export default function NewBlogPost() {
                               accept="image/*"
                               className="hidden"
                               onChange={(e) => handleImageChange(e, onChange)}
-                              {...fieldProps}
+                              ref={fieldProps.ref}
+                              name={fieldProps.name}
                             />
                             <Button
                               type="button"

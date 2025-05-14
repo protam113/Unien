@@ -5,7 +5,6 @@ import { useState } from 'react';
 //UI components
 
 //Components
-import Heading from '@/components/pages/heading/Heading';
 import { RefreshButton } from '@/components/button/RefreshButton';
 import { CustomPagination } from '@/components/design/pagination';
 import {
@@ -16,11 +15,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Container from '@/components/container/Container';
-import SelectStatus from '@/components/pages/Contact/selectStatus';
 import { ContactList } from '@/lib/responses/contactLib';
 import { useDeleteContact } from '@/hooks/contact/useContact';
 import ConfirmDialog from '@/components/design/Dialog';
 import { ContactTable } from '@/components/pages/admin/table/ContactTable';
+import Heading from '@/components/design/Heading';
+import SelectStatus from '@/components/pages/admin/contact/selectStatus';
 
 export default function ProductManager() {
   const [selectedStatus, setSelectedStatus] = useState<string>();

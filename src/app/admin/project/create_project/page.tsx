@@ -29,13 +29,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/pages/admin/project/multi-select';
-import { RichTextEditor } from '@/components/richText/rich-text-editor';
 import { ServiceList } from '@/lib/responses/serviceLib';
 import { useCreateProject } from '@/hooks/project/useProject';
-import Heading from '@/components/pages/heading/Heading';
 import { CreateProjectItem } from '@/types/types';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
+import Heading from '@/components/design/Heading';
+import Image from 'next/image';
 
 // Maximum file size: 5MB
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -273,7 +273,7 @@ export default function CreateProjectPage() {
               <FormField
                 control={form.control}
                 name="thumbnail"
-                render={({ field: { value, onChange, ...fieldProps } }) => (
+                render={({ field: { ...fieldProps } }) => (
                   <FormItem>
                     <FormLabel>Thumbnail Image</FormLabel>
                     <FormControl>
@@ -300,10 +300,11 @@ export default function CreateProjectPage() {
                             </>
                           ) : (
                             <div className="relative w-full">
-                              <img
+                              <Image
                                 src={imagePreview || '/placeholder.svg'}
                                 alt="Thumbnail preview"
-                                className="rounded-md max-h-[300px] mx-auto object-contain"
+                                width={300}
+                                height={300}
                               />
                               <Button
                                 type="button"
@@ -325,7 +326,7 @@ export default function CreateProjectPage() {
                             accept="image/png, image/jpeg, image/jpg, image/webp"
                             className="hidden"
                             onChange={handleImageChange}
-                            {...fieldProps}
+                            name={fieldProps.name}
                           />
                         </div>
                       </div>

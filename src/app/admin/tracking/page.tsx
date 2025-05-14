@@ -1,9 +1,8 @@
 'use client';
 
 import Container from '@/components/container/Container';
+import Heading from '@/components/design/Heading';
 import AnalyticsDashboard from '@/components/pages/admin/tracking/trackingTable';
-import Heading from '@/components/pages/heading/Heading';
-import Link from 'next/link';
 import React from 'react';
 
 const Page = () => {

@@ -2,9 +2,9 @@
 
 import PushButton from '@/components/button/PushButton';
 import Container from '@/components/container/Container';
+import Heading from '@/components/design/Heading';
 import ProjectListDataAdmin from '@/components/pages/admin/project/ProjectList';
-import Heading from '@/components/pages/heading/Heading';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Page = () => {
   return (

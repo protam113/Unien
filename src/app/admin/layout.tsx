@@ -4,8 +4,6 @@ import AdminLayout from '@/components/layout/AdminLayout/AdminLayout';
 import RadiatingLoader from '@/components/loading/radiating-loader';
 import { useAuthStore } from '@/store/authStore';
 import Head from 'next/head';
-// import Loading from '@/components/Loading/shuffle-loader';
-// import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 

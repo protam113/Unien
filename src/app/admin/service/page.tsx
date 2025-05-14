@@ -2,8 +2,8 @@
 
 import PushButton from '@/components/button/PushButton';
 import Container from '@/components/container/Container';
+import Heading from '@/components/design/Heading';
 import ServiceListDataAdmin from '@/components/pages/admin/service/ServiceList';
-import Heading from '@/components/pages/heading/Heading';
 import React from 'react';
 
 const Page = () => {
@@ -11,7 +11,7 @@ const Page = () => {
     <Container>
       <div className="flex items-center justify-between mb-4">
         <Heading
-          name="Service Page"
+          name="Dịch Vụ"
           desc="Manage all services available on the platform. You can create, update, or remove services and ensure that each one is clearly described and up-to-date for users."
         />
         <PushButton

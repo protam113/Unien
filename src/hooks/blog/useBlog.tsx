@@ -10,7 +10,7 @@ import {
 } from '@/types/types';
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
-import { logDebug } from '@/lib/logger';
+import { logDebug } from '@/utils/logger';
 
 /**
  * ==========================

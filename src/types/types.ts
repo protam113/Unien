@@ -469,6 +469,75 @@ export interface CreateServiceItem {
 
 /**
  * ==========================
+ *  @PRODUCT
+ * ==========================
+ */
+
+interface ProductList {
+  _id: string;
+  title: string;
+  content: string;
+  description: string;
+  file: string[];
+  slug: string;
+  user?: UserDataComponents;
+  views: number;
+  price: number;
+  status: string;
+  category: ChildCategory;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FetchProductListResponse {
+  pagination: Pagination;
+  results: ProductList[];
+}
+
+/**
+ * ==========================
+ *  @PRODUCT_DETAIL
+ * ==========================
+ */
+
+export interface ProductDetail {
+  _id: string;
+  title: string;
+  slug: string;
+  file: string[];
+  content: string;
+  price: number;
+  views: number;
+  status: string;
+  description: string;
+  category: ChildCategory;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProductDetailResponse {
+  status: string;
+  result: ProductDetail;
+}
+
+/**
+ * ==========================
+ *  @SERVICE_Create
+ * ==========================
+ */
+
+export interface CreateProductItem {
+  title: string;
+  file: File[] | File;
+  content: string;
+  price: string;
+  category: string;
+  status?: string;
+  description: string;
+}
+
+/**
+ * ==========================
  *  @BLOG_CATEGORY
  * ==========================
  */
@@ -544,4 +613,54 @@ export interface CreateBlogItem {
   description: string;
   status: string;
   link?: string | null;
+}
+
+export interface CopyLinkButtonProps {
+  url?: string;
+}
+
+/**
+ * ==========================
+ * @PushButtonProps
+ * ==========================
+ */ export interface PushButtonProps {
+  href: string;
+  label: string;
+}
+
+export const CategoryColumns = [
+  {
+    key: '_id',
+    label: 'ID',
+    className: 'font-mono text-sm text-muted-foreground',
+  },
+  { key: 'name', label: 'Title', className: 'font-medium' },
+  { key: 'status', label: 'Status', className: 'font-medium' },
+  { key: 'actions', label: 'Actions', className: 'text-right' },
+];
+
+/**
+ * ==========================
+ * 📌 @props CategoryTableProps
+ * ==========================
+ */
+
+export interface CategoryTableProps {
+  categories: Category[];
+  isLoading: boolean;
+  isError: boolean;
+  onDelete: (id: string) => void;
+}
+
+/**
+ * ==========================
+ * 📌 @props ContactTableProps
+ * ==========================
+ */
+
+export interface ContactTableProps {
+  contacts: any[];
+  isLoading: boolean;
+  isError: boolean;
+  onDelete: (id: string) => void;
 }
