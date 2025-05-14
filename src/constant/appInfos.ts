@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SeoList } from '@/lib/responses/seoLib';
 
 export const appInfo = {
   logo: '/Logo.svg',
@@ -10,32 +11,60 @@ export const appInfo = {
   themeColor: '#ffffff',
   keywords: [
     // Từ khóa tiếng Anh
-    'web development',
-    'website',
-    'web design',
-    'frontend development',
-    'backend development',
-    'full-stack development',
-    'web application',
-    'responsive design',
-    'e-commerce development',
-    'CMS development',
-    'SEO optimization',
-    'web solutions',
+    'boiler system',
+    'industrial boiler',
+    'electric boiler',
+    'biomass boiler',
+    'steam boiler',
+    'boiler installation',
+    'boiler maintenance',
+    'thermal energy solutions',
+    'solar energy',
+    'rooftop solar system',
+    'solar power installation',
+    'renewable energy solutions',
+    'solar inverter',
+    'solar panel system',
+    'off-grid solar system',
+    'hybrid solar solution',
+    'power distribution',
+    'electrical cabinet',
+    'electrical panel design',
+    'electrical control panel',
+    'industrial electrical equipment',
+    'switchgear solutions',
+    'electrical solutions',
+    'energy-saving systems',
 
     // Từ khóa tiếng Việt
-    'thiết kế website',
-    'phát triển web',
-    'dịch vụ web',
-    'thiết kế web chuyên nghiệp',
-    'xây dựng website',
-    'phát triển ứng dụng web',
-    'thiết kế web responsive',
-    'phát triển thương mại điện tử',
-    'tối ưu SEO',
-    'dịch vụ web toàn diện',
-    'lập trình website',
-    'giải pháp web',
+    'lò hơi công nghiệp',
+    'nồi hơi điện',
+    'nồi hơi tầng sôi',
+    'lò hơi đốt củi',
+    'lò hơi đốt than',
+    'lò hơi đốt dầu',
+    'sửa chữa lò hơi',
+    'bảo trì lò hơi',
+    'lắp đặt lò hơi',
+    'giải pháp nhiệt công nghiệp',
+    'điện mặt trời áp mái',
+    'hệ thống điện mặt trời',
+    'lắp đặt điện mặt trời',
+    'pin năng lượng mặt trời',
+    'inverter năng lượng mặt trời',
+    'giải pháp năng lượng tái tạo',
+    'hệ thống điện công nghiệp',
+    'tủ điện công nghiệp',
+    'tủ điện điều khiển',
+    'tủ điện phân phối',
+    'thiết kế tủ điện',
+    'lắp đặt tủ điện',
+    'thiết bị điện công nghiệp',
+    'vật tư thiết bị điện',
+    'giải pháp điện toàn diện',
+    'thiết bị đóng cắt',
+    'tụ bù điện',
+    'giải pháp tiết kiệm điện',
   ],
 }; // Đã loại bỏ "as const" ở đây
 
@@ -76,8 +105,8 @@ export const metadata: Metadata = {
     title: appInfo.title,
     description: appInfo.description,
     images: [`${appInfo.domain}${appInfo.ogImage}`],
-    creator: '@vietstrix',
-    site: '@vietstrix',
+    creator: '@unien',
+    site: '@unien',
   },
 
   viewport: {
@@ -111,9 +140,9 @@ export const metadata: Metadata = {
     yandex: 'verification_token',
   },
 
-  category: 'web development',
-  creator: 'VietStrix Team',
-  publisher: 'VietStrix',
+  category: 'boiler',
+  creator: 'Unien',
+  publisher: 'Unien',
 };
 
 // Function to generate metadata for child pages
@@ -121,19 +150,89 @@ export function PageMetadata(
   pageTitle: string,
   pageDescription?: string
 ): Metadata {
+  const { seo } = SeoList(0);
+
+  // Add null checks and type safety
+  const siteTitle = seo?.site_title ?? appInfo.title;
+  console.log('🚀 ~ seo:', seo);
+  const siteDescription =
+    pageDescription ?? seo?.site_description ?? appInfo.description;
+  const siteKeywords = seo?.keywords?.length ? seo.keywords : appInfo.keywords;
+  const siteDomain = seo?.domain ?? appInfo.domain;
+
   return {
-    ...metadata,
-    title: `${pageTitle} | ${appInfo.title}`,
-    description: pageDescription || metadata.description,
+    title: `${pageTitle} | ${siteTitle}`,
+    description: siteDescription,
+    keywords: siteKeywords,
+    applicationName: siteTitle,
+    generator: 'Next.js',
+
+    icons: {
+      icon: appInfo.logo,
+      apple: appInfo.logo,
+      shortcut: appInfo.logo,
+    },
+    themeColor: appInfo.themeColor,
+
     openGraph: {
-      ...metadata.openGraph,
-      title: `${pageTitle} | ${appInfo.title}`,
-      description: pageDescription || (metadata.description as string),
+      type: 'website',
+      title: `${pageTitle} | ${siteTitle}`,
+      description: siteDescription,
+      siteName: siteTitle,
+      url: siteDomain,
+      images: [
+        {
+          url: `${siteDomain}${appInfo.ogImage}`,
+          width: 1200,
+          height: 630,
+          alt: siteTitle,
+        },
+      ],
+      locale: 'vi_VN',
     },
+
     twitter: {
-      ...metadata.twitter,
-      title: `${pageTitle} | ${appInfo.title}`,
-      description: pageDescription || (metadata.description as string),
+      card: 'summary_large_image',
+      title: `${pageTitle} | ${siteTitle}`,
+      description: siteDescription,
+      images: [`${siteDomain}${appInfo.ogImage}`],
+      creator: '@unien',
+      site: '@unien',
     },
+
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+      userScalable: false,
+    },
+
+    alternates: {
+      canonical: siteDomain,
+      languages: {
+        'en-US': `${siteDomain}/en`,
+        'vi-VN': `${siteDomain}`,
+      },
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+
+    verification: {
+      google: 'verification_token',
+      yandex: 'verification_token',
+    },
+
+    category: 'Boiler',
+    creator: '@unien',
+    publisher: 'Unien',
   };
 }

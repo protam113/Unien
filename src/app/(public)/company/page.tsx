@@ -2,6 +2,7 @@ import ContactComponent from '@/components/container/contact-form';
 import Container from '@/components/container/Container';
 import HeroHeader from '@/components/container/Header';
 import { StatsSection } from '@/components/container/StartSection';
+import SEO from '@/components/design/SEO';
 import { WhoAreWeSection } from '@/components/pages/company/about-us';
 import CompanyPortfolio from '@/components/pages/company/more-info';
 import OurProjects from '@/components/pages/company/our-project';
@@ -9,23 +10,29 @@ import React from 'react';
 
 const Page = () => {
   return (
-    <main>
-      <HeroHeader
-        title="Contact Us"
-        description=" Chúng tôi ở đây để giúp đỡ. Hãy liên hệ với nhóm của chúng tôi nếu bạn
-      có bất kỳ câu hỏi hoặc thắc mắc nào."
+    <>
+      <SEO
+        title="Giới Thiệu Unien"
+        description="Unien là đối tác đáng tin cậy trong lĩnh vực Lò Hơi Công Nghiệp, Tủ Điện và Giải Pháp Năng Lượng. Chúng tôi cam kết mang đến giá trị thật, dịch vụ tận tâm và giải pháp bền vững cho doanh nghiệp của bạn."
       />
 
-      <Container>
-        <WhoAreWeSection />
-      </Container>
-      <StatsSection />
-      <Container>
-        <CompanyPortfolio />
-        <OurProjects />
-        <ContactComponent />
-      </Container>
-    </main>
+      <main>
+        <HeroHeader
+          title="Chúng Tôi Là Unien"
+          description="Với kinh nghiệm trong lĩnh vực điện – lò hơi – năng lượng tái tạo, chúng tôi không ngừng cải tiến để mang đến giải pháp kỹ thuật hiệu quả, tiết kiệm và bền vững cho khách hàng khắp cả nước."
+        />
+
+        <Container>
+          <WhoAreWeSection />
+        </Container>
+        <StatsSection />
+        <Container>
+          <CompanyPortfolio />
+          <OurProjects />
+          <ContactComponent />
+        </Container>
+      </main>
+    </>
   );
 };
 

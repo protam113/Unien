@@ -15,8 +15,8 @@ export default {
       },
       colors: {
         main: {
-          DEFAULT: 'hsl(var(--main))',
-          foreground: 'hsl(var(--main-foreground))',
+          DEFAULT: 'oklch(var(--main))',
+          foreground: 'oklch(var(--main-foreground))',
         },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
