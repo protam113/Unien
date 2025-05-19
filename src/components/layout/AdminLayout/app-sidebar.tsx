@@ -51,6 +51,11 @@ const data = {
       icon: ComponentsIcons.List,
     },
     {
+      title: 'Sản Phẩm',
+      url: '/admin/product',
+      icon: ComponentsIcons.Package,
+    },
+    {
       title: 'Dịch Vụ',
       url: '/admin/service',
       icon: ComponentsIcons.Package,

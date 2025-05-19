@@ -45,7 +45,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
         top: row === 'top' ? '0' : '80px', // Position based on row
       }}
     >
-      <div className="text-lg font-medium mb-2">{title}</div>
+      <div className="text-sm font-medium mb-2">{title}</div>
       <div
         className={cn(
           'h-3 rounded-full transition-all duration-1000 ease-out',
@@ -95,7 +95,7 @@ const ProcessTimeline: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 px-4 max-w-7xl mx-auto">
+    <section ref={sectionRef} className="py-16 px-4 mx-auto">
       <div
         className={cn(
           'opacity-0 transform translate-x-10 transition-all duration-1000 ease-out',
@@ -103,24 +103,25 @@ const ProcessTimeline: React.FC = () => {
         )}
       >
         <div className="flex flex-col">
-          <SectionHeader title="Qui Trình Làm Việc" />
+          <SectionHeader title="Quy Trình Làm Việc" />
           <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
-            Crafting Success, Step by Step
+            Hiệu quả bắt đầu từ quy trình bài bản
           </h2>
           <p className="text-gray-600 max-w-3xl mb-16">
-            At VietStrix, we don&apos;t just build websites—we engineer{' '}
-            <span className="font-semibold">digital ecosystems</span> that
-            scale. Our process is{' '}
+            Tại <span className="text-main font-bold">Unien</span>, mỗi công
+            trình đều được thực hiện theo một quy trình rõ ràng và chuyên nghiệp
+            — từ khảo sát thực tế, thiết kế hệ thống cho đến thi công lắp đặt và
+            bàn giao.
+            <br />
+            Chúng tôi không chỉ cung cấp thiết bị chất lượng mà còn tối ưu toàn
+            bộ giải pháp về kỹ thuật, vận hành và an toàn.
+            <br />
+            Với đội ngũ kỹ sư giàu kinh nghiệm,{' '}
             <span className="font-semibold">
-              agile, data-driven, and laser-focused
+              Unien cam kết mang đến hệ thống vận hành ổn định, tiết kiệm năng
+              lượng và đạt hiệu suất cao
             </span>{' '}
-            on delivering real value. From brainstorming the{' '}
-            <span className="font-semibold">big picture</span> to refining every{' '}
-            <span className="font-semibold">tiny detail</span>, we work closely
-            with you to craft solutions that aren&apos;t just visually stunning
-            but <span className="font-semibold">functionally powerful</span>. No
-            fluff. Just <span className="font-semibold">smart execution</span>{' '}
-            and <span className="font-semibold">measurable results</span>.
+            ngay từ ngày đầu đưa vào sử dụng.
           </p>
         </div>
 
@@ -136,7 +137,7 @@ const ProcessTimeline: React.FC = () => {
           <div className="relative h-full">
             {/* Top row */}
             <ProcessStep
-              title="Discovery"
+              title="Khảo sát & Nghiên cứu "
               startPosition="0%"
               color="bg-gray-300"
               width="20%"
@@ -146,7 +147,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Execution"
+              title="Lập kế hoạch triển khai"
               startPosition="40%"
               color="bg-gray-700"
               width="35%"
@@ -156,7 +157,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Reporting"
+              title="Thi công & Lắp đặt"
               startPosition="90%"
               color="bg-black"
               width="10%"
@@ -167,7 +168,7 @@ const ProcessTimeline: React.FC = () => {
 
             {/* Bottom row */}
             <ProcessStep
-              title="Planning"
+              title="Tối ưu vận hành hệ thống"
               startPosition="20%"
               color="bg-gray-500"
               width="20%"
@@ -177,7 +178,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Optimization"
+              title="Báo cáo & Bàn giao"
               startPosition="75%"
               color="bg-gray-800"
               width="15%"

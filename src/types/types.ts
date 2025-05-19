@@ -131,7 +131,7 @@ interface ManagerData {
   username: string;
   name: string;
   email: string;
-  phoneNumber: string;
+  phone_number: string;
   role: string;
   createdAt: Date | string;
   updatedAt: Date | string;
@@ -146,7 +146,7 @@ export interface CreateManagerData {
   username: string;
   name: string;
   email: string;
-  phoneNumber: string;
+  phone_number: string;
   password: string;
 }
 
@@ -177,6 +177,7 @@ export interface FetchCategoryListResponse {
 
 export interface CreateCategoryItem {
   name: string;
+  type: string;
   status?: string;
 }
 
@@ -271,7 +272,6 @@ interface ProjectList {
   file: string;
   content: string;
   description: string;
-  views: number;
   service: ProjectService[];
   testimonial: string;
   brand_name: string;
@@ -304,7 +304,6 @@ interface ProjectDetail {
   service: ProjectService[];
   testimonial: string;
   brand_name: string;
-  views: number;
   client: string;
   link?: number;
   status: string;
@@ -351,7 +350,6 @@ interface ServiceList {
   file: string;
   slug: string;
   user?: UserDataComponents;
-  views: number;
   price: number;
   status: string;
   category: ChildCategory;
@@ -377,7 +375,6 @@ export interface ServiceDetail {
   file: string;
   content: string;
   price: number;
-  views: number;
   status: string;
   description: string;
   category: ChildCategory;
@@ -404,7 +401,6 @@ export interface ServiceDetailResponse {
   content: string;
   price: number;
   category: ChildCategory;
-  views: number;
   status: string;
   description: string;
   createdAt: Date | string;
@@ -441,7 +437,6 @@ interface ProductList {
   file: string[];
   slug: string;
   user?: UserDataComponents;
-  views: number;
   price: number;
   status: string;
   category: ChildCategory;
@@ -467,7 +462,6 @@ export interface ProductDetail {
   file: string[];
   content: string;
   price: number;
-  views: number;
   status: string;
   description: string;
   category: ChildCategory;
@@ -519,7 +513,6 @@ interface BlogList {
   file: string;
   link: string;
   slug: string;
-  views: number;
   user?: UserDataComponents;
   category: ChildCategory;
   status: string;
@@ -546,7 +539,6 @@ export interface BlogDetail {
   file: string;
   category: ChildCategory;
   user?: UserDataComponents;
-  views: number;
   status: string;
   description: string;
   link?: string | null;
@@ -594,8 +586,9 @@ export const CategoryColumns = [
     label: 'ID',
     className: 'font-mono text-sm text-muted-foreground',
   },
-  { key: 'name', label: 'Title', className: 'font-medium' },
-  { key: 'status', label: 'Status', className: 'font-medium' },
+  { key: 'name', label: 'Tên', className: 'font-medium' },
+  { key: 'type', label: 'Thể Loại', className: 'font-medium' },
+  { key: 'status', label: 'Trạng Thái', className: 'font-medium' },
   { key: 'actions', label: 'Actions', className: 'text-right' },
 ];
 

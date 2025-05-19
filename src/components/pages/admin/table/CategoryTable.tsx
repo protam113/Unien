@@ -51,7 +51,7 @@ export const CategoryTable: React.FC<CategoryTableProps> = ({
 
   return (
     <>
-      <div className="rounded-md border">
+      <div className="border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -94,6 +94,7 @@ export const CategoryTable: React.FC<CategoryTableProps> = ({
                         ? category._id.substring(0, 8) + '...'
                         : ''}
                       {col.key === 'name' ? category.name : ''}
+                      {col.key === 'type' ? category.type : ''}
                       {col.key === 'status' ? (
                         userInfo?.role === 'admin' ? (
                           <SelectCategoryStatus

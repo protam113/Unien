@@ -3,7 +3,7 @@ import Image from 'next/image';
 // Product Card Component
 function ProductCard({ product }: { product: any }) {
   return (
-    <div className="bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] border border-gray-100 hover:border-gray-200 group relative">
+    <div className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] border border-gray-100 hover:border-gray-200 group relative">
       {/* Product Image */}
       <div className="relative">
         <Image

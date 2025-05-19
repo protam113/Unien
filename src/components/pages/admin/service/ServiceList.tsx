@@ -16,6 +16,8 @@ import { CustomPagination } from '@/components/design/pagination';
 import { RefreshButton } from '@/components/button/RefreshButton';
 import { DraftServiceCard } from './DraftServiceCard';
 import Heading from '@/components/design/Heading';
+import Container from '@/components/container/Container';
+import AdminServiceCategoryCard from './ServiceCategory';
 
 export enum ServiceStatus {
   Show = 'show',
@@ -29,10 +31,12 @@ export default function ServiceListDataAdmin() {
   const [refreshKey, setRefreshKey] = useState(0); // State to refresh data
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // ✅ Nếu là "all", không truyền status
   const params = {
     ...(selectedStatus !== 'all' && { status: selectedStatus }),
+    category: selectedCategory ?? undefined,
     page_size: pageSize,
   };
   const { services, isLoading, isError, pagination } = ServiceList(
@@ -85,9 +89,9 @@ export default function ServiceListDataAdmin() {
   };
 
   return (
-    <main>
+    <Container>
       <section className="mb-12">
-        <Heading name="Draft Service " />
+        <Heading name="Dịch vụ nhap " />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {draftService && draftService.length > 0 ? (
             draftService.map((post) => (
@@ -99,7 +103,7 @@ export default function ServiceListDataAdmin() {
             </div>
           )}
         </div>
-        <Heading name="Popular Service " />
+        <Heading name="Dịch vụ phổ biến " />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {popularService && popularService.length > 0 ? (
@@ -113,8 +117,12 @@ export default function ServiceListDataAdmin() {
           )}
         </div>
       </section>
-      <Heading name="All Service " />
+      <Heading name="Tất cả dịch vụ" />
 
+      <div className="border-b border-gray-200 mb-8">
+        <AdminServiceCategoryCard onCategorySelect={setSelectedCategory} />
+      </div>
+      {/* Heading */}
       {/* Filter status */}
       <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Filter status */}
@@ -128,10 +136,10 @@ export default function ServiceListDataAdmin() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              <SelectItem value={ServiceStatus.Show}>Show</SelectItem>
-              <SelectItem value={ServiceStatus.Hide}>Hide</SelectItem>
-              <SelectItem value={ServiceStatus.Popular}>Popular</SelectItem>
-              <SelectItem value={ServiceStatus.Draft}>Draft</SelectItem>
+              <SelectItem value={ServiceStatus.Show}>Hiện</SelectItem>
+              <SelectItem value={ServiceStatus.Hide}>Ẩn</SelectItem>
+              <SelectItem value={ServiceStatus.Popular}>Phổ Biến</SelectItem>
+              <SelectItem value={ServiceStatus.Draft}>Nháp</SelectItem>
             </SelectContent>
           </Select>
 
@@ -175,6 +183,6 @@ export default function ServiceListDataAdmin() {
           onPageChange={handlePageChange}
         />
       </section>
-    </main>
+    </Container>
   );
 }

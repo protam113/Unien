@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 import CategoryCard from './BlogCategory';
 import { BlogList } from '@/lib/responses/blogLib';
+import Container from '@/components/container/Container';
 
 export default function BlogGrid() {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ export default function BlogGrid() {
 
   const params = {
     category: selectedCategory ?? undefined,
-    limit: 5,
+    limit: 10,
   };
 
   const { blogs, isLoading, isError, pagination } = BlogList(
@@ -53,13 +54,13 @@ export default function BlogGrid() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <Container className="mx-auto px-4 py-12">
       <CategoryCard onCategorySelect={setSelectedCategory} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((post) => (
           <article
             key={post._id}
-            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+            className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             <Link href={`/blogs/${post.slug}`} className="block">
               <div className="relative overflow-hidden group">
@@ -90,7 +91,7 @@ export default function BlogGrid() {
             onClick={handleLoadMore}
             disabled={loading}
             className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300
-                     hover:bg-orange-500 hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-opacity-50
+                     hover:bg-main hover:scale-105 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-opacity-50
                      disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:bg-gray-900 disabled:hover:scale-100"
           >
             {loading ? (
@@ -99,11 +100,11 @@ export default function BlogGrid() {
                 LOADING...
               </span>
             ) : (
-              'LOAD MORE'
+              'TẢI THÊM'
             )}
           </button>
         </div>
       )}
-    </div>
+    </Container>
   );
 }

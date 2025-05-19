@@ -382,7 +382,7 @@ export const useAuthStore = create<AuthState>()(
                 error: null,
               });
 
-              window.location.href = '/auth';
+              window.location.href = '/login';
               return;
             }
 
@@ -413,7 +413,7 @@ export const useAuthStore = create<AuthState>()(
             error: null,
           });
 
-          window.location.href = '/auth';
+          window.location.href = '/login';
         }
       },
     }),

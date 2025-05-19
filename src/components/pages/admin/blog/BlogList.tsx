@@ -16,6 +16,7 @@ import {
 import { RefreshButton } from '@/components/button/RefreshButton';
 import { CustomPagination } from '@/components/design/pagination';
 import { DraftBlogCard } from './DraftBlogCard';
+import Container from '@/components/container/Container';
 
 export enum BlogStatus {
   Show = 'show',
@@ -73,9 +74,11 @@ export default function BlogListData() {
 
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Container className="mx-auto">
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Draft Blogs</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Bài Viết Nháp
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {draftBlogs.map((blog) => (
               <DraftBlogCard key={blog._id} blog={blog} />
@@ -86,7 +89,7 @@ export default function BlogListData() {
         {/* Popular Blogs */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Popular Blogs
+            Bài Viết Phổ Biến
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {popularBlogs && popularBlogs.length > 0 ? (
@@ -117,10 +120,10 @@ export default function BlogListData() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All</SelectItem>
-                <SelectItem value={BlogStatus.Show}>Show</SelectItem>
-                <SelectItem value={BlogStatus.Hide}>Hide</SelectItem>
-                <SelectItem value={BlogStatus.Popular}>Popular</SelectItem>
-                <SelectItem value={BlogStatus.Draft}>Draft</SelectItem>
+                <SelectItem value={BlogStatus.Show}>Hiện</SelectItem>
+                <SelectItem value={BlogStatus.Hide}>Ẩn</SelectItem>
+                <SelectItem value={BlogStatus.Popular}>Phổ Biến</SelectItem>
+                <SelectItem value={BlogStatus.Draft}>Nháp</SelectItem>
               </SelectContent>
             </Select>
 
@@ -164,7 +167,7 @@ export default function BlogListData() {
             onPageChange={handlePageChange}
           />
         </section>
-      </div>
+      </Container>
     </main>
   );
 }

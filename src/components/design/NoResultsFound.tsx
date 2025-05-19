@@ -1,18 +1,15 @@
 'use client';
 
-import { Frown, SmilePlus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Frown } from 'lucide-react';
 
 interface NoResultsFoundProps {
   title?: string;
   message?: string;
-  onRetry?: () => void;
 }
 
 export default function NoResultsFound({
-  title = 'Whoops, no matches',
-  message = "We couldn't find any search results. Give it another go",
-  onRetry,
+  title = 'Whoops, không có kết quả',
+  message = 'Chúng tôi không thể tìm thấy bất kỳ kết quả tìm kiếm nào. Hãy thử lại lần sau',
 }: NoResultsFoundProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center max-w-md mx-auto">
@@ -36,17 +33,6 @@ export default function NoResultsFound({
 
       <h3 className="text-xl font-medium text-gray-700 mb-2">{title}</h3>
       <p className="text-gray-500 mb-6">{message}</p>
-
-      <div className="flex items-center">
-        {onRetry && (
-          <Button onClick={onRetry} variant="outline" className="mr-2">
-            Try again
-          </Button>
-        )}
-        <div className="w-6 h-6 rounded-full bg-green-400 flex items-center justify-center">
-          <SmilePlus className="w-5 h-5 text-white" />
-        </div>
-      </div>
     </div>
   );
 }

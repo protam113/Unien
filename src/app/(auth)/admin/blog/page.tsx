@@ -2,7 +2,7 @@
 
 import PushButton from '@/components/button/PushButton';
 import Container from '@/components/container/Container';
-import Header from '@/components/design/Header';
+import Heading from '@/components/design/Heading';
 import BlogListData from '@/components/pages/admin/blog/BlogList';
 import React from 'react';
 
@@ -11,8 +11,8 @@ const Page = () => {
     <Container>
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
-        <Header title="Blog Page" />
-        <PushButton href="/admin/blog/create_blog" label="Create Blog" />
+        <Heading name="Bài viết" />
+        <PushButton href="/admin/blog/create_blog" label="Tạo bài viết" />
       </div>
 
       <BlogListData />

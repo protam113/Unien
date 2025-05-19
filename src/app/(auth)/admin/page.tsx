@@ -29,7 +29,6 @@ const Page = () => {
           <RecentInvoices />
         </CardContent>
       </Card>
-      <Header title="Tracking Recent" />
     </Container>
   );
 };

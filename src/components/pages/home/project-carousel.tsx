@@ -12,13 +12,7 @@ export default function ProjectCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [transition, setTransition] = useState(true);
-  const { projects, isLoading, isError } = ProjectList(
-    1,
-    {
-      status: 'popular',
-    },
-    0
-  );
+  const { projects, isLoading, isError } = ProjectList(1, {}, 0);
 
   // Adjust slides per view based on screen size
   useEffect(() => {

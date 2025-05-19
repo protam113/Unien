@@ -92,7 +92,7 @@ export default function ProjectListDataAdmin() {
   return (
     <main>
       <section className="mb-12">
-        <Heading name="Draft Project " />
+        <Heading name="Dự án nháp " />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {draftProjects && draftProjects.length > 0 ? (
@@ -106,7 +106,7 @@ export default function ProjectListDataAdmin() {
           )}
         </div>
 
-        <Heading name="Popular Project " />
+        <Heading name="Dự án tiêu biểu " />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {popularProjects && popularProjects.length > 0 ? (
@@ -120,7 +120,7 @@ export default function ProjectListDataAdmin() {
           )}
         </div>
       </section>
-      <Heading name="All Service " />
+      <Heading name="Toàn bộ dự án " />
       <div className="border-b border-gray-200 mb-8">
         <ServiceCateCard onCategorySelect={setSelectedCategory} />
       </div>
@@ -137,10 +137,10 @@ export default function ProjectListDataAdmin() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              <SelectItem value={ServiceStatus.Show}>Show</SelectItem>
-              <SelectItem value={ServiceStatus.Hide}>Hide</SelectItem>
-              <SelectItem value={ServiceStatus.Popular}>Popular</SelectItem>
-              <SelectItem value={ServiceStatus.Draft}>Draft</SelectItem>
+              <SelectItem value={ServiceStatus.Show}>Hiện</SelectItem>
+              <SelectItem value={ServiceStatus.Hide}>Ẩn</SelectItem>
+              <SelectItem value={ServiceStatus.Popular}>Phổ Biến</SelectItem>
+              <SelectItem value={ServiceStatus.Draft}>Nháp</SelectItem>
             </SelectContent>
           </Select>
 

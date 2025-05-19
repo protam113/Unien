@@ -8,13 +8,13 @@ export default function OurProjects() {
   const { projects, isLoading, isError } = ProjectList(
     1,
     {
-      status: ['show', 'popular'].join(','),
+      status: ['show', 'popular', 'draft'].join(','),
     },
     0
   );
 
   return (
-    <section className="py-16 px-4 max-w-7xl mx-auto">
+    <section className="py-16 px-4 mx-auto">
       <div className="text-center mb-16">
         <SectionHeader title="Các Dự Án Đã Thực Hiện" />
       </div>
@@ -36,14 +36,14 @@ export default function OurProjects() {
           {projects.map((project) => (
             <div
               key={project._id}
-              className="rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-lg"
+              className=" overflow-hidden bg-gray-50 transition-all duration-300 hover:shadow-lg"
             >
               <div className="aspect-[16/9] relative w-full">
                 <Image
                   src={project.file || '/placeholder.svg'}
                   alt={project.title}
                   fill
-                  className="object-cover rounded-t-3xl"
+                  className="object-cover "
                 />
               </div>
               <div className="p-6">

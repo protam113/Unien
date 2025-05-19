@@ -14,10 +14,12 @@ interface Category {
   name: string;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ onCategorySelect }) => {
+const AdminProductCategoryCard: React.FC<CategoryCardProps> = ({
+  onCategorySelect,
+}) => {
   const { categories, isLoading, isError } = CategoryList(
     1,
-    { limit: 20, type: 'blogs' },
+    { limit: 20, type: 'products' },
     0
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -72,4 +74,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ onCategorySelect }) => {
   );
 };
 
-export default CategoryCard;
+export default AdminProductCategoryCard;

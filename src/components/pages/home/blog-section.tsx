@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import SectionHeader from '@/components/container/SectionHeader';
 import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
 import { BlogList } from '@/lib/responses/blogLib';
+import Container from '@/components/container/Container';
 
 export default function BlogSection() {
   const { blogs, isLoading, isError } = BlogList(
@@ -18,7 +19,7 @@ export default function BlogSection() {
 
   return (
     <section className="py-12 px-4 md:px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+      <Container className="mx-auto">
         <div className="flex items-center justify-between mb-8">
           <SectionHeader title="Các Bài Viết Mới Nhất" />
 
@@ -56,7 +57,7 @@ export default function BlogSection() {
             Xem Thêm →
           </Link>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

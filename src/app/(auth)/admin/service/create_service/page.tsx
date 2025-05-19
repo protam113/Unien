@@ -1,6 +1,6 @@
 'use client';
 
-import type React from 'react';
+import React from 'react';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -58,6 +58,7 @@ const formSchema = z.object({
 export default function NewServiceForm() {
   const userInfo = useAuthStore((state) => state.userInfo);
   const router = useRouter();
+  const [displayPrice, setDisplayPrice] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const { mutate: createService } = useCreateService();
@@ -133,6 +134,33 @@ export default function NewServiceForm() {
     }
   };
 
+  React.useEffect(() => {
+    // Nếu form chưa load xong hoặc price rỗng thì set ''
+    if (!form.getValues('price')) {
+      setDisplayPrice('');
+      return;
+    }
+
+    const formatVND = (value: number | string) => {
+      const number = Number(value);
+      return number.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0,
+      });
+    };
+
+    setDisplayPrice(formatVND(form.getValues('price')));
+  }, [form.watch('price')]); // watch để cập nhật khi price thay đổi
+
+  // Hàm xử lý khi user nhập giá trị
+  function handlePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const rawValue = e.target.value.replace(/[^\d]/g, ''); // giữ số thôi
+    const numberValue = Number(rawValue);
+    setDisplayPrice(rawValue ? numberValue.toLocaleString('vi-VN') + ' ₫' : '');
+    form.setValue('price', rawValue || '0');
+  }
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
@@ -165,8 +193,8 @@ export default function NewServiceForm() {
     <Card className="w-full max-w-7xl mx-auto">
       <CardHeader>
         <Heading
-          name="Create New Service"
-          desc="Fill in the details below to publish a new service."
+          name="Tạo dịch vụ mới"
+          desc="Điền thông tin bên dưới để đăng dịch vụ mới."
         />
       </CardHeader>
       <CardContent>
@@ -183,9 +211,9 @@ export default function NewServiceForm() {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Tiêu đề</FormLabel>
                         <FormDescription>
-                          Enter a clear and concise title for the service
+                          Nhập tiêu đề cho dịch vụ{' '}
                         </FormDescription>
                         <FormControl>
                           <Input
@@ -203,9 +231,9 @@ export default function NewServiceForm() {
                     name="content"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Content</FormLabel>
+                        <FormLabel>Nội dung ngắn</FormLabel>
                         <FormDescription>
-                          Enter blog post Contnet
+                          Nhập nội dung bài đăng dịch vụ
                         </FormDescription>
                         <FormControl>
                           <Input
@@ -221,19 +249,19 @@ export default function NewServiceForm() {
                   <FormField
                     control={form.control}
                     name="price"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
-                        <FormLabel>Price (USD)</FormLabel>
+                        <FormLabel>Giá (VND)</FormLabel>
                         <FormDescription>
-                          Set the price for this service (0 for free)
+                          Đặt giá cho dịch vụ này (0 để liên hệ)
                         </FormDescription>
                         <FormControl>
                           <Input
-                            type="number"
-                            min="0"
-                            step="0.01"
+                            type="text"
+                            inputMode="numeric"
                             placeholder="0"
-                            {...field}
+                            value={displayPrice}
+                            onChange={handlePriceChange}
                           />
                         </FormControl>
                         <FormMessage />
@@ -250,7 +278,7 @@ export default function NewServiceForm() {
                     name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>Mô tả chi tiết</FormLabel>
                         <FormControl>
                           <ContentSection
                             value={field.value}
@@ -268,7 +296,7 @@ export default function NewServiceForm() {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>Thể Loại</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -318,7 +346,7 @@ export default function NewServiceForm() {
               />
               <div>
                 <h2 className="text-lg font-semibold flex items-center gap-2">
-                  📁 Upload Image
+                  📁 Tải ảnh
                 </h2>
                 <div className="mt-4">
                   <div
@@ -389,7 +417,7 @@ export default function NewServiceForm() {
                 type="button"
                 onClick={() => router.back()}
               >
-                Cancel
+                Hủy
               </Button>
               <div className="flex gap-4">
                 <Button
@@ -401,14 +429,14 @@ export default function NewServiceForm() {
                   }}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                  {isSubmitting ? 'Saving...' : 'Lưu nháp'}
                 </Button>
                 {userInfo?.role === 'admin' && (
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting && (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     )}
-                    {isSubmitting ? 'Creating...' : 'Create Blog'}
+                    {isSubmitting ? 'Creating...' : 'Khởi tạo dịch vụ'}
                   </Button>
                 )}
               </div>

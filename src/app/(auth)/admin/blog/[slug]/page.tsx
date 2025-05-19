@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import { parseISO, format } from 'date-fns';
 import BackButton from '@/components/button/BackButton';
 import { BlogDetailData } from '@/lib/responses/blogLib';
 import remarkGfm from 'remark-gfm';
@@ -43,27 +42,6 @@ export default function Page() {
                 fill
                 className="object-cover"
               />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/Logo.png?height=50&width=50"
-                alt="Author avatar"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <div>
-                <p className="font-semibold">Hust4L</p>
-                <p className="text-sm text-gray-500">
-                  {/* Kiểm tra nếu createdAt có giá trị hợp lệ */}
-                  {blog.createdAt
-                    ? format(parseISO(blog.createdAt), 'dd/MM/yyyy')
-                    : 'No date available'}
-                </p>
-              </div>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import RadiatingLoaderNoBg from '@/components/Loading/LoadingNoBg';
+import RadiatingLoader from '@/components/loading/radiating-loader';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -50,7 +50,7 @@ export default function AuthProtectedLayout({
   if (!authChecked || loading) {
     return (
       <div>
-        <RadiatingLoaderNoBg />
+        <RadiatingLoader />
       </div>
     );
   }

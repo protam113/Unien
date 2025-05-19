@@ -14,10 +14,10 @@ const BackButton: React.FC = () => {
   return (
     <button
       onClick={handleBack}
-      className="flex items-center space-x-2 p-2 bg-transparent text-primary-500 rounded-md border border-primary-500 hover:bg-lime-500 hover:text-white transition-all duration-300"
+      className="flex items-center space-x-2 p-2 bg-transparent text-primary-500 rounded-md border border-primary-500 hover:bg-orange-500 hover:text-white transition-all duration-300"
     >
       <ComponentsIcons.ArrowLeft className="h-4 w-4" />
-      <span className="text-sm">Back</span>
+      <span className="text-sm">Quay lại</span>
     </button>
   );
 };

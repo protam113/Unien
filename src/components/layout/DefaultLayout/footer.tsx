@@ -17,9 +17,10 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 max-w-md">
-              We design spaces that transform lives. Every project is a fusion
-              of innovation, functionality, and aesthetics, crafted for the
-              future.
+              Chúng tôi thiết kế và vận hành những hệ thống nhiệt động lực mạnh
+              mẽ, nâng tầm hoạt động của bạn. Mỗi dự án là sự kết hợp giữa đổi
+              mới công nghệ, độ tin cậy cao và hiệu suất tối ưu, hướng đến tương
+              lai bền vững.
             </p>
             <div className="flex justify-between items-center">
               <div className="flex space-x-4">

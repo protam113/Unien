@@ -15,14 +15,13 @@ interface Post {
   slug: string;
   status: string;
   file: string;
-  createdAt: string;
+  createdAt: string | Date;
   content: string;
   brand_name: string;
   user?: {
     username: string;
     role: string;
   };
-  views: number;
 }
 
 interface PostCardProps {
@@ -54,7 +53,7 @@ export function PopularProjectCard({ post }: PostCardProps) {
   };
 
   return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden">
+    <div className="border border-gray-200 overflow-hidden">
       <Link href={`/admin/project/${post.slug}`}>
         <div className="relative h-48">
           <Image
@@ -63,37 +62,18 @@ export function PopularProjectCard({ post }: PostCardProps) {
             fill
             className="object-cover"
           />
-          <Badge className="absolute top-3 left-3 bg-lime-400 text-gray-800 text-md font-bold hover:bg-lime-600">
-            ${post.brand_name}
+          <Badge className="absolute top-3 left-3 bg-main text-gray-800 text-sm font-bold hover:bg-lime-600">
+            {post.brand_name}
           </Badge>
         </div>
       </Link>
       <div className="p-4">
-        <Link href={`/admin/project/${post.slug}`}>
-          <div className="flex items-center gap-1 text-gray-500 text-sm mb-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-            <span>{post.views} views read</span>
-          </div>
-        </Link>
+        <Link href={`/admin/project/${post.slug}`}></Link>
         <h3 className="font-semibold text-gray-800 mb-2">{post.title}</h3>
         <p className="text-gray-600 text-sm mb-4">{post.content}</p>
         <div className="flex items-center gap-2">
           <Image
-            src={'/logo.png'}
+            src={'/logo.svg'}
             alt={post?.user?.username || 'User'}
             width={30}
             height={30}

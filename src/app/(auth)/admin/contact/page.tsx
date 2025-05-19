@@ -116,7 +116,7 @@ export default function ProductManager() {
         </div>
 
         {/* Table */}
-        <div className="rounded-md border">
+        <div>
           <ContactTable
             contacts={contacts}
             isLoading={isLoading}

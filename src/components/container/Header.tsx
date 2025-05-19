@@ -13,7 +13,7 @@ export default function HeroHeader({
   return (
     <section className="relative h-[400px] md:h-[400px]overflow-hidden bg-gradient-to-r from-background to-card mt-12">
       {/* Grid background */}
-      <div className="absolute inset-0  bg-[#F69429]/40  bg-[size:40px_40px]" />
+      <div className="absolute inset-0  bg-main/30  bg-[size:40px_40px]" />
 
       {/* City skyline illustration */}
       <div className="absolute right-0 bottom-0 w-full h-[100px] md:h-[150px] opacity-10 [mask-image:linear-gradient(to_left,#000_30%,transparent_100%)]">

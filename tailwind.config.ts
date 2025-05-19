@@ -1,33 +1,37 @@
 import type { Config } from 'tailwindcss';
-import tailwindAnimate from 'tailwindcss-animate'; // Add this import
+import tailwindAnimate from 'tailwindcss-animate';
 
 export default {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // Bao quát tất cả file trong src
+    './public/**/*.{html,js}', // File tĩnh trong public
   ],
   theme: {
     extend: {
       fontFamily: {
         sans: ['sans-serif', 'ui-sans-serif', 'system-ui'],
-        montserrat: ['Montserrat'],
+        montserrat: ['Montserrat', 'sans-serif'],
       },
       colors: {
         main: {
-          DEFAULT: 'oklch(var(--main))',
-          foreground: 'oklch(var(--main-foreground))',
+          DEFAULT: 'var(--main)',
+          50: '#fef6e6',
+          100: '#fdead0',
+          200: '#fbd4a0',
+          300: '#f9bf70',
+          400: '#f7a940',
+          500: '#f69429',
+          600: '#d67f22',
+          700: '#b66a1c',
+          800: '#965515',
+          900: '#76400e',
         },
+        // Các màu khác sử dụng biến CSS
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        'primary-900': 'hsl(var(--primary-900))',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
@@ -52,13 +56,6 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
       },
       fontSize: {
         '10': '10px',
@@ -74,50 +71,29 @@ export default {
       },
       keyframes: {
         'bg-position': {
-          '0%': {
-            backgroundPosition: '0% 50%',
-          },
-          '100%': {
-            backgroundPosition: '100% 50%',
-          },
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
         },
         'marquee-x': {
-          from: {
-            transform: 'translateX(0)',
-          },
-          to: {
-            transform: 'translateX(calc(-100% - var(--gap)))',
-          },
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
         },
         'marquee-y': {
-          from: {
-            transform: 'translateY(0)',
-          },
-          to: {
-            transform: 'translateY(calc(-100% - var(--gap)))',
-          },
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
         },
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
         'marquee-horizontal': 'marquee-x var(--duration) infinite linear',
         'marquee-vertical': 'marquee-y var(--duration) linear infinite',
-        trail: 'trail var(--duration) linear infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
@@ -128,5 +104,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindAnimate], // Use the imported plugin here,
+  plugins: [tailwindAnimate],
 } satisfies Config;

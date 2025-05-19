@@ -20,7 +20,6 @@ interface Post {
     username: string;
     role: string;
   };
-  views: number;
 }
 
 interface PostCardProps {
@@ -49,7 +48,7 @@ export function BlogCard({ blog }: PostCardProps) {
   };
   return (
     <>
-      <div className="border border-gray-200 rounded-xl overflow-hidden">
+      <div className="border border-gray-200 overflow-hidden">
         <Link href={`/admin/blog/${blog.slug}`}>
           <div className="relative h-48">
             <Image
@@ -67,37 +66,12 @@ export function BlogCard({ blog }: PostCardProps) {
         </Link>
         <div className="p-4">
           <Link href={`/admin/service/${blog.slug}`}>
-            <div className="flex items-center gap-1 text-gray-500 text-sm mb-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4"
-              >
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-              <span>{blog.views} views read</span>
-            </div>
             <h3 className="font-semibold text-gray-800 mb-2">{blog.title}</h3>
             <p className="text-gray-600 text-sm mb-4">{blog.content}</p>
           </Link>
           <div className="flex items-start justify-between w-full">
             {/* Avatar + Info */}
             <div className="flex items-center gap-2">
-              <Image
-                src={'/logo.png'}
-                alt={blog?.user?.username || 'User'}
-                width={30}
-                height={30}
-                className="rounded-full"
-              />
               <div>
                 <p className="text-sm font-medium text-gray-800">
                   {blog?.user?.username}

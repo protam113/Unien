@@ -53,7 +53,7 @@ import Heading from '@/components/design/Heading';
 
 const formSchema = z.object({
   name: z.string().min(1, 'name is required'),
-
+  type: z.string().min(1, 'type is required'),
   status: z.string().optional(),
 });
 
@@ -66,16 +66,20 @@ export default function CategoryManager() {
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState<string>();
+  const [selectedType, setSelectedType] = useState<string>();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      type: '',
       status: 'draft',
     },
   });
 
   const params = {
     ...(selectedStatus !== 'all' && { status: selectedStatus }),
+    ...(selectedType !== 'all' && { type: selectedType }),
     limit: pageSize,
   };
 
@@ -111,6 +115,7 @@ export default function CategoryManager() {
       // Create a blog item object matching the CreateBlogItem type
       const categoryData: CreateCategoryItem = {
         name: values.name,
+        type: values.type,
         status: status,
       };
 
@@ -144,6 +149,11 @@ export default function CategoryManager() {
     const newSize = parseInt(value, 10);
     setPageSize(newSize);
     setCurrentPage(1); // Reset về trang đầu tiên khi đổi số lượng
+  };
+
+  const handleTypeChange = (value: string) => {
+    setSelectedType(value);
+    setRefreshKey((prev) => prev + 1);
   };
 
   // State for the form
@@ -186,7 +196,21 @@ export default function CategoryManager() {
               </Select>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-16 font-semibold">Status:</span>
+              <span className="text-16 font-semibold">Loại :</span>
+              <Select onValueChange={handleTypeChange}>
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder={pageSize} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Tất cả</SelectItem>
+                  <SelectItem value="blogs">Bài Viết</SelectItem>
+                  <SelectItem value="services">Dịch Vụ</SelectItem>
+                  <SelectItem value="products">Sản Phẩm</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-16 font-semibold">Trạng Thái:</span>
 
               <SelectCategoryFilter
                 selectedStatus={selectedStatus}
@@ -201,14 +225,14 @@ export default function CategoryManager() {
             >
               <DialogTrigger asChild>
                 <Button>
-                  <Plus className="mr-2 h-4 w-4" /> Create New Category
+                  <Plus className="mr-2 h-4 w-4" /> Tạo Thể Loại Mới
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px] bg-white">
                 <DialogHeader>
-                  <DialogTitle>Create New Category</DialogTitle>
+                  <DialogTitle>Tạo Thể Loại mới</DialogTitle>
                   <DialogDescription>
-                    Fill in the details for the new category.
+                    Điền thông tin chi tiết cho danh mục mới.
                   </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -233,6 +257,33 @@ export default function CategoryManager() {
                         </FormItem>
                       )}
                     />
+                    <FormField
+                      control={form.control}
+                      name="type"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Type</FormLabel>
+                          <Select
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            defaultValue="blogs"
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Chọn loại danh mục" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="blogs">Blog</SelectItem>
+                              <SelectItem value="services">Dịch Vụ</SelectItem>
+                              <SelectItem value="products">Sản Phẩm</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
                     <DialogFooter>
                       <div className="flex mt-6 gap-4">
                         <Button
@@ -244,14 +295,14 @@ export default function CategoryManager() {
                           }}
                           disabled={isSubmitting}
                         >
-                          {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                          {isSubmitting ? 'Saving...' : 'Lưu Nháp'}
                         </Button>
                         {userInfo?.role === 'admin' && (
                           <Button type="submit" disabled={isSubmitting}>
                             {isSubmitting && (
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             )}
-                            {isSubmitting ? 'Creating...' : 'Create Blog'}
+                            {isSubmitting ? 'Creating...' : 'Tạo Mới'}
                           </Button>
                         )}
                       </div>
@@ -262,7 +313,7 @@ export default function CategoryManager() {
             </Dialog>
           </div>
         </div>
-        <div className="rounded-md border">
+        <div className="rounded-md min-w-0">
           <CategoryTable
             categories={categories}
             isLoading={isLoading}

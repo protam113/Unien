@@ -1,7 +1,7 @@
 import BackButton from '@/components/button/BackButton';
 import Container from '@/components/container/Container';
+import Heading from '@/components/design/Heading';
 import { SeoSettingsForm } from '@/components/pages/admin/seo/updateSeoForm';
-import Heading from '@/components/pages/heading/Heading';
 
 const Page = () => {
   return (

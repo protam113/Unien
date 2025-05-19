@@ -217,12 +217,12 @@ export default function CreateProjectPage() {
   }
 
   return (
-    <div className="container py-10">
-      <Card className="max-w-7xl mx-auto">
+    <div>
+      <Card>
         <CardHeader>
           <Heading
-            name="Create New Project"
-            desc="Add a new project to your portfolio. Fill in all the required fields."
+            name="Tạo dự án"
+            desc="Thêm một dự án mới vào danh mục của bạn để tăng uy tín. Điền vào tất cả các trường bắt buộc."
           />
         </CardHeader>
         <CardContent>
@@ -242,7 +242,7 @@ export default function CreateProjectPage() {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Project Title</FormLabel>
+                    <FormLabel>Tên dự án</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter project title" {...field} />
                     </FormControl>
@@ -255,7 +255,7 @@ export default function CreateProjectPage() {
                 name="content"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Content</FormLabel>
+                    <FormLabel>Mô tả ngắn</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Enter a short content or summary"
@@ -340,7 +340,7 @@ export default function CreateProjectPage() {
                 name="services"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Services</FormLabel>
+                    <FormLabel>Dịch vụ</FormLabel>
                     <FormControl>
                       <MultiSelect
                         options={serviceOptions}
@@ -361,7 +361,7 @@ export default function CreateProjectPage() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Mô tả chi tiết dự án</FormLabel>
                     <FormControl>
                       <ContentSection
                         value={field.value}
@@ -378,7 +378,7 @@ export default function CreateProjectPage() {
                   name="brandName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Brand Name</FormLabel>
+                      <FormLabel>Tên công ty</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter brand name" {...field} />
                       </FormControl>
@@ -391,7 +391,7 @@ export default function CreateProjectPage() {
                   name="client"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Client</FormLabel>
+                      <FormLabel>Khách hàng</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter client name" {...field} />
                       </FormControl>
@@ -405,7 +405,7 @@ export default function CreateProjectPage() {
                 name="testimonial"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Testimonial</FormLabel>
+                    <FormLabel>Dánh giá</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Enter client feedback or testimonial"
@@ -422,13 +422,10 @@ export default function CreateProjectPage() {
                 name="link"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Project Link (Optional)</FormLabel>
+                    <FormLabel>Link (Nếu có)</FormLabel>
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Provide a live demo or published link to the project.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -451,14 +448,14 @@ export default function CreateProjectPage() {
                     }}
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                    {isSubmitting ? 'Saving...' : 'Lưu nháp'}
                   </Button>
                   {userInfo?.role === 'admin' && (
                     <Button type="submit" disabled={isSubmitting}>
                       {isSubmitting && (
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       )}
-                      {isSubmitting ? 'Creating...' : 'Create Project'}
+                      {isSubmitting ? 'Creating...' : 'Tạo dự án'}
                     </Button>
                   )}
                 </div>

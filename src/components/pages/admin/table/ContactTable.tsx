@@ -61,7 +61,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
   };
 
   return (
-    <div className="rounded-md border">
+    <div className=" border">
       <Table>
         <TableHeader>
           <TableRow>
@@ -178,11 +178,11 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <h4 className="text-sm font-medium mb-2">
-                              Contact Details
+                              Chi Tiết Liên Hệ
                             </h4>
                             <div className="space-y-2 text-sm">
                               <div>
-                                <span className="font-medium">Name:</span>{' '}
+                                <span className="font-medium">Tên:</span>{' '}
                                 {contact.name}
                               </div>
                               <div>
@@ -190,11 +190,11 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                                 {contact.email}
                               </div>
                               <div>
-                                <span className="font-medium">Phone:</span>{' '}
+                                <span className="font-medium">Tel:</span>{' '}
                                 {contact.phone_number}
                               </div>
                               <div>
-                                <span className="font-medium">Created:</span>{' '}
+                                <span className="font-medium">Ngày:</span>{' '}
                                 {formatSmartDate(contact.createdAt)}
                               </div>
                               <div>
@@ -205,7 +205,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                           </div>
                           <div>
                             <h4 className="text-sm font-medium mb-2">
-                              Message
+                              Lời Nhắn
                             </h4>
                             <div className="p-3 bg-muted rounded-md text-sm">
                               {contact.message || (

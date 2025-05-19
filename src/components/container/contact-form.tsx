@@ -122,22 +122,20 @@ export default function ContactComponent() {
 
           <div className="lg:col-span-2">
             <form className="grid gap-4">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Input
-                    id="Name"
-                    placeholder="Tên"
-                    value={contactData.name}
-                    onChange={(e) =>
-                      setContactData((prevData) => ({
-                        ...prevData,
-                        name: e.target.value,
-                      }))
-                    }
-                    required
-                    className="border-gray-300"
-                  />
-                </div>
+              <div className="space-y-2">
+                <Input
+                  id="Name"
+                  placeholder="Tên"
+                  value={contactData.name}
+                  onChange={(e) =>
+                    setContactData((prevData) => ({
+                      ...prevData,
+                      name: e.target.value,
+                    }))
+                  }
+                  required
+                  className="border-gray-300"
+                />
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">

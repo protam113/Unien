@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Container from './Container';
 
 export function StatsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -29,8 +30,8 @@ export function StatsSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="w-full bg-[#F69429] py-16 px-4 ">
-      <div className="max-w-6xl mx-auto">
+    <div ref={sectionRef} className="w-full bg-main py-16 px-4 ">
+      <Container className="mx-auto">
         <div className="relative">
           {/* Timeline connector */}
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gray-700">
@@ -48,36 +49,36 @@ export function StatsSection() {
             <StatCounter
               value={50}
               suffix="+"
-              label="Projects Delivered"
+              label="Dự án hoàn thành"
               isVisible={isVisible}
             />
             <StatCounter
               value={5}
               suffix="+"
-              label="Team Members"
+              label="Thành viên"
               isVisible={isVisible}
             />
             <StatCounter
               value={100}
               suffix="+"
-              label="Satisfied Clients"
+              label="Khách hàng hài lòng"
               isVisible={isVisible}
             />
             <StatCounter
               value={9000}
               suffix="+"
-              label="Exp. In Man-Hours"
+              label="Kinh nghiệm làm việc"
               isVisible={isVisible}
             />
             <StatCounter
               value={97}
               suffix="%"
-              label="Client Retention Rate"
+              label="Tỷ lệ giữ chân khách hàng"
               isVisible={isVisible}
             />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

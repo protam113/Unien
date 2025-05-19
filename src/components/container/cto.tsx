@@ -18,7 +18,7 @@ export default function ContactSection({ href, title }: ContactSectionProps) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">
           <Link
             href="/contact-us"
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-[#d4ff4d] text-black font-medium px-6 py-3 rounded-full transition-colors"
+            className="inline-flex items-center gap-2 bg-main hover:bg-main-600 text-black font-medium px-6 py-3 rounded-full transition-colors"
           >
             Liên Hệ Ngay
             <svg

@@ -12,10 +12,7 @@ const Page = () => {
       {/* Heading */}
       <div className="flex items-center justify-between mb-4">
         <Heading name="Project Page" desc="Manage your projects here" />
-        <PushButton
-          href="/admin/project/create_project"
-          label="Create Project"
-        />
+        <PushButton href="/admin/project/create_project" label="Thêm dự án" />
       </div>
       {/* Link tạo bài viết */}
       <ProjectListDataAdmin />

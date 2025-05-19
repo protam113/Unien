@@ -106,7 +106,7 @@ export function SeoSettingsForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card className="w-full max-w-7xl mx-auto">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>SEO Settings</CardTitle>
           <CardDescription>
@@ -240,9 +240,9 @@ export function SeoSettingsForm() {
         <CardFooter>
           <Button
             type="submit"
-            className="ml-auto bg-lime-500 hover:bg-lime-700"
+            className="ml-auto bg-orange-500 hover:bg-orange-700"
           >
-            Save Changes
+            Lưu thay đổi
           </Button>
         </CardFooter>
       </Card>

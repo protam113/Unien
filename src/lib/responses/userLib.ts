@@ -14,7 +14,11 @@ export const UserList = (
     refreshKey
   );
 
-  const pagination = data?.pagination ?? { current_page: 1, total_page: 1 };
+  const pagination = data?.pagination ?? {
+    current_page: 1,
+    total_page: 1,
+    total: 0,
+  };
 
   const users = data?.results ?? [];
 

@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import BackButton from '@/components/button/BackButton';
 import Container from '@/components/container/Container';
@@ -10,18 +9,16 @@ import { Label } from '@/components/ui/label';
 import { CreateManagerData } from '@/types/types';
 import { toast } from 'sonner';
 import { useCreateManager } from '@/hooks/auth/useManager';
-import Heading from '@/components/pages/heading/Heading';
+import Heading from '@/components/design/Heading';
 
 const Page = () => {
-  const router = useRouter();
-
   const { mutate: createManager } = useCreateManager();
   const [managerData, setManagerData] = useState<CreateManagerData>({
     username: '',
     name: '',
     email: '',
     password: '',
-    phoneNumber: '',
+    phone_number: '',
   });
 
   const [errors, setErrors] = useState<
@@ -35,37 +32,37 @@ const Page = () => {
 
     // Validate username
     if (!managerData.username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = 'Tên đăng nhậ là bắt buộc';
       isValid = false;
     }
 
     // Validate name
     if (!managerData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = 'Tên là bắt buộc';
       isValid = false;
     }
 
     // Validate email
     if (!managerData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email là bắt buộc';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(managerData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = 'Email không hợp lệ';
       isValid = false;
     }
 
     // Validate password
     if (!managerData.password.trim()) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Mật khẩu là bắt buộc';
       isValid = false;
     } else if (managerData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'Mật khẩu phải có ít nhất 6 ký tự';
       isValid = false;
     }
 
     // Validate phone number
-    if (!managerData.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Phone number is required';
+    if (!managerData.phone_number.trim()) {
+      newErrors.phone_number = 'Số điện thoại là bắt buộc';
       isValid = false;
     }
 
@@ -75,11 +72,10 @@ const Page = () => {
 
   const handleCreateManager = async () => {
     if (!validateForm()) {
-      toast.error('Please fix the validation errors');
+      toast.error('Vui lòng sửa lỗi xác thực');
       return;
     }
 
-    console.log('Final Manager Data:', managerData);
     setLoading(true);
 
     try {
@@ -90,7 +86,7 @@ const Page = () => {
         name: '',
         email: '',
         password: '',
-        phoneNumber: '',
+        phone_number: '',
       });
       // Optionally navigate to another page
       // router.push('/managers');
@@ -122,9 +118,9 @@ const Page = () => {
     <Container>
       <BackButton />
       <div className="flex justify-between items-center">
-        <Heading name="Create Manager" desc="Create a new manager account" />
+        <Heading name="Tạo quản trị viên" desc="Tạo tài khoản quản lý mới" />
         <Button onClick={handleCreateManager} disabled={loading}>
-          {loading ? 'Creating...' : 'Create Manager'}
+          {loading ? 'Creating...' : 'Tạo'}
         </Button>
       </div>
       <form
@@ -135,11 +131,11 @@ const Page = () => {
         }}
       >
         {[
-          { label: 'Username', name: 'username' },
-          { label: 'Name', name: 'name' },
+          { label: 'Tên đăng nhập', name: 'username' },
+          { label: 'Tên', name: 'name' },
           { label: 'Email', name: 'email', type: 'email' },
           { label: 'Password', name: 'password', type: 'password' },
-          { label: 'Phone Number', name: 'phoneNumber' },
+          { label: 'Số điện thoại', name: 'phone_number' },
         ].map(({ label, name, type = 'text' }) => (
           <div
             key={name}

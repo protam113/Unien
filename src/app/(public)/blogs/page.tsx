@@ -1,5 +1,6 @@
 import ContactComponent from '@/components/container/contact-form';
 import Container from '@/components/container/Container';
+import ContactSection from '@/components/container/cto';
 import HeroHeader from '@/components/container/Header';
 import SEO from '@/components/design/SEO';
 import BlogListData from '@/components/pages/blog/blog-list';
@@ -22,6 +23,7 @@ const Page = () => {
 
         <Container>
           <BlogListData />
+          <ContactSection title="Hell" href="/" />
           <ContactComponent />
         </Container>
       </main>

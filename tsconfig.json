@@ -5,6 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "types": ["tailwindcss"],
     "noImplicitAny": false,
     "noEmit": true,
     "esModuleInterop": true,

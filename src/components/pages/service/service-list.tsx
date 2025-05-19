@@ -50,7 +50,7 @@ export default function ServiceListData({
   if (isError) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <p className="text-red-500">Error loading blog posts</p>
+        <p className="text-red-500">Error loading service posts</p>
       </div>
     );
   }
@@ -61,7 +61,7 @@ export default function ServiceListData({
         {services.map((post) => (
           <article
             key={post._id}
-            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+            className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
           >
             <Link href={post.slug} className="block">
               <div className="relative overflow-hidden group">
@@ -80,7 +80,9 @@ export default function ServiceListData({
 
             <div className="p-5">
               <h3 className="text-xl font-bold mt-2 mb-3">{post.title}</h3>
-              <p className="text-gray-600 text-sm">{post.content}</p>
+              <p className="text-gray-600 text-sm line-clamp-3">
+                {post.content}
+              </p>
             </div>
           </article>
         ))}
@@ -102,7 +104,7 @@ export default function ServiceListData({
                 LOADING...
               </span>
             ) : (
-              'LOAD MORE'
+              'TẢI THÊM'
             )}
           </button>
         </div>

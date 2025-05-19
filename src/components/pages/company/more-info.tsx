@@ -32,7 +32,7 @@ export default function CompanyPortfolio() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div
             ref={missionRef}
             className="text-center transform transition-all duration-1000 opacity-0 translate-y-10"
@@ -55,7 +55,7 @@ export default function CompanyPortfolio() {
 
       {/* Commitment Section */}
       <div className=" py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div
             ref={commitmentRef}
             className="lg:grid lg:grid-cols-2 lg:gap-16 items-center transform transition-all duration-1000 opacity-0 translate-y-10"
@@ -82,14 +82,13 @@ export default function CompanyPortfolio() {
               </p>
             </div>
             <div className="relative group">
-              <div className="relative rounded-lg overflow-hidden transform transition-transform duration-300 group-hover:scale-105">
+              <div className="relative  overflow-hidden transform transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/img/boiler2.jpg"
                   alt="Team meeting"
                   width={500}
                   height={500}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-lime-600/20 to-transparent mix-blend-overlay" />
               </div>
             </div>
           </div>

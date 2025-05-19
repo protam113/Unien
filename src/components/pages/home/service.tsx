@@ -22,14 +22,14 @@ export default function ServicesTabs() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12">
+    <div className="mx-auto px-4 py-12">
       <Tabs defaultValue="services" className="space-y-8">
         <TabsContent value="services" className="space-y-8">
           <div>
             <div className="flex items-center justify-between mb-6">
               <SectionHeader title="Dịch Vụ & Công Nghiệp" />
               <Link
-                href="/products"
+                href="/services"
                 className="text-sm text-gray-500 hover:text-gray-700 flex items-center"
               >
                 Xem Thêm
