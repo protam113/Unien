@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 import ProductCategoryCard from './ProductCategory';
 import { ProductList } from '@/lib/responses/productLib';
 

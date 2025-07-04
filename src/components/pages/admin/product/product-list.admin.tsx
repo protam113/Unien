@@ -6,7 +6,7 @@ import { ProductList } from '@/lib/responses/productLib';
 import { useState } from 'react';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { RefreshButton } from '@/components/button/RefreshButton';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { CustomPagination } from '@/components/design/pagination';
 import {
   Select,
@@ -66,7 +66,7 @@ export default function ProductListPage() {
   const handlePageSizeChange = (value: string) => {
     const newSize = parseInt(value, 10);
     setPageSize(newSize);
-    setCurrentPage(1); // Reset về trang đầu tiên khi đổi số lượng
+    setCurrentPage(1);
   };
   const handlePageChange = (page: number) => {
     if (page > 0 && page <= pagination.total_page) {
@@ -146,7 +146,7 @@ export default function ProductListPage() {
             </Select>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow overflow-x-auto">
+        <div className="bg-white  shadow overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">

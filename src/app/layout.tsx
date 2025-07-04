@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { metadata as siteMetadata } from '@/constant/appInfos';
+import {
+  metadata as siteMetadata,
+  viewport as siteViewport,
+} from '@/constant/appInfos';
 import ReactQueryProvider from './ReactQueryProvider';
 import { Toaster } from 'sonner';
 import Script from 'next/script';
@@ -19,7 +22,9 @@ const geistMontserrat = Geist({
   variable: '--font-montserrat',
   subsets: ['latin'],
 });
+
 export const metadata = siteMetadata;
+export const viewport = siteViewport;
 
 export default function RootLayout({
   children,

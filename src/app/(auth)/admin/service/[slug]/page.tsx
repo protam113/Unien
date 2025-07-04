@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import NoResultsFound from '@/components/design/NoResultsFound';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { formatDistanceToNow, format, differenceInHours } from 'date-fns';
 import { ServiceDetailData } from '@/lib/responses/serviceLib';
 import BackButton from '@/components/button/BackButton';

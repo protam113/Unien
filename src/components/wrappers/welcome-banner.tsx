@@ -17,7 +17,7 @@ export default function WelcomeBanner({
   }, []);
 
   return (
-    <div className="bg-orange-700 bg-opacity-90 rounded-lg overflow-hidden shadow-md transition-all duration-500 ease-in-out">
+    <div className="bg-main-800 bg-opacity-90 overflow-hidden shadow-md transition-all duration-500 ease-in-out">
       <div className="flex flex-col md:flex-row items-center justify-between p-6">
         <div className="space-y-3 md:w-1/2 mb-6 md:mb-0">
           <h2

@@ -14,7 +14,7 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/ui/select';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { ContactList } from '@/lib/responses/contactLib';
 import { useDeleteContact } from '@/hooks/contact/useContact';
 import ConfirmDialog from '@/components/design/Dialog';

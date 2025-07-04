@@ -12,7 +12,7 @@ function SidebarFilters({
 }) {
   const { categories, isLoading, isError } = CategoryList(
     1,
-    { limit: 20, type: 'blogs' },
+    { limit: 20, type: 'products' },
     0
   );
   if (isLoading) {

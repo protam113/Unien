@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 import { ProjectList } from '@/lib/responses/projectLib';
 
 export default function ProjectCarousel() {

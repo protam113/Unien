@@ -32,7 +32,7 @@ export const ProductList = (
 };
 
 // ServiceDetailData.ts
-export const ServiceDetailData = (slug: string, refreshKey: number) => {
+export const ProductDetailData = (slug: string, refreshKey: number) => {
   const { data, isLoading, isError } = useProductDetail(slug, refreshKey);
 
   const product = data?.result;

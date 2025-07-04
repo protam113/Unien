@@ -16,7 +16,7 @@ import { CustomPagination } from '@/components/design/pagination';
 import { RefreshButton } from '@/components/button/RefreshButton';
 import { DraftServiceCard } from './DraftServiceCard';
 import Heading from '@/components/design/Heading';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import AdminServiceCategoryCard from './ServiceCategory';
 
 export enum ServiceStatus {

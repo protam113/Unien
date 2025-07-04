@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 
 export default function IndustrialIntro() {
   return (

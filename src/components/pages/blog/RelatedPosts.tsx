@@ -28,7 +28,7 @@ export default function RelatedPosts() {
   }
 
   return (
-    <section className="py-16 px-4 max-w-7xl mx-auto">
+    <section className="py-16 px-4 mx-auto">
       <div className="space-y-12">
         <div className="space-y-4">
           <p className="text-sm font-medium flex items-center gap-2">
@@ -53,7 +53,7 @@ export default function RelatedPosts() {
           {blogs.map((post) => (
             <div
               key={post._id}
-              className="rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow relative"
+              className=" overflow-hidden  shadow-sm hover:shadow-md transition-shadow relative"
             >
               <Link href={`/blog/${post._id}`}>
                 <div className="relative h-60 w-full overflow-hidden">

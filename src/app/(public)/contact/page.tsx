@@ -1,6 +1,6 @@
-import ContactComponent from '@/components/container/contact-form';
-import Container from '@/components/container/Container';
-import HeroHeader from '@/components/container/Header';
+import ContactComponent from '@/components/wrappers/contact-form';
+import Container from '@/components/wrappers/Container';
+import HeroHeader from '@/components/wrappers/Header';
 import SEO from '@/components/design/SEO';
 import React from 'react';
 

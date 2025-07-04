@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 
 interface ProcessStepProps {
   title: string;

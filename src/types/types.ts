@@ -461,8 +461,8 @@ export interface ProductDetail {
   slug: string;
   file: string[];
   content: string;
-  price: number;
   status: string;
+  price: number;
   description: string;
   category: ChildCategory;
   createdAt: Date | string;
@@ -476,13 +476,13 @@ export interface ProductDetailResponse {
 
 /**
  * ==========================
- *  @SERVICE_Create
+ *  @PRODUCT_CREATE
  * ==========================
  */
 
 export interface CreateProductItem {
   title: string;
-  file: File[] | File;
+  files: File[] | File;
   content: string;
   price: string;
   category: string;

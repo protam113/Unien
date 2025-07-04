@@ -1,9 +1,13 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Product Card Component
 function ProductCard({ product }: { product: any }) {
   return (
-    <div className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] border border-gray-100 hover:border-gray-200 group relative">
+    <Link
+      href={`/products/${product.slug}`}
+      className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] border border-gray-100 hover:border-gray-200 group relative"
+    >
       {/* Product Image */}
       <div className="relative">
         <Image
@@ -23,11 +27,13 @@ function ProductCard({ product }: { product: any }) {
 
         <div className="mt-1 flex items-baseline">
           <span className="text-red-500 font-bold">
-            ₫{product.price.toLocaleString()}
+            {product?.price && product.price > 0
+              ? `₫${product.price.toLocaleString()}`
+              : 'Liên hệ'}
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

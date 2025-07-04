@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import BackButton from '@/components/button/BackButton';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

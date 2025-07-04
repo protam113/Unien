@@ -30,7 +30,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import {
   useCreateCategory,

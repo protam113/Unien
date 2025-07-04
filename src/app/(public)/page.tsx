@@ -1,6 +1,6 @@
-import ContactComponent from '@/components/container/contact-form';
-import Container from '@/components/container/Container';
-import { StatsSection } from '@/components/container/StartSection';
+import ContactComponent from '@/components/wrappers/contact-form';
+import Container from '@/components/wrappers/Container';
+import { StatsSection } from '@/components/wrappers/StartSection';
 import HeroBanner from '@/components/layout/DefaultLayout/Hero';
 import BlogSection from '@/components/pages/home/blog-section';
 import IndustrialIntro from '@/components/pages/home/introduce';

@@ -1,5 +1,5 @@
 import BackButton from '@/components/button/BackButton';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import Heading from '@/components/design/Heading';
 import { SeoSettingsForm } from '@/components/pages/admin/seo/updateSeoForm';
 

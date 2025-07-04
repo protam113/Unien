@@ -125,14 +125,14 @@ export default function Navbar() {
           <X size={24} />
         </button>
 
-        <div className="container mx-auto px-4 py-6">
+        <div className="container bg-white mx-auto px-4 py-6">
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'px-3 py-3 text-lg font-medium text-white border-b border-gray-800 hover:text-orange-400',
+                  'px-3 py-3 text-lg font-medium text-black border-b border-gray-800 hover:text-orange-400',
                   pathname === item.href && 'text-orange-400'
                 )}
               >
@@ -144,7 +144,7 @@ export default function Navbar() {
           <div className="mt-8 space-y-4">
             <a
               href="tel:+201001245741"
-              className="text-white flex items-center hover:text-orange-400 py-2"
+              className=" flex items-center hover:text-orange-400 py-2"
             >
               <Phone size={16} className="mr-2" />
               <span>+84 123456789</span>

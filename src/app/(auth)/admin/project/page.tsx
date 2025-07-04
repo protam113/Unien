@@ -1,7 +1,7 @@
 'use client';
 
 import PushButton from '@/components/button/PushButton';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import Heading from '@/components/design/Heading';
 import ProjectListDataAdmin from '@/components/pages/admin/project/ProjectList';
 import React from 'react';

@@ -70,8 +70,8 @@ export default function ContactComponent() {
       <div className="container px-4 md:px-6">
         <div className="flex flex-col gap-2 mb-8">
           <div className="flex items-center gap-2">
-            <div className="h-1 w-6 bg-[#F69429]"></div>
-            <span className="text-sm font-medium uppercase tracking-wider text-[#F69429]">
+            <div className="h-1 w-6 bg-main"></div>
+            <span className="text-sm font-medium uppercase tracking-wider text-main">
               Liên Hệ
             </span>
           </div>

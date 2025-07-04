@@ -1,10 +1,9 @@
 'use client';
 
 import PushButton from '@/components/button/PushButton';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import Heading from '@/components/design/Heading';
 import ProductListPage from '@/components/pages/admin/product/product-list.admin';
-import ServiceListDataAdmin from '@/components/pages/admin/service/ServiceList';
 import React from 'react';
 
 const Page = () => {

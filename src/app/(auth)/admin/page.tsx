@@ -1,9 +1,9 @@
 import React from 'react';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RecentInvoices } from '@/components/table/recent-invoices';
 import Header from '@/components/design/Header';
-import WelcomeBanner from '@/components/container/welcome-banner';
+import WelcomeBanner from '@/components/wrappers/welcome-banner';
 
 const Page = () => {
   return (
@@ -13,15 +13,15 @@ const Page = () => {
       </div>
       <Header title="Hust4l Area" />
 
-      <Card className=" mb-4">
+      <Card className="mb-4">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Recent Contacts</CardTitle>
+          <CardTitle>Liên Hệ Mới</CardTitle>
           <CardTitle>
             <a
               href="/admin/contact"
               className="text-sm text-muted-foreground hover:text-primary hover:underline"
             >
-              View All
+              Xem toàn bộ
             </a>
           </CardTitle>
         </CardHeader>

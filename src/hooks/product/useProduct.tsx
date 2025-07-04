@@ -4,9 +4,9 @@ import { endpoints } from '@/api/api';
 import {
   Filters,
   UpdateStatus,
-  CreateServiceItem,
   FetchProductListResponse,
   ProductDetailResponse,
+  CreateProductItem,
 } from '@/types/types';
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
@@ -215,15 +215,19 @@ const useUpdateProductStatus = () => {
   });
 };
 
-const CreateProduct = async (newPost: CreateServiceItem) => {
+const CreateProduct = async (newPost: CreateProductItem) => {
   const formData = new FormData();
 
   for (const key in newPost) {
-    const value = newPost[key as keyof CreateServiceItem];
+    const value = newPost[key as keyof CreateProductItem];
 
-    if (value instanceof File) {
-      formData.append('file', value);
-    } else if (value) {
+    if (Array.isArray(value) && value[0] instanceof File) {
+      value.forEach((file) => {
+        formData.append('files', file); // 👈 key luôn là 'files'
+      });
+    } else if (value instanceof File) {
+      formData.append('files', value); // fallback nếu chỉ là 1 file
+    } else if (value !== undefined && value !== null) {
       formData.append(key, value as string);
     }
   }
@@ -232,9 +236,9 @@ const CreateProduct = async (newPost: CreateServiceItem) => {
     const response = await handleAPI(`${endpoints.products}`, 'POST', formData);
     return response.data;
   } catch (error: any) {
-    console.error('Error creating Service:', error.response?.data);
+    console.error('Error creating Product:', error.response?.data);
     throw new Error(
-      error.response?.data?.message || 'Failed to create Service'
+      error.response?.data?.message || 'Failed to create Product'
     );
   }
 };
@@ -243,16 +247,16 @@ const useCreateProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newPost: CreateServiceItem) => {
+    mutationFn: async (newPost: CreateProductItem) => {
       return CreateProduct(newPost);
     },
     onSuccess: () => {
-      toast.success('Create Service Success!');
+      toast.success('Create Product Success!');
       queryClient.invalidateQueries({ queryKey: ['productList'] });
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Failed to create Service.');
-      console.error(error.message || 'Failed to create Service.');
+      toast.error(error.message || 'Failed to create Product.');
+      console.error(error.message || 'Failed to create Product.');
     },
   });
 };

@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Loader, Trash2, Search, Filter, Plus } from 'lucide-react';
+import { Loader, Trash2, Filter, Plus } from 'lucide-react';
 import { RefreshButton } from '@/components/button/RefreshButton';
 import {
   Select,
@@ -21,12 +21,11 @@ import {
 } from '@/components/ui/select';
 import { AlertCircle } from 'lucide-react';
 import { CustomPagination } from '@/components/design/pagination';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import { UserList } from '@/lib/responses/userLib';
 import { useDeleteManager } from '@/hooks/auth/useManager';
 import ConfirmDialog from '@/components/design/Dialog';
 import UserRolesChart from '@/components/pages/admin/chart/user-roles-chart';
-import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Heading from '@/components/design/Heading';
@@ -35,7 +34,6 @@ const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const [selectedRole, setSelectedRole] = useState<string>();
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const { users, isLoading, isError, pagination } = UserList(
     currentPage,
@@ -94,7 +92,7 @@ const Page = () => {
           {/* Total Clients */}
           <Card>
             <CardContent className="p-4">
-              <div className="flex justify-between items-center">
+              <div className="justify-between items-center">
                 <div>
                   <p className="text-sm font-medium text-gray-500">
                     Tổng số người dùng
@@ -112,7 +110,7 @@ const Page = () => {
           {/* Members */}
           <Card>
             <CardContent className="p-4">
-              <div className="flex justify-between items-center">
+              <div className="justify-between items-center">
                 <div>
                   <p className="text-sm font-medium text-gray-500">Trang</p>
                   <div className="flex items-baseline">
@@ -140,13 +138,13 @@ const Page = () => {
             {/* Search and Filter Bar */}
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
               <div className="relative w-full md:w-64">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                {/* <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
                   placeholder="Quick Search"
                   className="pl-10"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                />
+                /> */}
               </div>
 
               <div className="flex items-center gap-4 w-full md:w-auto">

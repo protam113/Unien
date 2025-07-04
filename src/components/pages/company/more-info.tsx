@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 
 export default function CompanyPortfolio() {
   const missionRef = useRef<HTMLDivElement>(null);

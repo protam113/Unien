@@ -4,8 +4,8 @@ import { Badge } from '@/components/ui/badge';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { useUpdateServiceStatus } from '@/hooks/service/useService';
 import { toast } from 'sonner';
-import { VisibilityOption } from '@/components/container/VisibilitySelect';
-import { VisibilityChange } from '@/components/container/ChangeToShow';
+import { VisibilityOption } from '@/components/wrappers/VisibilitySelect';
+import { VisibilityChange } from '@/components/wrappers/ChangeToShow';
 import { useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
 

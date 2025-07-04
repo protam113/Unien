@@ -1,5 +1,5 @@
 'use client';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { ServiceList } from '@/lib/responses/serviceLib';
 import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';

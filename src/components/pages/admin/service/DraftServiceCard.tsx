@@ -12,7 +12,7 @@ import ConfirmDialog from '@/components/design/Dialog';
 import {
   VisibilityOption,
   VisibilitySelect,
-} from '@/components/container/VisibilitySelect';
+} from '@/components/wrappers/VisibilitySelect';
 import { toast } from 'sonner';
 import { useAuthStore } from '@/store/authStore';
 

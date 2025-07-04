@@ -23,7 +23,7 @@ export default function ProductListingPage() {
   const params = {
     category: selectedCategory ?? undefined,
     limit: 20,
-    status: 'show,popular', // Fixed typo in 'status'
+    type: 'show,popular', // Fixed typo in 'status'
   };
 
   const { products, isLoading, isError, pagination } = ProductList(
@@ -74,7 +74,7 @@ export default function ProductListingPage() {
       {/* Main Content */}
       <div className="flex-1 p-4">
         {/* Top Filter/Sort Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 bg-white p-3 rounded-md shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 bg-white p-3  shadow-sm">
           <div className="flex items-center space-x-2 mb-2 md:mb-0">
             <span className="text-sm text-gray-500">Sắp xếp theo</span>
             <button

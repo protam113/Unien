@@ -1,6 +1,6 @@
 'use client';
 
-import type React from 'react';
+import React from 'react';
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -23,10 +23,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { ImageIcon, Loader2 } from 'lucide-react';
+import { Loader2, Trash2, Upload } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useCreateService } from '@/hooks/service/useService';
-import { CreateServiceItem } from '@/types/types';
+import { CreateProductItem } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import ContentSection from '@/components/richText/ContentSection';
@@ -40,7 +39,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useCreateProduct } from '@/hooks/product/useProduct';
 
+// schema.ts
 const formSchema = z.object({
   title: z.string().min(2, { message: 'Title must be at least 2 characters.' }),
   content: z.string().min(1, { message: 'Content is required.' }),
@@ -52,19 +53,19 @@ const formSchema = z.object({
   description: z
     .string()
     .min(10, { message: 'Description must be at least 10 characters.' }),
-  file: z.instanceof(File).optional(),
 });
 
-export default function NewServiceForm() {
+export default function Page() {
   const userInfo = useAuthStore((state) => state.userInfo);
   const router = useRouter();
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const { mutate: createService } = useCreateService();
+  const [previewIndex, setPreviewIndex] = useState<number | null>(null);
+  const { mutate: createService } = useCreateProduct();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [displayPrice, setDisplayPrice] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
   const { categories, isLoading, isError } = CategoryList(
     1,
-    { limit: 20, type: 'services' },
+    { limit: 20, type: 'products' },
     0
   );
   const form = useForm<z.infer<typeof formSchema>>({
@@ -86,11 +87,11 @@ export default function NewServiceForm() {
     setIsSubmitting(true);
     try {
       // Create service data with the specified status
-      const serviceData: CreateServiceItem = {
+      const serviceData: CreateProductItem = {
         title: values.title,
         content: values.content,
         description: values.description,
-        file: values.file as File,
+        files: files,
         category: values.category,
         status: status,
         price: values.price,
@@ -98,7 +99,10 @@ export default function NewServiceForm() {
 
       createService(serviceData, {
         onSuccess: () => {
-          router.push('/admin/service');
+          form.reset();
+          setFiles([]);
+          setPreviewIndex(null);
+          router.push('/admin/product');
         },
         onError: (error: any) => {
           console.error('Error creating service:', error);
@@ -121,45 +125,64 @@ export default function NewServiceForm() {
     }
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      form.setValue('file', file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const newFiles = Array.from(e.target.files);
+      setFiles((prev) => [...prev, ...newFiles]);
+
+      // Set the first uploaded image as preview if none is selected
+      if (previewIndex === null) {
+        setPreviewIndex(0);
+      }
     }
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
+  const removeFile = (index: number) => {
+    setFiles((prev) => {
+      const newFiles = [...prev];
+      newFiles.splice(index, 1);
 
-    const file = e.dataTransfer.files?.[0];
-    if (
-      file &&
-      (file.type === 'image/jpeg' || file.type === 'image/png') &&
-      file.size <= 5 * 1024 * 1024
-    ) {
-      form.setValue('file', file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      // Adjust preview index if needed
+      if (previewIndex === index) {
+        setPreviewIndex(newFiles.length > 0 ? 0 : null);
+      } else if (previewIndex !== null && previewIndex > index) {
+        setPreviewIndex(previewIndex - 1);
+      }
+
+      return newFiles;
+    });
+  };
+
+  const setAsPreview = (index: number) => {
+    setPreviewIndex(index);
+  };
+
+  React.useEffect(() => {
+    // Nếu form chưa load xong hoặc price rỗng thì set ''
+    if (!form.getValues('price')) {
+      setDisplayPrice('');
+      return;
     }
-  };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
+    const formatVND = (value: number | string) => {
+      const number = Number(value);
+      return number.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0,
+      });
+    };
 
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
+    setDisplayPrice(formatVND(form.getValues('price')));
+  }, [form.watch('price')]); // watch để cập nhật khi price thay đổi
+
+  // Hàm xử lý khi user nhập giá trị
+  function handlePriceChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const rawValue = e.target.value.replace(/[^\d]/g, ''); // giữ số thôi
+    const numberValue = Number(rawValue);
+    setDisplayPrice(rawValue ? numberValue.toLocaleString('vi-VN') + ' ₫' : '');
+    form.setValue('price', rawValue || '0');
+  }
 
   return (
     <Card className="w-full max-w-7xl mx-auto">
@@ -183,7 +206,7 @@ export default function NewServiceForm() {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Tên Sản Phẩm</FormLabel>
                         <FormDescription>
                           Enter a clear and concise title for the service
                         </FormDescription>
@@ -203,7 +226,7 @@ export default function NewServiceForm() {
                     name="content"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Content</FormLabel>
+                        <FormLabel>Mô Tả Ngắn</FormLabel>
                         <FormDescription>
                           Enter blog post Contnet
                         </FormDescription>
@@ -221,19 +244,19 @@ export default function NewServiceForm() {
                   <FormField
                     control={form.control}
                     name="price"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
-                        <FormLabel>Price (USD)</FormLabel>
+                        <FormLabel>Giá (VND)</FormLabel>
                         <FormDescription>
-                          Set the price for this service (0 for free)
+                          Đặt giá cho dịch vụ này (0 để liên hệ)
                         </FormDescription>
                         <FormControl>
                           <Input
-                            type="number"
-                            min="0"
-                            step="0.01"
+                            type="text"
+                            inputMode="numeric"
                             placeholder="0"
-                            {...field}
+                            value={displayPrice}
+                            onChange={handlePriceChange}
                           />
                         </FormControl>
                         <FormMessage />
@@ -316,70 +339,106 @@ export default function NewServiceForm() {
                   </FormItem>
                 )}
               />
-              <div>
-                <h2 className="text-lg font-semibold flex items-center gap-2">
-                  📁 Upload Image
-                </h2>
-                <div className="mt-4">
-                  <div
-                    className={cn(
-                      'border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors',
-                      isDragging
-                        ? 'border-primary bg-primary/5'
-                        : 'border-muted-foreground/25 hover:border-primary/50'
-                    )}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                    onClick={() =>
-                      document.getElementById('image-upload')?.click()
-                    }
-                  >
-                    {imagePreview ? (
-                      <div className="relative mx-auto max-w-xs">
-                        <Image
-                          className="h-10 w-10 text-muted-foreground"
-                          src={imagePreview || '/placeholder.svg'}
-                          alt="Preview"
-                          width={200}
-                          height={200}
-                        />
-                        <Button
-                          type="button"
-                          variant="destructive"
-                          size="sm"
-                          className="absolute top-2 right-2"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setImagePreview(null);
-                            form.setValue('file', undefined);
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center gap-2">
-                        <ImageIcon className="h-10 w-10 text-muted-foreground" />
-                        <div>
-                          <p className="font-medium">
-                            Drag & drop an image here, or click to upload
-                          </p>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Recommended format: JPG, PNG, Max size: 5MB
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                    <input
-                      id="image-upload"
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-lg font-medium mb-2">Ảnh Sản Phẩm</h2>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <Input
                       type="file"
-                      accept="image/jpeg, image/png"
+                      id="file-upload"
                       className="hidden"
-                      onChange={handleImageChange}
+                      onChange={handleFileChange}
+                      accept="image/*"
+                      multiple
                     />
+                    <label
+                      htmlFor="file-upload"
+                      className="cursor-pointer flex flex-col items-center justify-center"
+                    >
+                      <Upload className="h-10 w-10 text-gray-400 mb-2" />
+                      <p className="text-sm text-gray-600">
+                        Drag and drop files or click to browse
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        JPG, PNG, GIF up to 10MB
+                      </p>
+                    </label>
                   </div>
                 </div>
+
+                {files.length > 0 && (
+                  <div>
+                    <h3 className="text-md font-medium mb-2">
+                      Preview Image{' '}
+                      {previewIndex !== null && `(${previewIndex + 1})`}
+                    </h3>
+                    {previewIndex !== null && (
+                      <div className="relative aspect-video mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                        <Image
+                          src={
+                            URL.createObjectURL(files[previewIndex]) ||
+                            '/placeholder.svg'
+                          }
+                          alt="Preview"
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    )}
+
+                    <h3 className="text-md font-medium mb-2">
+                      Uploaded Images ({files.length})
+                    </h3>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                      {files.map((file, index) => (
+                        <div
+                          key={`${file.name}-${index}`}
+                          className={cn(
+                            'relative group aspect-square rounded-md overflow-hidden border-2',
+                            previewIndex === index
+                              ? 'border-primary'
+                              : 'border-gray-200'
+                          )}
+                        >
+                          <Image
+                            src={
+                              URL.createObjectURL(file) || '/placeholder.svg'
+                            }
+                            alt={`Image ${index + 1}`}
+                            fill
+                            className="object-cover"
+                          />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="secondary"
+                              className="h-8 text-xs"
+                              onClick={() => setAsPreview(index)}
+                            >
+                              Set as preview
+                            </Button>
+                            <Button
+                              type="button"
+                              size="icon"
+                              variant="destructive"
+                              className="h-8 w-8"
+                              onClick={() => removeFile(index)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Remove</span>
+                            </Button>
+                          </div>
+                          {previewIndex === index && (
+                            <div className="absolute top-1 right-1 bg-primary text-primary-foreground text-xs px-1.5 py-0.5 rounded-sm">
+                              Preview
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

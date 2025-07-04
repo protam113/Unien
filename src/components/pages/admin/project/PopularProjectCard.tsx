@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
-import { VisibilityOption } from '@/components/container/VisibilitySelect';
+import { VisibilityOption } from '@/components/wrappers/VisibilitySelect';
 import { useState } from 'react';
 import { useUpdateProjectStatus } from '@/hooks/project/useProject';
 import { toast } from 'sonner';
-import { VisibilityChange } from '@/components/container/ChangeToShow';
+import { VisibilityChange } from '@/components/wrappers/ChangeToShow';
 import { useAuthStore } from '@/store/authStore';
 
 interface Post {

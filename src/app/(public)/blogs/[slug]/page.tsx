@@ -5,9 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import NoResultsFound from '@/components/design/NoResultsFound';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 import RelatedPosts from '@/components/pages/blog/RelatedPosts';
-import ContactSection from '@/components/container/cto';
+import ContactSection from '@/components/wrappers/cto';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
 import { CodeBlockComponent } from '@/components/richText/ContentSection';
 import ReactMarkdown from 'react-markdown';
@@ -80,7 +80,7 @@ export default function Page() {
 
         <div className="mb-8 rounded-lg overflow-hidden">
           <Image
-            src={blog?.file || '/placeholder.svg'}
+            src={blog?.file || '/logo.svg'}
             alt={`Featured image for ${blog?.title}`}
             width={800}
             height={400}
@@ -126,7 +126,7 @@ export default function Page() {
         </div>
       </article>
       <RelatedPosts />
-      <ContactSection href="/blogs" title="BLOGS" />
+      <ContactSection href="/blogs" title="Bài Viết" />
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { SeoList } from '@/lib/responses/seoLib';
 
 export const appInfo = {
@@ -66,7 +66,7 @@ export const appInfo = {
     'tụ bù điện',
     'giải pháp tiết kiệm điện',
   ],
-}; // Đã loại bỏ "as const" ở đây
+};
 
 // Đảm bảo các giá trị không null/undefined
 export const metadata: Metadata = {
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     apple: appInfo.logo,
     shortcut: appInfo.logo,
   },
-  themeColor: appInfo.themeColor,
+  // Remove themeColor from here
 
   openGraph: {
     type: 'website',
@@ -107,13 +107,6 @@ export const metadata: Metadata = {
     images: [`${appInfo.domain}${appInfo.ogImage}`],
     creator: '@unien',
     site: '@unien',
-  },
-
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
   },
 
   alternates: {
@@ -145,6 +138,15 @@ export const metadata: Metadata = {
   publisher: 'Unien',
 };
 
+// Move themeColor to viewport export
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: appInfo.themeColor,
+};
+
 // Function to generate metadata for child pages
 export function PageMetadata(
   pageTitle: string,
@@ -172,7 +174,7 @@ export function PageMetadata(
       apple: appInfo.logo,
       shortcut: appInfo.logo,
     },
-    themeColor: appInfo.themeColor,
+    // Don't include themeColor here either
 
     openGraph: {
       type: 'website',
@@ -198,13 +200,6 @@ export function PageMetadata(
       images: [`${siteDomain}${appInfo.ogImage}`],
       creator: '@unien',
       site: '@unien',
-    },
-
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 1,
-      userScalable: false,
     },
 
     alternates: {

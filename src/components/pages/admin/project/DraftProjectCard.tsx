@@ -12,7 +12,7 @@ import {
 import {
   VisibilityOption,
   VisibilitySelect,
-} from '@/components/container/VisibilitySelect';
+} from '@/components/wrappers/VisibilitySelect';
 import { toast } from 'sonner';
 
 interface Post {

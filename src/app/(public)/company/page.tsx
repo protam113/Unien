@@ -1,7 +1,7 @@
-import ContactComponent from '@/components/container/contact-form';
-import Container from '@/components/container/Container';
-import HeroHeader from '@/components/container/Header';
-import { StatsSection } from '@/components/container/StartSection';
+import ContactComponent from '@/components/wrappers/contact-form';
+import Container from '@/components/wrappers/Container';
+import HeroHeader from '@/components/wrappers/Header';
+import { StatsSection } from '@/components/wrappers/StartSection';
 import SEO from '@/components/design/SEO';
 import { WhoAreWeSection } from '@/components/pages/company/about-us';
 import CompanyPortfolio from '@/components/pages/company/more-info';

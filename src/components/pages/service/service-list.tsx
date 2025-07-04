@@ -63,15 +63,15 @@ export default function ServiceListData({
             key={post._id}
             className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
           >
-            <Link href={post.slug} className="block">
+            <Link href={`/services/${post.slug}`} className="block">
               <div className="relative overflow-hidden group">
                 <div className="w-full h-64 bg-gray-200 relative">
                   <Image
                     src={post.file}
                     alt={post.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw" // 👈 size của ảnh sẽ tùy theo screen width
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     priority
                   />
                 </div>

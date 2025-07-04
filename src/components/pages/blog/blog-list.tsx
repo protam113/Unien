@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 import CategoryCard from './BlogCategory';
 import { BlogList } from '@/lib/responses/blogLib';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 
 export default function BlogGrid() {
   const [loading, setLoading] = useState(false);

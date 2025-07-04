@@ -13,7 +13,7 @@ const PushButton: React.FC<PushButtonProps> = ({ href, label }) => {
   return (
     <button
       onClick={handlePush}
-      className="flex items-center justify-center w-[200px] h-10 space-x-2 p-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300"
+      className="flex items-center justify-center w-[200px] h-10 space-x-2 p-2 bg-main text-white hover:bg-main-600 transition duration-300"
     >
       <span>{label}</span>
       <FaArrowRight />

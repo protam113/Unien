@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 import Image from 'next/image';
 
 export const WhoAreWeSection = () => {
@@ -25,7 +25,7 @@ export const WhoAreWeSection = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                Công Ty TNHH <span className="text-[#F69429]">UNIEN</span>
+                Công Ty TNHH <span className="text-main">UNIEN</span>
               </motion.h1>
 
               <motion.p
@@ -53,7 +53,7 @@ export const WhoAreWeSection = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8 }}
-                className="relative overflow-hidden rounded-lg"
+                className="relative overflow-hidden "
               >
                 <Image
                   src="/img/boiler.jpg"

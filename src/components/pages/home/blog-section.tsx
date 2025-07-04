@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import SectionHeader from '@/components/container/SectionHeader';
+import SectionHeader from '@/components/wrappers/SectionHeader';
 import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
 import { BlogList } from '@/lib/responses/blogLib';
-import Container from '@/components/container/Container';
+import Container from '@/components/wrappers/Container';
 
 export default function BlogSection() {
   const { blogs, isLoading, isError } = BlogList(
