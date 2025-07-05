@@ -53,7 +53,7 @@ export default function Footer() {
                   <span className="sr-only">LinkedIn</span>
                 </Link>
               </div>
-              <div className="bg-[#F69429] border rounded-full px-5 py-2 text-white font-semibold shadow-md hover:bg-[#e88410] transition-all duration-300 ease-in-out">
+              <div className="bg-main border  px-5 py-2 text-white font-semibold shadow-md hover:bg-[#e88410] transition-all duration-300 ease-in-out">
                 <Link href="#" className="hover:text-white transition-colors">
                   Liên Hệ
                 </Link>
@@ -114,9 +114,9 @@ export default function Footer() {
             <Link
               href="https://vietstrix.com"
               target="_blank"
-              className="text-sm text-gray-200 bg-gray-700 px-3 py-1 rounded-full"
+              className="text-sm text-gray-200 bg-gray-700 px-3 py-1 rounded-full hover:bg-gray-600"
             >
-              by Vietstrix
+              by <span className="font-bold">Vietstrix</span>
             </Link>
           </div>
         </div>

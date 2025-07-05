@@ -1,11 +1,10 @@
+import { SectionHeaderProps } from '@/types';
 import React from 'react';
 
-interface SectionHeaderProps {
-  title: string;
-  design?: string;
-}
-
-const SectionHeader: React.FC<SectionHeaderProps> = ({ title, design }) => {
+export const SectionHeader: React.FC<SectionHeaderProps> = ({
+  title,
+  design,
+}) => {
   return (
     <h2 className="text-4xl font-bold text-main uppercase mt-4 mb-4 flex items-center gap-2">
       {title}{' '}
@@ -15,5 +14,3 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ title, design }) => {
     </h2>
   );
 };
-
-export default SectionHeader;

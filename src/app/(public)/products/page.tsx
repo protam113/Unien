@@ -1,7 +1,6 @@
-import Container from '@/components/wrappers/Container';
-import HeroHeader from '@/components/wrappers/Header';
-import SEO from '@/components/design/SEO';
-import ProductListingPage from '@/components/pages/product/product-listing-page';
+import { Container } from '@/components/wrappers/Container';
+import { HeroHeader, SEO } from '@/components';
+import { ProductListingPage } from '@/components/pages/product/product-listing-page';
 import React from 'react';
 
 const Page = () => {

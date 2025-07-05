@@ -2,13 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
-import SectionHeader from '@/components/wrappers/SectionHeader';
+import { Card, CardContent, CustomImage, SectionHeader } from '@/components';
 import { AlertTriangle, ChevronRight, Loader2 } from 'lucide-react';
 import { BlogList } from '@/lib/responses/blogLib';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 
-export default function BlogSection() {
+export function BlogSection() {
   const { blogs, isLoading, isError } = BlogList(
     1,
     {
@@ -64,14 +63,14 @@ export default function BlogSection() {
 
 function BlogCard({ post }: { post: any }) {
   return (
-    <Card className="group rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <Card className="group shadow-xl overflow-hidden border border-gray-2bmmnb00 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       <Link
         href={`/blog/${post.slug}`}
         className="block relative h-64 overflow-hidden"
       >
         <div className="relative h-48 w-full">
-          <Image
-            src={post.file || '/placeholder.svg'}
+          <CustomImage
+            src={post.file || '/logo.svg'}
             alt={post.title}
             fill
             className="object-cover"
@@ -85,7 +84,6 @@ function BlogCard({ post }: { post: any }) {
           <h2 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
             {post.title}
           </h2>
-          <p className="text-gray-600 mb-4 line-clamp-2">vsdasdsasd</p>
         </div>
 
         <p className="text-sm text-gray-500">{post.date}</p>

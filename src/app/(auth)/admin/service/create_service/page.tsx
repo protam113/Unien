@@ -24,7 +24,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { ImageIcon, Loader2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import { useCreateService } from '@/hooks/service/useService';
 import { CreateServiceItem } from '@/types/types';
 import { useRouter } from 'next/navigation';

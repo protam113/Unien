@@ -1,11 +1,6 @@
-import { ReactNode } from 'react';
+import { ContainerProps } from '@/types';
 
-interface ContainerProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export default function Container({ children, className }: ContainerProps) {
+export function Container({ children, className }: ContainerProps) {
   return (
     <main className={`w-full mx-auto container py-4  ${className}`}>
       {children}

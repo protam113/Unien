@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
-import SectionHeader from '@/components/wrappers/SectionHeader';
+import { SectionHeader } from '@/components/wrappers/SectionHeader';
 import Image from 'next/image';
 
 export const WhoAreWeSection = () => {

@@ -1,18 +1,10 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { cn } from '@/lib/utils';
-import SectionHeader from '@/components/wrappers/SectionHeader';
-
-interface ProcessStepProps {
-  title: string;
-  startPosition: string;
-  color: string;
-  width: string;
-  delay: number;
-  row: 'top' | 'bottom';
-  isVisible: boolean;
-}
+import { cn } from '@/utils';
+import { SectionHeader } from '@/components';
+import { ProcessStepProps } from '@/types';
+import servicesData from '@/data/service.data.json';
 
 const ProcessStep: React.FC<ProcessStepProps> = ({
   title,
@@ -60,35 +52,29 @@ const ProcessStep: React.FC<ProcessStepProps> = ({
   );
 };
 
-const ProcessTimeline: React.FC = () => {
+export const ProcessTimeline: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Create intersection observer to detect when section is scrolled into view
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Once triggered, we can disconnect the observer
           observer.disconnect();
         }
       },
       {
-        // Trigger when at least 20% of the element is visible
         threshold: 0.2,
-        // Add rootMargin to trigger slightly before the element comes into view
         rootMargin: '0px 0px -50px 0px',
       }
     );
 
-    // Start observing the section
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    // Clean up observer on component unmount
     return () => {
       observer.disconnect();
     };
@@ -103,25 +89,12 @@ const ProcessTimeline: React.FC = () => {
         )}
       >
         <div className="flex flex-col">
-          <SectionHeader title="Quy Trình Làm Việc" />
+          <SectionHeader title={servicesData.ServicePage.process_title} />
           <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4">
             Hiệu quả bắt đầu từ quy trình bài bản
           </h2>
           <p className="text-gray-600 max-w-3xl mb-16">
-            Tại <span className="text-main font-bold">Unien</span>, mỗi công
-            trình đều được thực hiện theo một quy trình rõ ràng và chuyên nghiệp
-            — từ khảo sát thực tế, thiết kế hệ thống cho đến thi công lắp đặt và
-            bàn giao.
-            <br />
-            Chúng tôi không chỉ cung cấp thiết bị chất lượng mà còn tối ưu toàn
-            bộ giải pháp về kỹ thuật, vận hành và an toàn.
-            <br />
-            Với đội ngũ kỹ sư giàu kinh nghiệm,{' '}
-            <span className="font-semibold">
-              Unien cam kết mang đến hệ thống vận hành ổn định, tiết kiệm năng
-              lượng và đạt hiệu suất cao
-            </span>{' '}
-            ngay từ ngày đầu đưa vào sử dụng.
+            {servicesData.ServicePage.process_desc}
           </p>
         </div>
 
@@ -137,7 +110,7 @@ const ProcessTimeline: React.FC = () => {
           <div className="relative h-full">
             {/* Top row */}
             <ProcessStep
-              title="Khảo sát & Nghiên cứu "
+              title={servicesData.ServicePage.step1}
               startPosition="0%"
               color="bg-gray-300"
               width="20%"
@@ -147,7 +120,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Lập kế hoạch triển khai"
+              title={servicesData.ServicePage.step4}
               startPosition="40%"
               color="bg-gray-700"
               width="35%"
@@ -157,7 +130,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Thi công & Lắp đặt"
+              title={servicesData.ServicePage.step5}
               startPosition="90%"
               color="bg-black"
               width="10%"
@@ -168,7 +141,7 @@ const ProcessTimeline: React.FC = () => {
 
             {/* Bottom row */}
             <ProcessStep
-              title="Tối ưu vận hành hệ thống"
+              title={servicesData.ServicePage.step_2}
               startPosition="20%"
               color="bg-gray-500"
               width="20%"
@@ -178,7 +151,7 @@ const ProcessTimeline: React.FC = () => {
             />
 
             <ProcessStep
-              title="Báo cáo & Bàn giao"
+              title={servicesData.ServicePage.step3}
               startPosition="75%"
               color="bg-gray-800"
               width="15%"
@@ -214,5 +187,3 @@ const ProcessTimeline: React.FC = () => {
     </section>
   );
 };
-
-export default ProcessTimeline;

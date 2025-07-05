@@ -11,14 +11,28 @@ import {
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
+import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================
  * 📌 @HOOK useCategoryList
  * ==========================
  *
- * @desc Custom hook to get list of categories
- * @returns {Category[]} List of categories
+ * @desc Custom hook to get list of blog
+ * @returns {Blog[
+ * _id: string;
+ * title: string;
+ * content: string;
+ * description: string;
+ * file: string;
+ * link: string;
+ * slug: string;
+ * user?: UserDataComponents;
+ * category: ChildCategory;
+ * status: string;
+ * createdAt: string | Date;
+ * updatedAt: string | Date;
+ * ]} List of blog
  */
 
 const fetchBlogList = async (
@@ -26,18 +40,7 @@ const fetchBlogList = async (
   filters: Filters
 ): Promise<FetchBlogListResponse> => {
   try {
-    // Check if endpoint is valid
-    const validFilters = Object.fromEntries(
-      Object.entries(filters).filter(
-        ([, value]) => value !== undefined && value !== ''
-      )
-    );
-
-    // Create query string from filters
-    const queryString = new URLSearchParams({
-      page: pageParam.toString(),
-      ...validFilters,
-    }).toString();
+    const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(

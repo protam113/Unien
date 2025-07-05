@@ -1,5 +1,5 @@
 import { CategoryList } from '@/lib/responses/categoriesLib';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 
 function SidebarFilters({
   activeCategory,

@@ -1,8 +1,6 @@
 'use client';
 
-import RadiatingLoader from '@/components/loading/radiating-loader';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button, Input, RadiatingLoader } from '@/components';
 import { useAuthStore } from '@/store/authStore';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

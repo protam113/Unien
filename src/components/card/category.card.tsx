@@ -1,26 +1,18 @@
 'use client';
 
 import { CategoryList } from '@/lib/responses/categoriesLib';
+import { CategoryCardProps } from '@/types';
+import { Category } from '@/types/types';
 import React, { useState } from 'react';
 
-// Định nghĩa type cho category
-interface Category {
-  _id: string;
-  name: string;
-}
-
-// Props nếu muốn nhận callback khi chọn category
-interface CategoryCardProps {
-  onCategorySelect?: (categoryId: string | null) => void;
-}
-
-const ServiceCategoryCard: React.FC<CategoryCardProps> = ({
+export const CategoryCard: React.FC<CategoryCardProps> = ({
   onCategorySelect,
+  type,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { categories, isLoading, isError } = CategoryList(
     1,
-    { limit: 20, type: 'services' },
+    { limit: 20, type: type },
     0
   );
 
@@ -54,7 +46,7 @@ const ServiceCategoryCard: React.FC<CategoryCardProps> = ({
                 : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            View all
+            Tất cả
           </button>
 
           {/* Danh sách categories */}
@@ -76,5 +68,3 @@ const ServiceCategoryCard: React.FC<CategoryCardProps> = ({
     </nav>
   );
 };
-
-export default ServiceCategoryCard;

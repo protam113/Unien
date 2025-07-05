@@ -4,13 +4,13 @@ import type React from 'react';
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import SidebarFilters from './product-side-filters';
 import ProductCard from './product-card';
 import { ProductList } from '@/lib/responses/productLib';
 import NoResultsFound from '@/components/design/NoResultsFound';
 
-export default function ProductListingPage() {
+export function ProductListingPage() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);

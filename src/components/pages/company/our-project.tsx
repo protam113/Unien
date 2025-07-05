@@ -1,6 +1,6 @@
 'use client';
 
-import SectionHeader from '@/components/wrappers/SectionHeader';
+import { SectionHeader } from '@/components/wrappers/SectionHeader';
 import { ProjectList } from '@/lib/responses/projectLib';
 import Image from 'next/image';
 

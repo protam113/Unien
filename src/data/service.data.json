@@ -1,0 +1,19 @@
+{
+  "ServiceData": {
+    "title": "Dịch Vụ & Công Nghiệp",
+    "description": "Chúng tôi cung cấp giải pháp toàn diện trong lĩnh vực điều khiển – tự động hóa cho hệ thống lò hơi và thiết bị công nghiệp. Từ lắp đặt tủ điện, lập trình PLC, đến cải tạo, nâng cấp và vận hành an toàn, đội ngũ kỹ thuật của chúng tôi luôn đồng hành để tối ưu hiệu suất và đảm bảo hoạt động ổn định cho doanh nghiệp bạn."
+  },
+  "ServicePage": {
+    "title": "Dịch Vụ & Công Nghiệp",
+    "desc_1": "Chúng tôi cung cấp giải pháp trọn gói trong các lĩnh vực điện công nghiệp, năng lượng mặt trời và lò hơi – từ tư vấn, thiết kế đến thi công và bảo trì.",
+    "desc_2": "Với đội ngũ kỹ thuật giàu kinh nghiệm, chúng tôi cam kết mang đến hệ thống vận hành ổn định, an toàn và tiết kiệm chi phí, đồng thời góp phần thúc đẩy sản xuất xanh và phát triển bền vững cho doanh nghiệp.",
+
+    "process_title": "Quy Trình Làm Việc",
+    "process_desc": "Tại Unien, mỗi công trình đều được thực hiện theo một quy trình rõ ràng và chuyên nghiệp — từ khảo sát thực tế, thiết kế hệ thống cho đến thi công lắp đặt và bàn giao. Chúng tôi không chỉ cung cấp thiết bị chất lượng mà còn tối ưu toàn bộ giải pháp về kỹ thuật, vận hành và an toàn. Với đội ngũ kỹ sư giàu kinh nghiệm,Unien cam kết mang đến hệ thống vận hành ổn định, tiết kiệm năng lượng và đạt hiệu suất caongay từ ngày đầu đưa vào sử dụng.",
+    "step1": "Khảo sát & Nghiên cứu",
+    "step_2": "Lập kế hoạch triển khai",
+    "step3": "Tối ưu vận hành hệ thống",
+    "step4": "Thi công & Lắp đặt",
+    "step5": "Báo cáo & Bàn giao"
+  }
+}

@@ -5,7 +5,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Bold, Italic, List, ListOrdered, Underline } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import {

@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import SectionHeader from '@/components/wrappers/SectionHeader';
+import { Button, SectionHeader } from '@/components';
+import { cn } from '@/utils/helpers/utils';
 import { ProjectList } from '@/lib/responses/projectLib';
 
 export default function ProjectCarousel() {

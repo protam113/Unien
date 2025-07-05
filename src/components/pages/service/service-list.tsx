@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
 import { ServiceList } from '@/lib/responses/serviceLib';
+import { LoadingSpin, ErrorLoading } from '@/components';
+import { PostCard } from '@/components';
 
-export default function ServiceListData({
+export function ServiceListData({
   selectedCategory,
 }: {
   selectedCategory: string | null;
@@ -40,51 +40,25 @@ export default function ServiceListData({
   };
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
-    );
+    return <LoadingSpin />;
   }
 
   if (isError) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <p className="text-red-500">Error loading service posts</p>
-      </div>
-    );
+    return <ErrorLoading />;
   }
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((post) => (
-          <article
+          <PostCard
             key={post._id}
-            className="bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-          >
-            <Link href={`/services/${post.slug}`} className="block">
-              <div className="relative overflow-hidden group">
-                <div className="w-full h-64 bg-gray-200 relative">
-                  <Image
-                    src={post.file}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw" // 👈 size của ảnh sẽ tùy theo screen width
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    priority
-                  />
-                </div>
-              </div>
-            </Link>
-
-            <div className="p-5">
-              <h3 className="text-xl font-bold mt-2 mb-3">{post.title}</h3>
-              <p className="text-gray-600 text-sm line-clamp-3">
-                {post.content}
-              </p>
-            </div>
-          </article>
+            _id={post._id}
+            title={post.title}
+            slug={post.slug}
+            content={post.content}
+            file={post.file}
+          />
         ))}
       </div>
 

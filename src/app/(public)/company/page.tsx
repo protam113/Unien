@@ -1,8 +1,6 @@
-import ContactComponent from '@/components/wrappers/contact-form';
-import Container from '@/components/wrappers/Container';
-import HeroHeader from '@/components/wrappers/Header';
+import { Container } from '@/components/wrappers/Container';
 import { StatsSection } from '@/components/wrappers/StartSection';
-import SEO from '@/components/design/SEO';
+import { SEO, HeroHeader, ContactComponent } from '@/components';
 import { WhoAreWeSection } from '@/components/pages/company/about-us';
 import CompanyPortfolio from '@/components/pages/company/more-info';
 import OurProjects from '@/components/pages/company/our-project';

@@ -11,7 +11,7 @@ import {
 } from 'react-icons/ri';
 import { IoListOutline } from 'react-icons/io5';
 import { useState, useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import { Upload, X } from 'lucide-react';
 import { Button as ImageButton } from '@/components/ui/button';
 import { useUploadMedia } from '@/hooks/media/useMedia';

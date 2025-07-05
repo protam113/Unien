@@ -24,7 +24,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Loader2, Trash2, Upload } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import { CreateProductItem } from '@/types/types';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';

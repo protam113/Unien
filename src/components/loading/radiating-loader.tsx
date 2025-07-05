@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-export default function RadiatingLoader() {
+export function RadiatingLoader() {
   const [pulses, setPulses] = useState<number[]>([]);
 
   useEffect(() => {

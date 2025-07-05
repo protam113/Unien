@@ -1,12 +1,11 @@
-import ContactComponent from '@/components/wrappers/contact-form';
-import Container from '@/components/wrappers/Container';
+import { ContactComponent } from '@/components';
+import { Container } from '@/components/wrappers/Container';
 import { StatsSection } from '@/components/wrappers/StartSection';
 import HeroBanner from '@/components/layout/DefaultLayout/Hero';
-import BlogSection from '@/components/pages/home/blog-section';
+import { BlogSection, ServicesTabs } from '@/components/pages';
 import IndustrialIntro from '@/components/pages/home/introduce';
 import ProductShowcase from '@/components/pages/home/product-showcase';
 import ProjectCarousel from '@/components/pages/home/project-carousel';
-import ServicesData from '@/components/pages/home/service';
 
 export default function Home() {
   return (
@@ -18,7 +17,7 @@ export default function Home() {
 
       <StatsSection />
       <Container>
-        <ServicesData />
+        <ServicesTabs />
         <ProductShowcase />
         <ProjectCarousel />
 

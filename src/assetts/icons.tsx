@@ -44,6 +44,9 @@ import {
   Search,
   ChartBarStacked,
   List,
+  Loader2,
+  AlertTriangle,
+  ChevronRight,
 } from 'lucide-react';
 import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 
@@ -53,7 +56,7 @@ import { Box, ShoppingBag, ClipboardList } from 'lucide-react';
 //   logoNameW,
 // };
 
-export const Icons = {};
+export const Icons = { Loader2, AlertTriangle, ChevronRight };
 
 export const ComponentsIcons = {
   Search,

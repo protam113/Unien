@@ -1,14 +1,10 @@
+import { ContactSectionProps } from '@/types';
 import Link from 'next/link';
 
-interface ContactSectionProps {
-  href: string;
-  title: string;
-}
-
-export default function ContactSection({ href, title }: ContactSectionProps) {
+export function ContactSection({ href, title }: ContactSectionProps) {
   return (
-    <div className="bg-black py-12 px-6 md:px-12 rounded-xl">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div className="bg-black py-12 px-6 md:px-12">
+      <div className="mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="max-w-xl">
           <h2 className="text-white text-xl md:text-2xl font-medium leading-relaxed">
             Nếu bạn đã sẵn sàng thay đổi hoặc có ý tưởng mà bạn tin tưởng, hãy

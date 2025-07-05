@@ -3,15 +3,11 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { PageMetadata } from '@/constant/appInfos';
+import { SEOProps } from '@/types';
 
-interface SEOProps {
-  title: string;
-  description?: string;
-}
-
-export default function SEO({ title, description }: SEOProps) {
+export function SEO({ title, description }: SEOProps) {
   const pathname = usePathname();
-  const metadata = PageMetadata(title, description); // Gọi hàm PageMetadata
+  const metadata = PageMetadata(title, description);
 
   useEffect(() => {
     document.title = metadata.title as string;
@@ -20,5 +16,5 @@ export default function SEO({ title, description }: SEOProps) {
       ?.setAttribute('content', metadata.description as string);
   }, [metadata, pathname]);
 
-  return null; // Không render gì, chỉ cập nhật metadata
+  return null;
 }

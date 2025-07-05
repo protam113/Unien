@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, Phone, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/helpers/utils';
 import Image from 'next/image';
 
 const navItems = [
@@ -44,11 +44,13 @@ export default function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-black/60  backdrop-blur-md' : 'bg-black'
+        scrolled
+          ? 'bg-black/60 backdrop-blur-md min-h-[100px]'
+          : 'bg-black min-h-[100px]'
       )}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="container mx-auto px-4 h-full">
+        <div className="flex items-center justify-between h-full min-h-[100px]">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
@@ -77,7 +79,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'px-3 py-2 text-sm font-medium text-white hover:text-orange-400 transition-colors relative group',
+                  'px-3 py-2 text-sm md:text-base lg:text-lg font-medium text-white hover:text-orange-400 transition-colors relative group',
                   pathname === item.href && 'text-orange-400'
                 )}
               >
@@ -101,7 +103,7 @@ export default function Navbar() {
             </a>
             <Button
               onClick={handleMenuClick}
-              className="bg-white text-black hover:bg-orange-400 hover:text-white"
+              className="bg-white text-lg text-black hover:bg-orange-400 hover:text-white"
             >
               Liên hệ
             </Button>

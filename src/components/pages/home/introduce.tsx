@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import SectionHeader from '@/components/wrappers/SectionHeader';
+import { CustomImage } from '@/components/design/image.component';
+import { SectionHeader } from '@/components';
 
 export default function IndustrialIntro() {
   return (
@@ -11,8 +11,8 @@ export default function IndustrialIntro() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Left side with image and years badge */}
           <div className="relative">
-            <div className="relative h-[300px] w-full overflow-hidden rounded-lg md:h-[400px]">
-              <Image
+            <div className="relative h-[300px] w-full overflow-hidden rounded-none md:h-[400px]">
+              <CustomImage
                 src="/img/boiler1.jpg"
                 alt="Industrial worker examining blueprints"
                 fill

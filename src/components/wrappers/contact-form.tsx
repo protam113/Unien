@@ -9,8 +9,9 @@ import { CreateContactItem } from '@/types/types';
 import { useCreateContact } from '@/hooks/contact/useContact';
 import { logDebug } from '@/utils/logger';
 import { toast } from 'sonner';
+import contactInfo from '@/data/contact.data.json';
 
-export default function ContactComponent() {
+export function ContactComponent() {
   const [loading, setLoading] = useState(false);
 
   const [contactData, setContactData] = useState<CreateContactItem>({
@@ -72,17 +73,16 @@ export default function ContactComponent() {
           <div className="flex items-center gap-2">
             <div className="h-1 w-6 bg-main"></div>
             <span className="text-sm font-medium uppercase tracking-wider text-main">
-              Liên Hệ
+              {contactInfo.ContactData.title}
             </span>
           </div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            Liên Hệ Ngay Với
+            {contactInfo.ContactData.content}
             <br />
             Chúng Tôi
           </h2>
           <p className="text-muted-foreground max-w-[600px]">
-            Hãy liên hệ với chúng tôi để được giải đáp thắc mắc hoặc hỗ trợ.
-            Chúng tôi ở đây để giúp đỡ và mong nhận được phản hồi từ bạn.
+            {contactInfo.ContactData.description}
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export default function ContactComponent() {
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500/10">
-                <Phone className="h-5 w-5 text-yellow-500" />
+                <Phone className="h-5 w-5 text-main" />
               </div>
               <div>
                 <h3 className="font-semibold">Tel</h3>
@@ -99,7 +99,7 @@ export default function ContactComponent() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500/10">
-                <Mail className="h-5 w-5 text-yellow-500" />
+                <Mail className="h-5 w-5 text-main" />
               </div>
               <div>
                 <h3 className="font-semibold">Email</h3>
@@ -108,7 +108,7 @@ export default function ContactComponent() {
             </div>
             <div className="flex items-start gap-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500/10">
-                <MapPin className="h-5 w-5 text-yellow-500" />
+                <MapPin className="h-5 w-5 text-main" />
               </div>
               <div>
                 <h3 className="font-semibold">Địa Chỉ</h3>

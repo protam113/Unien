@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import DefaultBreadcrumb from '../design/DefaultBreadCrumb';
 
-export default function HeroHeader({
+export function HeroHeader({
   title,
   description,
 }: {
@@ -45,7 +45,7 @@ export default function HeroHeader({
           <DefaultBreadcrumb />
         </div>
         <motion.p
-          className="mt-4 text-lg text-muted-foreground max-w-md"
+          className="mt-4 text-lg text-muted-foreground w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
