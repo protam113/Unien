@@ -3,12 +3,13 @@
 import type React from 'react';
 
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/utils/helpers/utils';
 import SidebarFilters from './product-side-filters';
 import ProductCard from './product-card';
 import { ProductList } from '@/lib/responses/productLib';
 import NoResultsFound from '@/components/design/NoResultsFound';
+import { LoadingSpin } from '@/components/loading/loading';
 
 export function ProductListingPage() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -46,11 +47,7 @@ export function ProductListingPage() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
-    );
+    return <LoadingSpin />;
   }
 
   if (isError) {
@@ -62,7 +59,7 @@ export function ProductListingPage() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen ">
       {/* Sidebar Filters */}
       <SidebarFilters
         activeCategory={selectedCategory || ''}
@@ -74,7 +71,7 @@ export function ProductListingPage() {
       {/* Main Content */}
       <div className="flex-1 p-4">
         {/* Top Filter/Sort Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 bg-white p-3  shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 p-3  shadow-sm">
           <div className="flex items-center space-x-2 mb-2 md:mb-0">
             <span className="text-sm text-gray-500">Sắp xếp theo</span>
             <button

@@ -1,8 +1,7 @@
 'use client';
 
-import { SectionHeader } from '@/components/wrappers/SectionHeader';
-import { ProjectList } from '@/lib/responses/projectLib';
-import Image from 'next/image';
+import { LoadingSpin, SectionHeader, CustomImage } from '@/components';
+import { ProjectList } from '@/lib';
 
 export default function OurProjects() {
   const { projects, isLoading, isError } = ProjectList(
@@ -20,9 +19,7 @@ export default function OurProjects() {
       </div>
 
       {isLoading ? (
-        <div className="text-center text-gray-500 py-20">
-          Đang tải dữ liệu...
-        </div>
+        <LoadingSpin />
       ) : isError ? (
         <div className="text-center text-red-500 py-20">
           Có lỗi xảy ra khi tải dự án. Vui lòng thử lại sau.
@@ -36,10 +33,10 @@ export default function OurProjects() {
           {projects.map((project) => (
             <div
               key={project._id}
-              className=" overflow-hidden bg-gray-50 transition-all duration-300 hover:shadow-lg"
+              className=" overflow-hidden  transition-all duration-300 hover:shadow-lg"
             >
               <div className="aspect-[16/9] relative w-full">
-                <Image
+                <CustomImage
                   src={project.file || '/placeholder.svg'}
                   alt={project.title}
                   fill
@@ -51,10 +48,11 @@ export default function OurProjects() {
                 <p className="text-gray-600 mb-6">
                   {project.description || 'Không có mô tả cho dự án này.'}
                 </p>
+                <p className="text-gray-600 mb-6">{project.testimonial}</p>
                 <div className="text-sm text-gray-500 space-y-1">
                   {project.client}
+                  <span>-</span>
                   {project.brand_name}
-                  {project.testimonial}
                 </div>
               </div>
             </div>

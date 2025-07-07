@@ -8,6 +8,7 @@ import ParticleOverlay from '@/components/design/ParticleOverlay';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
+import AppData from '@/data/app.data.json';
 
 export default function HeroBanner() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -62,14 +63,12 @@ export default function HeroBanner() {
                 UNIEN
               </span>
               <span className="block text-2xl md:text-4xl lg:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground to-primary-foreground/80 dark:from-primary-foreground dark:to-primary-foreground/80 animate-gradient">
-                CHẤT LƯỢNG TẠO NIỀM TIN
+                {AppData.AppData.slogan}
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
-              Chúng tôi cung cấp giải pháp điện công nghiệp, năng lượng mặt trời
-              và lò hơi hiệu quả – an toàn – bền vững, giúp doanh nghiệp hoạt
-              động ổn định, tiết kiệm chi phí và thân thiện với môi trường.
+              {AppData.AppData.intro}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2 md:pt-4">

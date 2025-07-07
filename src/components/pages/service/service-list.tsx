@@ -52,6 +52,7 @@ export function ServiceListData({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((post) => (
           <PostCard
+            type="service"
             key={post._id}
             _id={post._id}
             title={post.title}

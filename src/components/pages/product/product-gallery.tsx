@@ -1,15 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import { cn } from '@/utils/helpers/utils';
-import { Button } from '@/components/ui/button';
-
-interface ProductGalleryProps {
-  images: string[];
-}
+import { cn } from '@/utils';
+import { Button, CustomImage } from '@/components';
+import { ProductGalleryProps } from '@/types';
 
 export function ProductGallery({ images }: ProductGalleryProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -18,7 +13,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
   if (!images || images.length === 0) {
     return (
       <div className="relative aspect-square w-full overflow-hidden rounded-lg border bg-muted">
-        <Image
+        <CustomImage
           src="/logo.svg?height=600&width=600&text=No+Image"
           alt="Product placeholder"
           fill
@@ -40,8 +35,8 @@ export function ProductGallery({ images }: ProductGalleryProps) {
     <div className="space-y-4">
       {/* Main Image */}
       <div className="relative aspect-square overflow-hidden rounded-lg border bg-muted">
-        <Image
-          src={images[currentImageIndex] || '/placeholder.svg'}
+        <CustomImage
+          src={images[currentImageIndex] || '/logo.svg'}
           alt={`Product image ${currentImageIndex + 1}`}
           fill
           priority={currentImageIndex === 0}
@@ -88,8 +83,8 @@ export function ProductGallery({ images }: ProductGalleryProps) {
               onClick={() => setCurrentImageIndex(index)}
               aria-label={`View image ${index + 1}`}
             >
-              <Image
-                src={image || '/placeholder.svg'}
+              <CustomImage
+                src={image || '/logo.svg'}
                 alt={`Product thumbnail ${index + 1}`}
                 fill
                 className="object-cover"

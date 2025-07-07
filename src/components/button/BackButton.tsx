@@ -1,25 +1,24 @@
 'use client';
-// components/button/BackButton.tsx
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ComponentsIcons } from '@/assetts/icons';
+import { BackButtonProps } from '@/types';
 
-const BackButton: React.FC = () => {
+export const BackButton: React.FC<BackButtonProps> = ({ href }) => {
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    router.push(href);
   };
 
   return (
     <button
       onClick={handleBack}
-      className="flex items-center space-x-2 p-2 bg-transparent text-primary-500 rounded-md border border-primary-500 hover:bg-orange-500 hover:text-white transition-all duration-300"
+      className="mb-8 inline-flex items-center gap-2 text-gray-600 hover:text-main transition-colors"
     >
       <ComponentsIcons.ArrowLeft className="h-4 w-4" />
       <span className="text-sm">Quay lại</span>
     </button>
   );
 };
-
-export default BackButton;

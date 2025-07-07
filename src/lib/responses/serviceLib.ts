@@ -1,7 +1,8 @@
 'use client';
 
 import { useServiceDetail, useServiceList } from '@/hooks/service/useService';
-import { Filters } from '@/types/types';
+import { Filters } from '@/types';
+import { ServiceDetail } from '@/types/types';
 
 export const ServiceList = (
   currentPage: number,
@@ -32,7 +33,7 @@ export const ServiceList = (
 export const ServiceDetailData = (slug: string, refreshKey: number) => {
   const { data, isLoading, isError } = useServiceDetail(slug, refreshKey);
 
-  const service = data?.result; // Changed from data?.data to data
+  const service = data ?? ({} as Partial<ServiceDetail>);
 
   return {
     service,

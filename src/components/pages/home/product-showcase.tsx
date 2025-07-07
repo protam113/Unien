@@ -3,10 +3,17 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CategoryCard, CustomImage, SectionHeader } from '@/components';
+import {
+  CategoryCard,
+  CustomImage,
+  ErrorLoading,
+  LoadingSpin,
+  SectionHeader,
+} from '@/components';
 import ProductCategoryCard from './ProductCategory';
 import { ProductList } from '@/lib/responses/productLib';
 import { Icons } from '@/assetts/icons';
+import ProductCard from '../product/product-card';
 
 const EXCHANGE_RATE = 25500;
 
@@ -14,7 +21,7 @@ export default function ProductShowcase() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const params = {
     category: selectedCategory ?? undefined,
-    limit: 5,
+    limit: 8,
   };
 
   const { products, isLoading, isError } = ProductList(1, params, 0);
@@ -38,39 +45,14 @@ export default function ProductShowcase() {
         </Link>
       </div>
       <CategoryCard onCategorySelect={setSelectedCategory} type="products" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {isLoading ? (
-          <div className="col-span-full flex justify-center items-center py-10">
-            <Icons.Loader2 className="animate-spin h-6 w-6 text-gray-500" />
-            <span className="ml-2 text-sm text-gray-500">
-              Đang tải sản phẩm...
-            </span>
-          </div>
+          <LoadingSpin />
         ) : isError ? (
-          <div className="col-span-full flex justify-center items-center py-10 text-red-500">
-            <Icons.AlertTriangle className="h-5 w-5 mr-2" />
-            <span>Không thể tải sản phẩm. Vui lòng thử lại sau.</span>
-          </div>
+          <ErrorLoading />
         ) : (
           products.map((product) => (
-            <div key={product._id} className="group shadow-xl">
-              <div className="relative aspect-square overflow-hidden  mb-3 bg-gray-100">
-                <CustomImage
-                  src={product.file?.[0] || '/logo.svg'}
-                  alt={product.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <h3 className="font-medium text-sm mb-2">{product.title}</h3>
-              <div className="flex items-start flex-col">
-                <div className="flex flex-col">
-                  <span className="font-bold text-red-600">
-                    {formatVND(product.price)}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <ProductCard key={product._id} product={product} />
           ))
         )}
       </div>

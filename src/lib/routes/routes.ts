@@ -46,9 +46,18 @@ export const ROUTES: Readonly<RouteMap> = deepFreeze({
   HOME: '/',
   COMPANY: '/company',
   CONTACT: '/contact',
-
+  BLOG: {
+    ROOT: '/blogs',
+    DETAIL: (slug: string) => `/services/${slug}`,
+    // ID: ENV.VIA_ART_FAIR_ID,
+  },
   SERVICE: {
     ROOT: '/services',
+    DETAIL: (slug: string) => `/services/${slug}`,
+    // ID: ENV.VIA_ART_FAIR_ID,
+  },
+  PRODUCT: {
+    ROOT: '/products',
     DETAIL: (slug: string) => `/services/${slug}`,
     // ID: ENV.VIA_ART_FAIR_ID,
   },

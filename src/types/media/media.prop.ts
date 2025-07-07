@@ -20,3 +20,7 @@ export interface ImageViewerProps {
   height: number;
   className?: string;
 }
+
+export interface ProductGalleryProps {
+  images: string[];
+}

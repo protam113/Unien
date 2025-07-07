@@ -14,6 +14,9 @@ export * from './responses/contactLib';
 // serviceLib.ts
 export * from './responses/serviceLib';
 
+// projectLib.ts
+export * from './responses/projectLib';
+
 /**
  * ==========================
  *  @ROUTES

@@ -29,7 +29,7 @@ export default function CompanyPortfolio() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-white">
         <div className=" mx-auto px-4 sm:px-6 lg:px-8 py-12">

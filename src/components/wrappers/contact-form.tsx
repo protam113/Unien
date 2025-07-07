@@ -10,6 +10,8 @@ import { useCreateContact } from '@/hooks/contact/useContact';
 import { logDebug } from '@/utils/logger';
 import { toast } from 'sonner';
 import contactInfo from '@/data/contact.data.json';
+import appInfo from '@/data/app.data.json';
+import { SectionHeader } from './SectionHeader';
 
 export function ContactComponent() {
   const [loading, setLoading] = useState(false);
@@ -70,12 +72,7 @@ export function ContactComponent() {
     <section className="w-full py-12 md:py-16 lg:py-20">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col gap-2 mb-8">
-          <div className="flex items-center gap-2">
-            <div className="h-1 w-6 bg-main"></div>
-            <span className="text-sm font-medium uppercase tracking-wider text-main">
-              {contactInfo.ContactData.title}
-            </span>
-          </div>
+          <SectionHeader title={contactInfo.ContactData.title} />
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             {contactInfo.ContactData.content}
             <br />
@@ -113,8 +110,7 @@ export function ContactComponent() {
               <div>
                 <h3 className="font-semibold">Địa Chỉ</h3>
                 <p className="text-muted-foreground">
-                  123 Main Street, Level 4<br />
-                  Bien Hoa , TP Ho Chi Minh, VietNam
+                  {appInfo.AppData.address}
                 </p>
               </div>
             </div>
@@ -190,7 +186,7 @@ export function ContactComponent() {
                 onClick={handleSentContact}
                 className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-medium"
               >
-                {loading ? 'Sending...' : 'Reach Us'}
+                {loading ? 'Đang Gửi...' : 'Gửi'}
               </Button>
             </form>
           </div>

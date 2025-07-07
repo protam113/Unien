@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoaderCircle } from 'lucide-react';
+import { LoadingSpin } from '@/components';
 
 const PageRedirect = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const PageRedirect = () => {
 
   return (
     <div className="flex h-screen w-full items-center justify-center">
-      <LoaderCircle className="h-10 w-10 animate-spin text-blue-500" />
+      <LoadingSpin />
     </div>
   );
 };

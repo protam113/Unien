@@ -2,12 +2,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endpoints } from '@/api/api';
 import {
-  Filters,
   FetchServiceListResponse,
   ServiceDetailResponse,
   UpdateStatus,
   CreateServiceItem,
+  ServiceDetail,
 } from '@/types/types';
+import { Filters } from '@/types';
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
@@ -45,7 +46,6 @@ const fetchServiceList = async (
       'GET',
       null
     );
-    logDebug(handleAPI);
 
     return response;
   } catch (error) {
@@ -85,19 +85,14 @@ const useServiceList = (
  * @returns {Document} Detail of document
  */
 
-const fetchServiceDetail = async (
-  slug: string
-): Promise<ServiceDetailResponse> => {
+const fetchServiceDetail = async (slug: string): Promise<ServiceDetail> => {
   try {
-    // Check if slug is valid
     if (!slug) {
       throw new Error('Slug is required');
     }
-    // Check if endpoint is valid
     if (!endpoints.serviceDetail) {
       throw null;
     }
-    // Call API
     const response = await handleAPI(
       `${endpoints.serviceDetail.replace(':slug', slug)}`,
       'GET',
@@ -112,7 +107,7 @@ const fetchServiceDetail = async (
 
 // Custom hook to get detail of category
 const useServiceDetail = (slug: string, refreshKey: number) => {
-  return useQuery<ServiceDetailResponse, Error>({
+  return useQuery<ServiceDetail, Error>({
     queryKey: ['serviceDetail', slug, refreshKey],
     queryFn: () => fetchServiceDetail(slug),
     enabled: !!slug,

@@ -27,6 +27,7 @@ export interface ContactSectionProps {
 }
 
 export interface CardProps {
+  type: string;
   _id: string;
   title: string;
   slug: string;
@@ -38,3 +39,7 @@ export interface ContainerProps {
   children: ReactNode;
   className?: string;
 }
+
+export type BackButtonProps = {
+  href: string;
+};

@@ -1,13 +1,3 @@
-/**
- * ==========================
- *  @FILTERS
- * ==========================
- */
-
-export interface Filters {
-  [key: string]: string | number | string[] | undefined;
-}
-
 export interface HeaderProps {
   title: string;
   className?: string;
@@ -495,34 +485,9 @@ export interface CreateProductItem {
  *  @BLOG_CATEGORY
  * ==========================
  */
-interface ChildCategory {
+export interface ChildCategory {
   _id: string;
   name: string;
-}
-/**
- * ==========================
- *  @BLOG
- * ==========================
- */
-
-interface BlogList {
-  _id: string;
-  title: string;
-  content: string;
-  description: string;
-  file: string;
-  link: string;
-  slug: string;
-  user?: UserDataComponents;
-  category: ChildCategory;
-  status: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-}
-
-export interface FetchBlogListResponse {
-  pagination: Pagination;
-  results: BlogList[];
 }
 
 /**

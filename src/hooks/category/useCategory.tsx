@@ -2,7 +2,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endpoints } from '@/api/api';
 import {
-  Filters,
   FetchCategoryListResponse,
   CreateCategoryItem,
   UpdateStatus,
@@ -10,6 +9,7 @@ import {
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
+import { Filters } from '@/types';
 
 /**
  * ==========================s

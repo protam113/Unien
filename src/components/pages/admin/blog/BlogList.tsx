@@ -16,7 +16,7 @@ import {
 import { RefreshButton } from '@/components/button/RefreshButton';
 import { CustomPagination } from '@/components/design/pagination';
 import { DraftBlogCard } from './DraftBlogCard';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 
 export enum BlogStatus {
   Show = 'show',

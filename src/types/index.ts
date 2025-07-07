@@ -6,6 +6,7 @@
  * ==========================
  */
 export * from './base/base.type';
+export * from './blog/blog.type';
 
 /**
  * ==========================

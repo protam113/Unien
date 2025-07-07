@@ -1,7 +1,7 @@
 'use client';
 
 import AdminLayout from '@/components/layout/AdminLayout/AdminLayout';
-import RadiatingLoader from '@/components/loading/radiating-loader';
+import { RadiatingLoader } from '@/components/loading/radiating-loader';
 import { useAuthStore } from '@/store/authStore';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,7 @@ export default function AuthProtectedLayout({
     verifyAuth();
 
     return () => {
-      isMounted = false; // Prevent state updates after unmount
+      isMounted = false;
     };
   }, [checkAuth]);
 

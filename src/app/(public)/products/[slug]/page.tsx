@@ -8,7 +8,7 @@ import { ProductGallery } from '@/components/pages/product/product-gallery';
 import { ProductDetailData } from '@/lib/responses/productLib';
 import NoResultsFound from '@/components/design/NoResultsFound';
 import { formatSmartDate } from '@/utils/formatTimeAgo';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 import Link from 'next/link';
 
 export default function Page() {

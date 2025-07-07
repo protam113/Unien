@@ -65,3 +65,5 @@ export * from './wrappers/contact-form';
  */
 export * from './card/card';
 export * from './card/category.card';
+
+export * from './button/BackButton';

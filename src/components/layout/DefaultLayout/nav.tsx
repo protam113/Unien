@@ -54,7 +54,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="flex items-center">
-              <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+              <Image src="/logo.svg" alt="Logo" width={50} height={50} />
               <span className="ml-2 text-white font-bold text-xl md:text-2xl lg:text-3xl">
                 UNIEN
               </span>

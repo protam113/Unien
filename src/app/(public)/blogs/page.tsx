@@ -67,15 +67,17 @@ const Page = () => {
         />
 
         <Container className="mx-auto px-4 py-12">
-          <CategoryCard onCategorySelect={setSelectedCategory} type="blogs" />
+          <div className="mb-8">
+            <CategoryCard onCategorySelect={setSelectedCategory} type="blogs" />
 
-          <BlogListSection
-            blogs={blogs}
-            pagination={pagination}
-            loading={loading}
-            handleLoadMore={handleLoadMore}
-            allLoaded={allLoaded}
-          />
+            <BlogListSection
+              blogs={blogs}
+              pagination={pagination}
+              loading={loading}
+              handleLoadMore={handleLoadMore}
+              allLoaded={allLoaded}
+            />
+          </div>
           <ContactSection title="Dịch Vụ" href="/services" />
           <ContactComponent />
         </Container>

@@ -1,13 +1,8 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { endpoints } from '@/api/api';
-import {
-  Filters,
-  FetchBlogListResponse,
-  BlogDetailResponse,
-  UpdateStatus,
-  CreateBlogItem,
-} from '@/types/types';
+import { UpdateStatus, CreateBlogItem, BlogDetail } from '@/types/types';
+import { Filters, FetchBlogListResponse } from '@/types';
 import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
@@ -88,7 +83,7 @@ const useBlogList = (
  * @returns {Document} Detail of document
  */
 
-const fetchBlogDetail = async (slug: string): Promise<BlogDetailResponse> => {
+const fetchBlogDetail = async (slug: string): Promise<BlogDetail> => {
   try {
     // Check if slug is valid
     if (!slug) {
@@ -113,7 +108,7 @@ const fetchBlogDetail = async (slug: string): Promise<BlogDetailResponse> => {
 
 // Custom hook to get detail of category
 const useBlogDetail = (slug: string, refreshKey: number) => {
-  return useQuery<BlogDetailResponse, Error>({
+  return useQuery<BlogDetail, Error>({
     queryKey: ['blogDetail', slug, refreshKey],
     queryFn: () => fetchBlogDetail(slug),
     enabled: !!slug,

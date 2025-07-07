@@ -1,5 +1,6 @@
 import { ContactSectionProps } from '@/types';
 import Link from 'next/link';
+import contactData from '@/data/contact.data.json';
 
 export function ContactSection({ href, title }: ContactSectionProps) {
   return (
@@ -7,8 +8,7 @@ export function ContactSection({ href, title }: ContactSectionProps) {
       <div className="mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="max-w-xl">
           <h2 className="text-white text-xl md:text-2xl font-medium leading-relaxed">
-            Nếu bạn đã sẵn sàng thay đổi hoặc có ý tưởng mà bạn tin tưởng, hãy
-            nói về điều đó. Liên hệ với chúng tôi và chờ phản hồi nhanh chóng.
+            {contactData.ContactData.cto}
           </h2>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">

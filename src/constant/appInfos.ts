@@ -147,6 +147,8 @@ export const viewport: Viewport = {
   themeColor: appInfo.themeColor,
 };
 
+export const siteBaseUrl = 'https://unien.vn';
+
 // Function to generate metadata for child pages
 export function PageMetadata(
   pageTitle: string,

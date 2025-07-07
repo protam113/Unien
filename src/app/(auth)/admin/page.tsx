@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RecentInvoices } from '@/components/table/recent-invoices';
 import Header from '@/components/design/Header';
