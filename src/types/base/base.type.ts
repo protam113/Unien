@@ -20,3 +20,13 @@ export interface Pagination {
   total: number;
   total_page: number;
 }
+
+/**
+ * ==========================
+ *  @UPDATE_STATUS
+ * ==========================
+ */
+
+export interface UpdateStatus {
+  status: string;
+}

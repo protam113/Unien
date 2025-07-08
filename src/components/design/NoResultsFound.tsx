@@ -1,13 +1,9 @@
 'use client';
 
+import { NoResultsFoundProps } from '@/types';
 import { Frown } from 'lucide-react';
 
-interface NoResultsFoundProps {
-  title?: string;
-  message?: string;
-}
-
-export default function NoResultsFound({
+export function NoResultsFound({
   title = 'Whoops, không có kết quả',
   message = 'Chúng tôi không thể tìm thấy bất kỳ kết quả tìm kiếm nào. Hãy thử lại lần sau',
 }: NoResultsFoundProps) {
@@ -15,10 +11,10 @@ export default function NoResultsFound({
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center max-w-md mx-auto">
       <div className="relative w-32 h-32 mb-6">
         {/* Folder/document background */}
-        <div className="absolute inset-0 bg-gray-100 rounded-lg"></div>
+        <div className="absolute inset-0  rounded-lg"></div>
 
         {/* Folder tab */}
-        <div className="absolute top-0 left-4 w-8 h-3 bg-gray-100 rounded-t-md"></div>
+        <div className="absolute top-0 left-4 w-8 h-3  rounded-t-md"></div>
 
         {/* Magnifying glass with sad face */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

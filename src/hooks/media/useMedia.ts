@@ -1,8 +1,6 @@
-'use client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
+import { endpoints, handleAPI } from '@/api';
 import { UploadMedia } from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
 
 const CreateMedia = async (newMedia: UploadMedia) => {
   const formData = new FormData();

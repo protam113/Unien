@@ -1,9 +1,6 @@
-'use client';
-
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChangePassword, VerifyCode } from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
-import { endpoints } from '@/api/api';
+import { endpoints, handleAPI } from '@/api';
 
 const ChangePasswordAuth = async (changePassword: ChangePassword) => {
   const formData = new FormData();

@@ -1,6 +1,6 @@
 'use client';
 
-import RadiatingLoader from '@/components/loading/radiating-loader';
+import { RadiatingLoader } from '@/components/loading/radiating-loader';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';

@@ -1,8 +1,6 @@
-'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
 import { SeoData, UpdateSeo } from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
+import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
 

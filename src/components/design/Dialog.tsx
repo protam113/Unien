@@ -7,15 +7,8 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from '@/components/ui/alert-dialog';
-
-interface ConfirmDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  question: string;
-  description: string;
-  onConfirm: () => void;
-}
+} from '@/components';
+import { ConfirmDialogProps } from '@/types';
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,
@@ -32,12 +25,12 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Hủy</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             className="bg-red-700 text-white hover:bg-red-600"
           >
-            Confirm
+            Đồng Ý
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

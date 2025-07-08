@@ -1,15 +1,15 @@
 'use client';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
+import { handleAPI, endpoints } from '@/api';
+import { toast } from 'sonner';
 import {
+  Filters,
+  UpdateStatus,
   FetchCategoryListResponse,
   CreateCategoryItem,
-  UpdateStatus,
-} from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
-import { toast } from 'sonner';
-import { logDebug } from '@/utils/logger';
-import { Filters } from '@/types';
+} from '@/types';
+import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================s
@@ -25,18 +25,7 @@ const fetchCategoriesList = async (
   filters: Filters
 ): Promise<FetchCategoryListResponse> => {
   try {
-    // Check if endpoint is valid
-    const validFilters = Object.fromEntries(
-      Object.entries(filters).filter(
-        ([, value]) => value !== undefined && value !== ''
-      )
-    );
-
-    // Create query string from filters
-    const queryString = new URLSearchParams({
-      page: pageParam.toString(),
-      ...validFilters,
-    }).toString();
+    const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(
@@ -44,9 +33,6 @@ const fetchCategoriesList = async (
       'GET',
       null
     );
-    console.log('endpoint:', endpoints.categories);
-
-    logDebug(handleAPI);
 
     return response;
   } catch (error) {
@@ -79,7 +65,6 @@ const useCategoryList = (
  * ==========================
  * 📌 @HOOK useCreateCategory
  * ==========================
-Create role
  **/
 
 const CreateCategory = async (newCategory: CreateCategoryItem) => {
@@ -159,14 +144,13 @@ const useDeleteCategory = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: DeleteCategory, // Directly pass the function
+    mutationFn: DeleteCategory,
     onSuccess: () => {
       toast.success('Delete Category Success!');
       queryClient.invalidateQueries({ queryKey: ['categoryList'] });
     },
     onError: (error: any) => {
       console.error(error.message || 'Failed to delete Category.');
-      toast.error(error.message || 'Failed to delete Category.');
     },
   });
 };

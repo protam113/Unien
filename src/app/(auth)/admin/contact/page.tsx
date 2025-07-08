@@ -14,12 +14,12 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/ui/select';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 import { ContactList } from '@/lib/responses/contactLib';
 import { useDeleteContact } from '@/hooks/contact/useContact';
 import ConfirmDialog from '@/components/design/Dialog';
 import { ContactTable } from '@/components/pages/admin/table/ContactTable';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 import SelectStatus from '@/components/pages/admin/contact/selectStatus';
 
 export default function ProductManager() {

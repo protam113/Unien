@@ -1,34 +1,35 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Trash2, Filter, Plus, AlertCircle } from 'lucide-react';
+import { RefreshButton } from '@/components/button/RefreshButton';
 import {
+  Container,
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { Loader, Trash2, Filter, Plus } from 'lucide-react';
-import { RefreshButton } from '@/components/button/RefreshButton';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/ui/select';
-import { AlertCircle } from 'lucide-react';
+  Button,
+  LoadingSpin,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components';
 import { CustomPagination } from '@/components/design/pagination';
-import Container from '@/components/wrappers/Container';
-import { UserList } from '@/lib/responses/userLib';
+import { UserList } from '@/lib/';
 import { useDeleteManager } from '@/hooks/auth/useManager';
 import ConfirmDialog from '@/components/design/Dialog';
 import UserRolesChart from '@/components/pages/admin/chart/user-roles-chart';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 
 const Page = () => {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -87,7 +88,7 @@ const Page = () => {
     <>
       <Container>
         {/* Stats Overview */}
-        <Heading name="Quản lý người dùng" />
+        <Heading name="Quản lý người dùng" desc="Trang Quản Lý Quản Trị Viên" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {/* Total Clients */}
           <Card>
@@ -196,9 +197,7 @@ const Page = () => {
                   {isLoading ? (
                     <TableRow>
                       <TableCell colSpan={6} className="h-64">
-                        <div className="flex justify-center items-center h-full">
-                          <Loader className="w-8 h-8 animate-spin text-blue-500" />
-                        </div>
+                        <LoadingSpin />
                       </TableCell>
                     </TableRow>
                   ) : isError ? (
@@ -253,9 +252,9 @@ const Page = () => {
                           </TableCell>
                           <TableCell className="text-right">
                             <div className="flex justify-end gap-2">
-                              <Button variant="ghost" size="sm">
+                              {/* <Button variant="ghost" size="sm">
                                 Xem
-                              </Button>
+                              </Button> */}
                               {!isProtectedRole && (
                                 <Button
                                   variant="outline"

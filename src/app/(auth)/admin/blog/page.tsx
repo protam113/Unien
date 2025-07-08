@@ -1,8 +1,8 @@
 'use client';
 
-import PushButton from '@/components/button/PushButton';
-import Container from '@/components/wrappers/Container';
-import Heading from '@/components/design/Heading';
+import { PushButton } from '@/components';
+import { Container } from '@/components';
+import { Heading } from '@/components/design/Heading';
 import BlogListData from '@/components/pages/admin/blog/BlogList';
 import React from 'react';
 

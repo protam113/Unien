@@ -43,3 +43,31 @@ export interface ContainerProps {
 export type BackButtonProps = {
   href: string;
 };
+
+export interface NoResultsFoundProps {
+  title?: string;
+  message?: string;
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPage: number;
+  onPageChange: (page: number) => void;
+}
+
+export interface ConfirmDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  question: string;
+  description: string;
+  onConfirm: () => void;
+}
+
+/**
+ * ==========================
+ * @PushButtonProps
+ * ==========================
+ */ export interface PushButtonProps {
+  href: string;
+  label: string;
+}

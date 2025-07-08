@@ -1,9 +1,8 @@
-import { ContactComponent } from '@/components';
-import { Container } from '@/components/wrappers/Container';
+import { ContactComponent, Container } from '@/components';
 import { StatsSection } from '@/components/wrappers/StartSection';
-import HeroBanner from '@/components/layout/DefaultLayout/Hero';
+import { HeroBanner } from '@/components/layout/DefaultLayout/Hero';
 import { BlogSection, ServicesTabs } from '@/components/pages';
-import IndustrialIntro from '@/components/pages/home/introduce';
+import { IndustrialIntro } from '@/components/pages/home/introduce';
 import ProductShowcase from '@/components/pages/home/product-showcase';
 import ProjectCarousel from '@/components/pages/home/project-carousel';
 

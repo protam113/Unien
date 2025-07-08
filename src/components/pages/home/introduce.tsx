@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { CustomImage } from '@/components/design/image.component';
 import { SectionHeader } from '@/components';
+import { ROUTES } from '@/lib';
 
-export default function IndustrialIntro() {
+export function IndustrialIntro() {
   return (
     <section className="w-full bg-white">
       <SectionHeader title="Về Chúng Tôi" />
@@ -56,7 +57,7 @@ export default function IndustrialIntro() {
             {/* CTA and rating */}
             <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
               <Link
-                href="/about"
+                href={ROUTES.COMPANY}
                 className="flex items-center gap-2 rounded bg-main px-4 py-2 font-medium text-white transition hover:bg-main-400"
               >
                 Xem Thêm

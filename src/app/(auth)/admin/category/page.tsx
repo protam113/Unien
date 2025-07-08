@@ -4,8 +4,17 @@ import type React from 'react';
 import { useState } from 'react';
 //UI components
 import { Loader2, Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+//Components
+import { RefreshButton } from '@/components/button/RefreshButton';
+import { CustomPagination } from '@/components/design/pagination';
 import {
+  Button,
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -13,24 +22,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-
-//Components
-import { RefreshButton } from '@/components/button/RefreshButton';
-import { CustomPagination } from '@/components/design/pagination';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from '@/components/ui/select';
+  Input,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components';
 //Data
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import Container from '@/components/wrappers/Container';
+import { Container } from '@/components/wrappers/Container';
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import {
   useCreateCategory,
@@ -38,18 +41,11 @@ import {
 } from '@/hooks/category/useCategory';
 import ConfirmDialog from '@/components/design/Dialog';
 import { CategoryTable } from '@/components/pages/admin/table/CategoryTable';
-import { CreateCategoryItem } from '@/types/types';
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { CreateCategoryItem } from '@/types';
 import { Form } from '@/components/ui/form';
 import { useAuthStore } from '@/store/authStore';
 import SelectCategoryFilter from '@/components/pages/admin/categoryFilter';
-import Heading from '@/components/design/Heading';
+import { Heading } from '@/components/design/Heading';
 
 const formSchema = z.object({
   name: z.string().min(1, 'name is required'),

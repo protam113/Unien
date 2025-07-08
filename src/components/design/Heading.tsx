@@ -1,10 +1,4 @@
-export default function Heading({
-  name,
-  desc,
-}: {
-  name: string;
-  desc?: string;
-}) {
+export function Heading({ name, desc }: { name: string; desc?: string }) {
   return (
     <div className="flex w-full relative mt-6 mb-6 flex-col">
       <div className="flex items-center gap-2">

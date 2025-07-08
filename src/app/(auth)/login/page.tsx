@@ -1,8 +1,7 @@
 'use client';
 
-import { Button, Input, RadiatingLoader } from '@/components';
+import { Button, CustomImage, Input, RadiatingLoader } from '@/components';
 import { useAuthStore } from '@/store/authStore';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -48,7 +47,7 @@ export default function LoginPage() {
       {/* Left side with illustration */}
       <div className="relative hidden lg:flex flex-col items-center justify-center p-8 bg-orange-300 text-white">
         <div className="max-w-md mx-auto text-center space-y-6">
-          <Image
+          <CustomImage
             src="/Logo.svg"
             alt="Decorative bird illustration"
             width={300}

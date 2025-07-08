@@ -1,15 +1,14 @@
 'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
+import { endpoints, handleAPI } from '@/api';
 import {
   FetchManagerListResponse,
-  Filters,
   CreateManagerData,
   UserDataStatistic,
 } from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
+import { Filters } from '@/types';
 
 /**
  * ==========================

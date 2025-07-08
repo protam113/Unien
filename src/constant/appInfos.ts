@@ -158,7 +158,6 @@ export function PageMetadata(
 
   // Add null checks and type safety
   const siteTitle = seo?.site_title ?? appInfo.title;
-  console.log('🚀 ~ seo:', seo);
   const siteDescription =
     pageDescription ?? seo?.site_description ?? appInfo.description;
   const siteKeywords = seo?.keywords?.length ? seo.keywords : appInfo.keywords;

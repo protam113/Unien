@@ -2,7 +2,7 @@
 
 import { CategoryList } from '@/lib/responses/categoriesLib';
 import { CategoryCardProps } from '@/types';
-import { Category } from '@/types/types';
+import type { Category } from '@/types';
 import React, { useState } from 'react';
 
 export const CategoryCard: React.FC<CategoryCardProps> = ({
@@ -42,8 +42,8 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
             onClick={() => handleCategoryClick(null)}
             className={`pb-4 px-1 font-medium ${
               selectedCategory === null
-                ? 'text-primary border-b-2 border-primary'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'text-main border-b-2 border-primary'
+                : 'text-gray-600 hover:text-main'
             }`}
           >
             Tất cả
@@ -56,8 +56,8 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
               onClick={() => handleCategoryClick(category._id)}
               className={`pb-4 px-1 ${
                 selectedCategory === category._id
-                  ? 'text-primary border-b-2 border-primary font-medium'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'text-main border-b-2 border-primary font-medium'
+                  : 'text-gray-600 hover:text-main'
               }`}
             >
               {category.name}

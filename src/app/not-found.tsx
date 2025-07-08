@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout';
+import { ROUTES } from '@/lib';
+import { Container } from '@/components';
 
 export default function NotFound() {
   return (
     <DefaultLayout>
-      <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
+      <Container className="mt-16 h-[800px] flex flex-col items-center justify-center px-4 text-center">
         <div className="max-w-md space-y-6">
           <h1
             className="text-[220px] font-bold leading-none tracking-tighter animate-fade-in-down"
@@ -17,15 +19,16 @@ export default function NotFound() {
             className="text-4xl font-bold animate-fade-in-up"
             style={{ animationDelay: '0.4s', animationDuration: '0.8s' }}
           >
-            We lost this page
+            Ôi không! Trang này không tồn tại.
           </h2>
           <p
             className="text-muted-foreground animate-fade-in-up"
             style={{ animationDelay: '0.6s', animationDuration: '0.8s' }}
           >
-            The page you are looking for doesn&apos;t exist or has been moved.
+            Liên kết bạn truy cập có thể đã sai hoặc trang đã bị xóa.
             <br />
-            But you&apos;ll definitely love our works.
+            Nhưng đừng lo, vẫn còn rất nhiều điều tuyệt vời đang chờ bạn khám
+            phá!
           </p>
           <div
             className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-in-up"
@@ -33,21 +36,21 @@ export default function NotFound() {
           >
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-main px-6 py-3 font-medium text-black transition-colors hover:bg-[#b1ef62] hover:scale-105 transform  md:transition-transform duration-300 animate-pulse-subtle"
+              className="inline-flex items-center justify-center gap-2  bg-main px-6 py-3 font-medium text-black transition-colors hover:bg-main/80 hover:scale-105 transform  md:transition-transform duration-300 animate-pulse-subtle"
             >
-              BACK TO HOMEPAGE
+              Quay Lại Trang Chủ
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/services"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 px-6 py-3 font-medium transition-colors hover:bg-gray-100 hover:scale-105 transform md:transition-transform duration-300"
+              href={ROUTES.SERVICE.ROOT}
+              className="inline-flex items-center justify-center gap-2 border border-gray-300 px-6 py-3 font-medium transition-colors hover:bg-gray-100 hover:scale-105 transform md:transition-transform duration-300"
             >
-              SEE OUR SERVICES
+              Xem Các Dịch Vụ
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
     </DefaultLayout>
   );
 }

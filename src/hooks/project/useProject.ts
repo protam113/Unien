@@ -1,45 +1,35 @@
-'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
-import { UpdateStatus, CreateBlogItem, BlogDetail } from '@/types/types';
-import { Filters, FetchBlogListResponse } from '@/types';
-import { handleAPI } from '@/api/axiosClient';
+import {
+  FetchProjectListResponse,
+  ProjectDetailResponse,
+  CreateProjectItem,
+} from '@/types/types';
+import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
+import { UpdateStatus, Filters } from '@/types';
 import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================
- * 📌 @HOOK useCategoryList
+ * 📌 @HOOK useProjectList
  * ==========================
  *
- * @desc Custom hook to get list of blog
- * @returns {Blog[
- * _id: string;
- * title: string;
- * content: string;
- * description: string;
- * file: string;
- * link: string;
- * slug: string;
- * user?: UserDataComponents;
- * category: ChildCategory;
- * status: string;
- * createdAt: string | Date;
- * updatedAt: string | Date;
- * ]} List of blog
+ * @desc Custom hook to get list of services
+ * @returns {PROJECT[]} List of services
  */
 
-const fetchBlogList = async (
+const fetchProjectList = async (
   pageParam: number = 1,
   filters: Filters
-): Promise<FetchBlogListResponse> => {
+): Promise<FetchProjectListResponse> => {
   try {
+    // Check if endpoint is valid
     const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(
-      `${endpoints.blogs}${queryString ? `?${queryString}` : ''}`,
+      `${endpoints.projects}${queryString ? `?${queryString}` : ''}`,
       'GET',
       null
     );
@@ -55,14 +45,14 @@ const fetchBlogList = async (
 /**
  * Custom hook to get list of categories using React Query.
  */
-const useBlogList = (
+const useProjectList = (
   page: number,
   filters: Filters = {},
   refreshKey: number
 ) => {
-  return useQuery<FetchBlogListResponse, Error>({
-    queryKey: ['blogList', page, filters, refreshKey],
-    queryFn: () => fetchBlogList(page, filters),
+  return useQuery<FetchProjectListResponse, Error>({
+    queryKey: ['projectList', page, filters, refreshKey],
+    queryFn: () => fetchProjectList(page, filters),
     enabled: page > 0,
     staleTime: process.env.NODE_ENV === 'development' ? 1000 : 300000,
     gcTime: 30 * 60 * 1000, //
@@ -70,12 +60,12 @@ const useBlogList = (
 };
 
 /**
- * ========== END OF @HOOK useCategoriesList ==========
+ * ========== END OF @HOOK useProjectList ==========
  */
 
 /**
  * ==========================
- * 📌 @HOOK useDocumentDetail
+ * 📌 @HOOK useProjectDetail
  * ==========================
  *
  * @desc Custom hook to get detail of document
@@ -83,19 +73,21 @@ const useBlogList = (
  * @returns {Document} Detail of document
  */
 
-const fetchBlogDetail = async (slug: string): Promise<BlogDetail> => {
+const fetchProjectDetail = async (
+  slug: string
+): Promise<ProjectDetailResponse> => {
   try {
     // Check if slug is valid
     if (!slug) {
       throw new Error('Slug is required');
     }
     // Check if endpoint is valid
-    if (!endpoints.blogDetail) {
+    if (!endpoints.projectDetail) {
       throw null;
     }
     // Call API
     const response = await handleAPI(
-      `${endpoints.blogDetail.replace(':slug', slug)}`,
+      `${endpoints.projectDetail.replace(':slug', slug)}`,
       'GET',
       null
     );
@@ -107,51 +99,53 @@ const fetchBlogDetail = async (slug: string): Promise<BlogDetail> => {
 };
 
 // Custom hook to get detail of category
-const useBlogDetail = (slug: string, refreshKey: number) => {
-  return useQuery<BlogDetail, Error>({
-    queryKey: ['blogDetail', slug, refreshKey],
-    queryFn: () => fetchBlogDetail(slug),
+const useProjectDetail = (slug: string, refreshKey: number) => {
+  return useQuery<ProjectDetailResponse, Error>({
+    queryKey: ['projectDetail', slug, refreshKey],
+    queryFn: () => fetchProjectDetail(slug),
     enabled: !!slug,
     staleTime: process.env.NODE_ENV === 'development' ? 1000 : 300000,
   });
 };
 
 /**
- * ========== END OF @HOOK useBlogDetail ==========
+ * ========== END OF @HOOK useProjectDetail ==========
  */
 
-const DeleteBlog = async (blogID: string) => {
+const DeleteProject = async (projectID: string) => {
   try {
-    if (!endpoints.blog) {
-      throw new Error('blog endpoint is not defined.');
+    if (!endpoints.project) {
+      throw new Error('Project endpoint is not defined.');
     }
 
     const response = await handleAPI(
-      `${endpoints.blog.replace(':id', blogID)}`,
+      `${endpoints.project.replace(':id', projectID)}`,
       'DELETE'
     );
     return response.data;
   } catch (error: any) {
     console.error(
-      'Error deleting Blog:',
+      'Error deleting Service:',
       error?.response?.data || error.message
     );
-    throw new Error(error?.response?.data?.message || 'Failed to delete Blog');
+    throw new Error(
+      error?.response?.data?.message || 'Failed to delete Project'
+    );
   }
 };
 
-const useDeleteBlog = () => {
+const useDeleteProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: DeleteBlog, // Directly pass the function
+    mutationFn: DeleteProject, // Directly pass the function
     onSuccess: () => {
-      toast.success('Delete Blog Success!');
-      queryClient.invalidateQueries({ queryKey: ['blogList'] });
+      toast.success('Delete Project Success!');
+      queryClient.invalidateQueries({ queryKey: ['projectList'] });
     },
     onError: (error: any) => {
-      console.error(error.message || 'Failed to delete Blog.');
-      toast.error(error.message || 'Failed to delete Blog.');
+      console.error(error.message || 'Failed to delete Project.');
+      toast.error(error.message || 'Failed to delete Project.');
     },
   });
 };
@@ -174,11 +168,11 @@ const EditStatus = async (updateStatus: UpdateStatus, postId: string) => {
   }
 
   try {
-    if (!endpoints.blogStatus) {
+    if (!endpoints.projectStatus) {
       throw null;
     }
 
-    const url = endpoints.blogStatus.replace(':id', postId);
+    const url = endpoints.projectStatus.replace(':id', postId);
 
     const response = await handleAPI(url, 'PATCH', formData);
     return response.data;
@@ -189,7 +183,7 @@ const EditStatus = async (updateStatus: UpdateStatus, postId: string) => {
   }
 };
 
-const useUpdateBlogStatus = () => {
+const useUpdateProjectStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -204,57 +198,61 @@ const useUpdateBlogStatus = () => {
     },
     onSuccess: () => {
       toast.success('Update status successfully!');
-      queryClient.invalidateQueries({ queryKey: ['blogList'] });
+      queryClient.invalidateQueries({ queryKey: ['projectList'] });
     },
   });
 };
 
-const CreateBlog = async (newBlog: CreateBlogItem) => {
+const CreateProject = async (newPost: CreateProjectItem) => {
   const formData = new FormData();
 
-  for (const key in newBlog) {
-    const value = newBlog[key as keyof CreateBlogItem];
+  for (const key in newPost) {
+    const value = newPost[key as keyof CreateProjectItem];
 
-    if (key === 'file' && Array.isArray(value)) {
-      value.forEach((file) => formData.append('file', file));
+    if (key === 'service' && Array.isArray(value)) {
+      value.forEach((serviceId) => {
+        formData.append('service', serviceId);
+      });
+    } else if (value instanceof File) {
+      formData.append('file', value);
     } else if (value) {
-      // Thêm các trường khác
       formData.append(key, value as string);
     }
   }
 
   try {
-    const response = await handleAPI(`${endpoints.blogs}`, 'POST', formData);
-
+    const response = await handleAPI(`${endpoints.projects}`, 'POST', formData);
     return response.data;
   } catch (error: any) {
-    console.error('Error creating blog:', error.response?.data);
-    throw new Error(error.response?.data?.message || 'Failed to create blog');
+    console.error('Error creating project:', error.response?.data);
+    throw new Error(
+      error.response?.data?.message || 'Failed to create project'
+    );
   }
 };
 
-const useCreateBlog = () => {
+const useCreateProject = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newBlog: CreateBlogItem) => {
-      return CreateBlog(newBlog);
+    mutationFn: async (newPost: CreateProjectItem) => {
+      return CreateProject(newPost);
     },
     onSuccess: () => {
-      toast.success('Create blog Success!');
-      queryClient.invalidateQueries({ queryKey: ['blogList'] });
+      toast.success('Create Project Success!');
+      queryClient.invalidateQueries({ queryKey: ['projectList'] });
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Failed to create blog.');
-      console.error(error.message || 'Failed to create blog.');
+      toast.error(error.message || 'Failed to create project.');
+      console.error(error.message || 'Failed to create project.');
     },
   });
 };
 
 export {
-  useBlogList,
-  useBlogDetail,
-  useDeleteBlog,
-  useUpdateBlogStatus,
-  useCreateBlog,
+  useProjectList,
+  useProjectDetail,
+  useDeleteProject,
+  useUpdateProjectStatus,
+  useCreateProject,
 };

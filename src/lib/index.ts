@@ -17,6 +17,12 @@ export * from './responses/serviceLib';
 // projectLib.ts
 export * from './responses/projectLib';
 
+// blogLib.ts
+export * from './responses/blogLib';
+
+// userLib.ts
+export * from './responses/userLib';
+
 /**
  * ==========================
  *  @ROUTES

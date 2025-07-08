@@ -1,17 +1,13 @@
-'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
+import { endpoints, handleAPI } from '@/api';
 import {
   FetchServiceListResponse,
-  ServiceDetailResponse,
-  UpdateStatus,
   CreateServiceItem,
   ServiceDetail,
 } from '@/types/types';
-import { Filters } from '@/types';
-import { handleAPI } from '@/api/axiosClient';
+import { UpdateStatus, Filters } from '@/types';
 import { toast } from 'sonner';
-import { logDebug } from '@/utils/logger';
+import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================
@@ -28,17 +24,7 @@ const fetchServiceList = async (
 ): Promise<FetchServiceListResponse> => {
   try {
     // Check if endpoint is valid
-    const validFilters = Object.fromEntries(
-      Object.entries(filters).filter(
-        ([, value]) => value !== undefined && value !== ''
-      )
-    );
-
-    // Create query string from filters
-    const queryString = new URLSearchParams({
-      page: pageParam.toString(),
-      ...validFilters,
-    }).toString();
+    const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(
@@ -67,7 +53,7 @@ const useServiceList = (
     queryFn: () => fetchServiceList(page, filters),
     enabled: page > 0,
     staleTime: process.env.NODE_ENV === 'development' ? 1000 : 300000,
-    gcTime: 30 * 60 * 1000, //
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -77,12 +63,12 @@ const useServiceList = (
 
 /**
  * ==========================
- * 📌 @HOOK useDocumentDetail
+ * 📌 @HOOK useServiceDetail
  * ==========================
  *
- * @desc Custom hook to get detail of document
- * @param {string} slug Slug of document
- * @returns {Document} Detail of document
+ * @desc Custom hook to get detail of service
+ * @param {string} slug Slug of service
+ * @returns {Service} Detail of service
  */
 
 const fetchServiceDetail = async (slug: string): Promise<ServiceDetail> => {
@@ -116,7 +102,7 @@ const useServiceDetail = (slug: string, refreshKey: number) => {
 };
 
 /**
- * ========== END OF @HOOK useBlogDetail ==========
+ * ========== END OF @HOOK useServiceDetail ==========
  */
 
 const DeleteService = async (serviceID: string) => {

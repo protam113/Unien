@@ -1,15 +1,14 @@
-'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
+import { handleAPI, endpoints } from '@/api';
+import { toast } from 'sonner';
+import { logDebug } from '@/utils/logger';
 import {
   Filters,
   FetchContactListResponse,
   UpdateContactStatus,
   CreateContactItem,
-} from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
-import { toast } from 'sonner';
-import { logDebug } from '@/utils/logger';
+} from '@/types';
+import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================
@@ -26,18 +25,7 @@ const fetchContactList = async (
   filters: Filters
 ): Promise<FetchContactListResponse> => {
   try {
-    // Check if endpoint is valid
-    const validFilters = Object.fromEntries(
-      Object.entries(filters).filter(
-        ([, value]) => value !== undefined && value !== ''
-      )
-    );
-
-    // Create query string from filters
-    const queryString = new URLSearchParams({
-      page: pageParam.toString(),
-      ...validFilters,
-    }).toString();
+    const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(
@@ -78,7 +66,6 @@ const useContactList = (
  * ==========================
  * 📌 @HOOK useUpdateStatus
  * ==========================
-Edit Status
  **/
 
 const EditStatus = async (

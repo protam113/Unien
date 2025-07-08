@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
 import AppData from '@/data/app.data.json';
 
-export default function HeroBanner() {
+export function HeroBanner() {
   const heroRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const handleExploreClick = () => {

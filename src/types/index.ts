@@ -6,7 +6,11 @@
  * ==========================
  */
 export * from './base/base.type';
+export * from './category/category.type';
 export * from './blog/blog.type';
+export * from './contact/contact.type';
+export * from './product/product.type';
+export * from './types';
 
 /**
  * ==========================

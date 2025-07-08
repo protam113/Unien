@@ -1,47 +1,36 @@
-'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { endpoints } from '@/api/api';
-import {
-  Filters,
-  FetchProjectListResponse,
-  ProjectDetailResponse,
-  UpdateStatus,
-  CreateProjectItem,
-} from '@/types/types';
-import { handleAPI } from '@/api/axiosClient';
+import { endpoints, handleAPI } from '@/api';
 import { toast } from 'sonner';
 import { logDebug } from '@/utils/logger';
+import {
+  UpdateStatus,
+  Filters,
+  FetchProductListResponse,
+  ProductDetailResponse,
+  CreateProductItem,
+} from '@/types';
+import { buildQueryParams } from '@/utils';
 
 /**
  * ==========================
- * 📌 @HOOK useProjectList
+ * 📌 @HOOK useServiceList
  * ==========================
  *
  * @desc Custom hook to get list of services
- * @returns {PROJECT[]} List of services
+ * @returns {Products[]} List of services
  */
 
-const fetchProjectList = async (
+const fetchProductList = async (
   pageParam: number = 1,
   filters: Filters
-): Promise<FetchProjectListResponse> => {
+): Promise<FetchProductListResponse> => {
   try {
     // Check if endpoint is valid
-    const validFilters = Object.fromEntries(
-      Object.entries(filters).filter(
-        ([, value]) => value !== undefined && value !== ''
-      )
-    );
-
-    // Create query string from filters
-    const queryString = new URLSearchParams({
-      page: pageParam.toString(),
-      ...validFilters,
-    }).toString();
+    const queryString = buildQueryParams(filters, pageParam);
 
     // Call API
     const response = await handleAPI(
-      `${endpoints.projects}${queryString ? `?${queryString}` : ''}`,
+      `${endpoints.products}${queryString ? `?${queryString}` : ''}`,
       'GET',
       null
     );
@@ -57,14 +46,14 @@ const fetchProjectList = async (
 /**
  * Custom hook to get list of categories using React Query.
  */
-const useProjectList = (
+const useProductList = (
   page: number,
   filters: Filters = {},
   refreshKey: number
 ) => {
-  return useQuery<FetchProjectListResponse, Error>({
-    queryKey: ['projectList', page, filters, refreshKey],
-    queryFn: () => fetchProjectList(page, filters),
+  return useQuery<FetchProductListResponse, Error>({
+    queryKey: ['productList', page, filters, refreshKey],
+    queryFn: () => fetchProductList(page, filters),
     enabled: page > 0,
     staleTime: process.env.NODE_ENV === 'development' ? 1000 : 300000,
     gcTime: 30 * 60 * 1000, //
@@ -72,12 +61,12 @@ const useProjectList = (
 };
 
 /**
- * ========== END OF @HOOK useProjectList ==========
+ * ========== END OF @HOOK useServiceList ==========
  */
 
 /**
  * ==========================
- * 📌 @HOOK useProjectDetail
+ * 📌 @HOOK useDocumentDetail
  * ==========================
  *
  * @desc Custom hook to get detail of document
@@ -85,79 +74,79 @@ const useProjectList = (
  * @returns {Document} Detail of document
  */
 
-const fetchProjectDetail = async (
+const fetchProductDetail = async (
   slug: string
-): Promise<ProjectDetailResponse> => {
+): Promise<ProductDetailResponse> => {
   try {
     // Check if slug is valid
     if (!slug) {
       throw new Error('Slug is required');
     }
     // Check if endpoint is valid
-    if (!endpoints.projectDetail) {
+    if (!endpoints.productDetail) {
       throw null;
     }
     // Call API
     const response = await handleAPI(
-      `${endpoints.projectDetail.replace(':slug', slug)}`,
+      `${endpoints.productDetail.replace(':slug', slug)}`,
       'GET',
       null
     );
     return response;
   } catch (error) {
-    console.error('Error fetching blog detail:', error);
+    console.error('Error fetching post detail:', error);
     throw error;
   }
 };
 
 // Custom hook to get detail of category
-const useProjectDetail = (slug: string, refreshKey: number) => {
-  return useQuery<ProjectDetailResponse, Error>({
-    queryKey: ['projectDetail', slug, refreshKey],
-    queryFn: () => fetchProjectDetail(slug),
+const useProductDetail = (slug: string, refreshKey: number) => {
+  return useQuery<ProductDetailResponse, Error>({
+    queryKey: ['productDetail', slug, refreshKey],
+    queryFn: () => fetchProductDetail(slug),
     enabled: !!slug,
     staleTime: process.env.NODE_ENV === 'development' ? 1000 : 300000,
   });
 };
 
 /**
- * ========== END OF @HOOK useProjectDetail ==========
+ * ========== END OF @HOOK useBlogDetail ==========
  */
 
-const DeleteProject = async (projectID: string) => {
+const DeleteProduct = async (serviceID: string) => {
   try {
-    if (!endpoints.project) {
-      throw new Error('Project endpoint is not defined.');
+    if (!endpoints.product) {
+      throw new Error('Product endpoint is not defined.');
     }
 
     const response = await handleAPI(
-      `${endpoints.project.replace(':id', projectID)}`,
+      `${endpoints.product.replace(':id', serviceID)}`,
       'DELETE'
     );
     return response.data;
   } catch (error: any) {
     console.error(
-      'Error deleting Service:',
+      'Error deleting Product:',
       error?.response?.data || error.message
     );
     throw new Error(
-      error?.response?.data?.message || 'Failed to delete Project'
+      error?.response?.data?.message || 'Failed to delete Product'
     );
   }
 };
 
-const useDeleteProject = () => {
+const useDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: DeleteProject, // Directly pass the function
+    mutationFn: DeleteProduct, // Directly pass the function
     onSuccess: () => {
-      toast.success('Delete Project Success!');
-      queryClient.invalidateQueries({ queryKey: ['projectList'] });
+      toast.success('Delete Product Success!');
+      queryClient.invalidateQueries({ queryKey: ['productList'] });
     },
     onError: (error: any) => {
-      console.error(error.message || 'Failed to delete Project.');
-      toast.error(error.message || 'Failed to delete Project.');
+      console.error(error.message || 'Failed to delete Product.');
+      toast.error(error.message || 'Failed to delete Product.');
     },
   });
 };
@@ -180,22 +169,22 @@ const EditStatus = async (updateStatus: UpdateStatus, postId: string) => {
   }
 
   try {
-    if (!endpoints.projectStatus) {
+    if (!endpoints.productStatus) {
       throw null;
     }
 
-    const url = endpoints.projectStatus.replace(':id', postId);
+    const url = endpoints.productStatus.replace(':id', postId);
 
     const response = await handleAPI(url, 'PATCH', formData);
     return response.data;
   } catch (error: any) {
     throw new Error(
-      error.response?.data?.message || 'Failed to update service'
+      error.response?.data?.message || 'Failed to update product'
     );
   }
 };
 
-const useUpdateProjectStatus = () => {
+const useUpdateProductStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -210,61 +199,61 @@ const useUpdateProjectStatus = () => {
     },
     onSuccess: () => {
       toast.success('Update status successfully!');
-      queryClient.invalidateQueries({ queryKey: ['projectList'] });
+      queryClient.invalidateQueries({ queryKey: ['productList'] });
     },
   });
 };
 
-const CreateProject = async (newPost: CreateProjectItem) => {
+const CreateProduct = async (newPost: CreateProductItem) => {
   const formData = new FormData();
 
   for (const key in newPost) {
-    const value = newPost[key as keyof CreateProjectItem];
+    const value = newPost[key as keyof CreateProductItem];
 
-    if (key === 'service' && Array.isArray(value)) {
-      value.forEach((serviceId) => {
-        formData.append('service', serviceId);
+    if (Array.isArray(value) && value[0] instanceof File) {
+      value.forEach((file) => {
+        formData.append('files', file);
       });
     } else if (value instanceof File) {
-      formData.append('file', value);
-    } else if (value) {
+      formData.append('files', value); // fallback nếu chỉ là 1 file
+    } else if (value !== undefined && value !== null) {
       formData.append(key, value as string);
     }
   }
 
   try {
-    const response = await handleAPI(`${endpoints.projects}`, 'POST', formData);
+    const response = await handleAPI(`${endpoints.products}`, 'POST', formData);
     return response.data;
   } catch (error: any) {
-    console.error('Error creating project:', error.response?.data);
+    console.error('Error creating Product:', error.response?.data);
     throw new Error(
-      error.response?.data?.message || 'Failed to create project'
+      error.response?.data?.message || 'Failed to create Product'
     );
   }
 };
 
-const useCreateProject = () => {
+const useCreateProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newPost: CreateProjectItem) => {
-      return CreateProject(newPost);
+    mutationFn: async (newPost: CreateProductItem) => {
+      return CreateProduct(newPost);
     },
     onSuccess: () => {
-      toast.success('Create Project Success!');
-      queryClient.invalidateQueries({ queryKey: ['projectList'] });
+      toast.success('Create Product Success!');
+      queryClient.invalidateQueries({ queryKey: ['productList'] });
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Failed to create project.');
-      console.error(error.message || 'Failed to create project.');
+      toast.error(error.message || 'Failed to create Product.');
+      console.error(error.message || 'Failed to create Product.');
     },
   });
 };
 
 export {
-  useProjectList,
-  useProjectDetail,
-  useDeleteProject,
-  useUpdateProjectStatus,
-  useCreateProject,
+  useProductList,
+  useProductDetail,
+  useDeleteProduct,
+  useUpdateProductStatus,
+  useCreateProduct,
 };
